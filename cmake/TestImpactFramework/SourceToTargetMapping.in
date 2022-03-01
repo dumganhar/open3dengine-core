@@ -1,0 +1,18 @@
+{
+    "sources": {
+        "input": [
+${autogen_input_files}
+        ],
+        "output": [
+${autogen_output_files}
+        ],
+        "static": [
+${static_sources}
+        ]
+    },
+    "target": {
+        "name": "${target_name}",
+        "output_name": "${target_output_name}",
+        "path": "${target_path}"
+    }
+}
