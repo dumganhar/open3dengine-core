@@ -715,5 +715,5 @@ endif()
 if(PAL_TRAIT_BUILD_HOST_TOOLS)
     include(${LY_ROOT_FOLDER}/cmake/LYWrappers.cmake)
     # Importing this globally to handle AUTOMOC, AUTOUIC, AUTORCC
-    ly_parse_third_party_dependencies(3rdParty::Qt)
+    #cjh ly_parse_third_party_dependencies(3rdParty::Qt)
 endif()
