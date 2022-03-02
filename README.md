@@ -1,3 +1,9 @@
+## 源码来源
+
+https://github.com/o3de/o3de development 分支
+
+commit id: b64cce7f14b4946f66b1060cd467314eb6eecfac
+
 ## 构建方法
 
 ### Mac
