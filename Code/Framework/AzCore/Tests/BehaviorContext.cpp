@@ -649,6 +649,8 @@ namespace UnitTest
 
 struct MyClass1 {
     AZ_RTTI(MyClass1, "{BEA0AEE2-9D09-4C02-B3F2-28CE74573EE9}")
+    AZ_CLASS_ALLOCATOR(MyClass1, AZ::SystemAllocator, 0)
+
     MyClass1() {
 
     }
@@ -672,7 +674,8 @@ struct MyClass1 {
 };
 
 struct MySubClass : public MyClass1 {
-    AZ_RTTI(MyClass1, "{26D8063E-0B16-4194-AF5F-298970239C3A}", MyClass1)
+    AZ_RTTI(MySubClass, "{26D8063E-0B16-4194-AF5F-298970239C3A}", MyClass1)
+    AZ_CLASS_ALLOCATOR(MySubClass, AZ::SystemAllocator, 0)
 
     MySubClass() {
 
