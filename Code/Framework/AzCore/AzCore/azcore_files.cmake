@@ -89,10 +89,10 @@ set(FILES
     # Slice/SliceMetadataInfoBus.h
     # Slice/SliceMetadataInfoComponent.h
     # Slice/SliceMetadataInfoComponent.cpp
-    Compression/Compression.cpp
-    Compression/Compression.h
-    Compression/zstd_compression.cpp
-    Compression/zstd_compression.h
+    # Compression/Compression.cpp
+    # Compression/Compression.h
+    # Compression/zstd_compression.cpp
+    # Compression/zstd_compression.h
     # Debug/Budget.h
     # Debug/Budget.cpp
     # Debug/BudgetTracker.h
@@ -644,15 +644,15 @@ set(FILES
     # Task/TaskGraph.inl
     # Task/TaskGraphSystemComponent.h
     # Task/TaskGraphSystemComponent.cpp
-    Threading/ThreadSafeDeque.h
-    Threading/ThreadSafeDeque.inl
-    Threading/ThreadSafeObject.h
-    Threading/ThreadSafeObject.inl
-    Threading/ThreadUtils.h
-    Threading/ThreadUtils.cpp
-    Time/ITime.h
-    Time/TimeSystem.cpp
-    Time/TimeSystem.h
+    # Threading/ThreadSafeDeque.h
+    # Threading/ThreadSafeDeque.inl
+    # Threading/ThreadSafeObject.h
+    # Threading/ThreadSafeObject.inl
+    # Threading/ThreadUtils.h
+    # Threading/ThreadUtils.cpp
+    # Time/ITime.h
+    # Time/TimeSystem.cpp
+    # Time/TimeSystem.h
 )
 
 # Prevent the following files from being grouped in UNITY builds
