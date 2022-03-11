@@ -134,38 +134,38 @@ namespace UnitTest
         EXPECT_EQ(testSystemInterface, nullptr);
     }
 
-    TEST_F(InterfaceTest, RegisterTwiceAssertTest)
-    {
-        TestSystem testSystem1;
-        TestSystem testSystem2;
+//    TEST_F(InterfaceTest, RegisterTwiceAssertTest)
+//    {
+//        TestSystem testSystem1;
+//        TestSystem testSystem2;
+//
+//        testSystem1.Activate();
+//
+//        AZ_TEST_START_TRACE_SUPPRESSION;
+//        // This should fail.
+//        testSystem2.Activate();
+//        AZ_TEST_STOP_TRACE_SUPPRESSION(1);
+//
+//        AZ_TEST_START_TRACE_SUPPRESSION;
+//        // This should also fail.
+//        testSystem2.Deactivate();
+//        AZ_TEST_STOP_TRACE_SUPPRESSION(1);
+//
+//        testSystem1.Deactivate();
+//    }
 
-        testSystem1.Activate();
-
-        AZ_TEST_START_TRACE_SUPPRESSION;
-        // This should fail.
-        testSystem2.Activate();
-        AZ_TEST_STOP_TRACE_SUPPRESSION(1);
-
-        AZ_TEST_START_TRACE_SUPPRESSION;
-        // This should also fail.
-        testSystem2.Deactivate();
-        AZ_TEST_STOP_TRACE_SUPPRESSION(1);
-
-        testSystem1.Deactivate();
-    }
-
-    TEST_F(InterfaceTest, RegisterMismatchTest)
-    {
-        TestSystem testSystem1;
-        TestSystem testSystem2;
-
-        testSystem1.Activate();
-
-        AZ_TEST_START_TRACE_SUPPRESSION;
-        // This should fail.
-        testSystem2.Deactivate();
-        AZ_TEST_STOP_TRACE_SUPPRESSION(1);
-
-        testSystem1.Deactivate();
-    }
+//    TEST_F(InterfaceTest, RegisterMismatchTest)
+//    {
+//        TestSystem testSystem1;
+//        TestSystem testSystem2;
+//
+//        testSystem1.Activate();
+//
+//        AZ_TEST_START_TRACE_SUPPRESSION;
+//        // This should fail.
+//        testSystem2.Deactivate();
+//        AZ_TEST_STOP_TRACE_SUPPRESSION(1);
+//
+//        testSystem1.Deactivate();
+//    }
 }

@@ -11,7 +11,7 @@
 #include <AzCore/base.h>
 #include <AzCore/std/functional.h>
 #include <AzCore/IO/Path/Path.h>
-#include <AzCore/IO/SystemFile.h>
+//cjh #include <AzCore/IO/SystemFile.h>
 //cjh #include <AzCore/Settings/SettingsRegistryImpl.h>
 //#include <AzCore/Settings/SettingsRegistryMergeUtils.h>
 #include <AzCore/StringFunc/StringFunc.h>
@@ -159,11 +159,12 @@ namespace AZ
 
         AZStd::string GetCurrentExecutablePath()
         {
-            char exeDirectory[AZ_MAX_PATH_LEN];
-            AZ::Utils::GetExecutableDirectory(exeDirectory, AZ_ARRAY_SIZE(exeDirectory));
-
-            AZStd::string executablePath = exeDirectory;
-            return executablePath;
+            return {};
+//cjh            char exeDirectory[AZ_MAX_PATH_LEN];
+//            AZ::Utils::GetExecutableDirectory(exeDirectory, AZ_ARRAY_SIZE(exeDirectory));
+//
+//            AZStd::string executablePath = exeDirectory;
+//            return executablePath;
         }
 
         AZStd::string GetEngineRootPath()
@@ -194,25 +195,25 @@ namespace AZ
         // Method to delete a folder recursively
         static void DeleteFolderRecursive(const AZ::IO::PathView& path)
         {
-            auto callback = [&path](AZStd::string_view filename, bool isFile) -> bool {
-                if (isFile)
-                {
-                    auto filePath = AZ::IO::FixedMaxPath(path) / filename;
-                    AZ::IO::SystemFile::Delete(filePath.c_str());
-                }
-                else
-                {
-                    if (filename != "." && filename != "..")
-                    {
-                        auto folderPath = AZ::IO::FixedMaxPath(path) / filename;
-                        DeleteFolderRecursive(folderPath);
-                    }
-                }
-                return true;
-            };
-            auto searchPath = AZ::IO::FixedMaxPath(path) / "*";
-            AZ::IO::SystemFile::FindFiles(searchPath.c_str(), callback);
-            AZ::IO::SystemFile::DeleteDir(AZ::IO::FixedMaxPathString(path.Native()).c_str());
+//cjh            auto callback = [&path](AZStd::string_view filename, bool isFile) -> bool {
+//                if (isFile)
+//                {
+//                    auto filePath = AZ::IO::FixedMaxPath(path) / filename;
+//                    AZ::IO::SystemFile::Delete(filePath.c_str());
+//                }
+//                else
+//                {
+//                    if (filename != "." && filename != "..")
+//                    {
+//                        auto folderPath = AZ::IO::FixedMaxPath(path) / filename;
+//                        DeleteFolderRecursive(folderPath);
+//                    }
+//                }
+//                return true;
+//            };
+//            auto searchPath = AZ::IO::FixedMaxPath(path) / "*";
+//            AZ::IO::SystemFile::FindFiles(searchPath.c_str(), callback);
+//            AZ::IO::SystemFile::DeleteDir(AZ::IO::FixedMaxPathString(path.Native()).c_str());
         }
 
         ScopedAutoTempDirectory::~ScopedAutoTempDirectory()

@@ -7,7 +7,7 @@
  */
 #include <stdio.h>                  // for freopen
 #include <unistd.h>                 // for getcwd
-#include <AzCore/IO/SystemFile.h>   // for AZ_MAX_PATH_LEN
+//cjh #include <AzCore/IO/SystemFile.h>   // for AZ_MAX_PATH_LEN
 
 namespace AzTestRunner
 {
@@ -18,13 +18,14 @@ namespace AzTestRunner
 
     const char* get_current_working_directory()
     {
-        static char cwd_buffer[AZ_MAX_PATH_LEN] = { '\0' };
-        return getcwd(cwd_buffer, sizeof(cwd_buffer));
+//cjh        static char cwd_buffer[AZ_MAX_PATH_LEN] = { '\0' };
+//        return getcwd(cwd_buffer, sizeof(cwd_buffer));
+        return nullptr;
     }
 
     void pause_on_completion()
     {
-        [[maybe_unused]] auto systemResult = system("pause");
+//cjh        [[maybe_unused]] auto systemResult = system("pause");
     }
 
 }

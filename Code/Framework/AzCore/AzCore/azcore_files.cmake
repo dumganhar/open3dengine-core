@@ -158,29 +158,30 @@ set(FILES
     # EBus/Internal/Handlers.h
     # EBus/Internal/StoragePolicies.h
     Interface/Interface.h
-    IO/ByteContainerStream.h
-    IO/CompressionBus.h
-    # IO/CompressionBus.cpp
-    IO/Compressor.cpp
-    IO/Compressor.h
-    IO/CompressorStream.cpp
-    IO/CompressorStream.h
-    IO/CompressorZLib.cpp
-    IO/CompressorZLib.h
-    IO/CompressorZStd.cpp
-    IO/CompressorZStd.h
-    IO/FileIO.cpp
-    IO/FileIO.h
-    IO/FileReader.cpp
-    IO/FileReader.h
-    IO/IOUtils.h
-    IO/IOUtils.cpp
-    IO/IStreamer.h
-    IO/IStreamerTypes.h
-    IO/IStreamerTypes.inl
-    IO/IStreamerTypes.cpp
-    IO/GenericStreams.cpp
-    IO/GenericStreams.h
+
+    # IO/ByteContainerStream.h
+    # IO/CompressionBus.h
+    # # IO/CompressionBus.cpp
+    # IO/Compressor.cpp
+    # IO/Compressor.h
+    # IO/CompressorStream.cpp
+    # IO/CompressorStream.h
+    # IO/CompressorZLib.cpp
+    # IO/CompressorZLib.h
+    # IO/CompressorZStd.cpp
+    # IO/CompressorZStd.h
+    # IO/FileIO.cpp
+    # IO/FileIO.h
+    # IO/FileReader.cpp
+    # IO/FileReader.h
+    # IO/IOUtils.h
+    # IO/IOUtils.cpp
+    # IO/IStreamer.h
+    # IO/IStreamerTypes.h
+    # IO/IStreamerTypes.inl
+    # IO/IStreamerTypes.cpp
+    # IO/GenericStreams.cpp
+    # IO/GenericStreams.h
     IO/Path/Path.cpp
     IO/Path/Path.h
     IO/Path/Path.inl
@@ -189,40 +190,41 @@ set(FILES
     IO/Path/PathReflect.cpp
     IO/Path/PathReflect.h
     IO/Path/Path_fwd.h
-    IO/SystemFile.cpp
-    IO/SystemFile.h
-    IO/TextStreamWriters.h
-    IO/Streamer/BlockCache.h
-    IO/Streamer/BlockCache.cpp
-    IO/Streamer/DedicatedCache.h
-    IO/Streamer/DedicatedCache.cpp
-    IO/Streamer/FileRange.h
-    IO/Streamer/FileRange.cpp
-    IO/Streamer/FileRequest.h
-    IO/Streamer/FileRequest.inl
-    IO/Streamer/FileRequest.cpp
-    IO/Streamer/FullFileDecompressor.h
-    IO/Streamer/FullFileDecompressor.cpp
-    IO/Streamer/ReadSplitter.h
-    IO/Streamer/ReadSplitter.cpp
-    IO/Streamer/RequestPath.h
-    IO/Streamer/RequestPath.cpp
-    IO/Streamer/Scheduler.h
-    IO/Streamer/Scheduler.cpp
-    IO/Streamer/Statistics.h
-    IO/Streamer/Statistics.cpp
-    IO/Streamer/StorageDrive.h
-    IO/Streamer/StorageDrive.cpp
-    IO/Streamer/StreamerConfiguration.h
-    IO/Streamer/StreamerConfiguration.cpp
-    IO/Streamer/Streamer.cpp
-    IO/Streamer/Streamer.h
-    IO/Streamer/StreamerContext.h
-    IO/Streamer/StreamerContext.cpp
-    # IO/Streamer/StreamerComponent.cpp
-    # IO/Streamer/StreamerComponent.h
-    IO/Streamer/StreamStackEntry.h
-    IO/Streamer/StreamStackEntry.cpp
+    # IO/SystemFile.cpp
+    # IO/SystemFile.h
+    # IO/TextStreamWriters.h
+    # IO/Streamer/BlockCache.h
+    # IO/Streamer/BlockCache.cpp
+    # IO/Streamer/DedicatedCache.h
+    # IO/Streamer/DedicatedCache.cpp
+    # IO/Streamer/FileRange.h
+    # IO/Streamer/FileRange.cpp
+    # IO/Streamer/FileRequest.h
+    # IO/Streamer/FileRequest.inl
+    # IO/Streamer/FileRequest.cpp
+    # IO/Streamer/FullFileDecompressor.h
+    # IO/Streamer/FullFileDecompressor.cpp
+    # IO/Streamer/ReadSplitter.h
+    # IO/Streamer/ReadSplitter.cpp
+    # IO/Streamer/RequestPath.h
+    # IO/Streamer/RequestPath.cpp
+    # IO/Streamer/Scheduler.h
+    # IO/Streamer/Scheduler.cpp
+    # IO/Streamer/Statistics.h
+    # IO/Streamer/Statistics.cpp
+    # IO/Streamer/StorageDrive.h
+    # IO/Streamer/StorageDrive.cpp
+    # IO/Streamer/StreamerConfiguration.h
+    # IO/Streamer/StreamerConfiguration.cpp
+    # IO/Streamer/Streamer.cpp
+    # IO/Streamer/Streamer.h
+    # IO/Streamer/StreamerContext.h
+    # IO/Streamer/StreamerContext.cpp
+    # # IO/Streamer/StreamerComponent.cpp
+    # # IO/Streamer/StreamerComponent.h
+    # IO/Streamer/StreamStackEntry.h
+    # IO/Streamer/StreamStackEntry.cpp
+    
     # IPC/SharedMemory.cpp
     # IPC/SharedMemory.h
     # Jobs/Algorithms.h
