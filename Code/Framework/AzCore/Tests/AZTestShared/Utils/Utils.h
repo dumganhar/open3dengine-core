@@ -8,8 +8,8 @@
 #pragma once
 
 #include <AzCore/std/string/string.h>
-#include <AzCore/Debug/TraceMessageBus.h>
-#include "AzCore/Slice/SliceAsset.h"
+//cjh #include <AzCore/Debug/TraceMessageBus.h>
+//cjh #include "AzCore/Slice/SliceAsset.h"
 
 namespace UnitTest
 {
@@ -21,7 +21,7 @@ namespace UnitTest
     //! Handler for the trace message bus to suppress errors / warnings that are expected due to testing particular
     //! code branches, so as to avoid filling the test output with traces.
     class ErrorHandler
-        : public AZ::Debug::TraceMessageBus::Handler
+//cjh        : public AZ::Debug::TraceMessageBus::Handler
     {
     public:
         explicit ErrorHandler(const char* errorPattern);
@@ -38,10 +38,10 @@ namespace UnitTest
 
         // AZ::Debug::TraceMessageBus
         bool OnPreError(
-            const char* window, const char* fileName, int line, const char* func, const char* message) override;
+                        const char* window, const char* fileName, int line, const char* func, const char* message);//cjh override;
         bool OnPreWarning(
-            const char* window, const char* fileName, int line, const char* func, const char* message) override;
-        bool OnPrintf(const char* window, const char* message) override;
+                          const char* window, const char* fileName, int line, const char* func, const char* message);//cjh  override;
+        bool OnPrintf(const char* window, const char* message);//cjh override;
     private:
         AZStd::string m_errorPattern;
         int m_errorCount;
@@ -58,27 +58,27 @@ namespace AZ
     namespace Test
     {
         //! Creates an entity, assigns the given component to it and then creates a slice asset containing the entity
-        AZ::Data::Asset<AZ::SliceAsset> CreateSliceFromComponent(AZ::Component* assetComponent, AZ::Data::AssetId sliceAssetId);
+//cjh        AZ::Data::Asset<AZ::SliceAsset> CreateSliceFromComponent(AZ::Component* assetComponent, AZ::Data::AssetId sliceAssetId);
  
         // the Assert Absorber can be used to absorb asserts, errors and warnings during unit tests.
-        class AssertAbsorber
-            : public AZ::Debug::TraceMessageBus::Handler
-        {
-        public:
-            AssertAbsorber();
-            ~AssertAbsorber();
-
-            bool OnPreAssert(const char* fileName, int line, const char* func, const char* message) override;
-            bool OnAssert(const char* message) override;
-            bool OnPreError(const char* window, const char* fileName, int line, const char* func, const char* message) override;
-            bool OnError(const char* window, const char* message) override;
-            bool OnWarning(const char* window, const char* message) override;
-            bool OnPreWarning(const char* window, const char* fileName, int line, const char* func, const char* message) override;
-
-            AZ::u32 m_errorCount{ 0 };
-            AZ::u32 m_warningCount{ 0 };
-            AZ::u32 m_assertCount{ 0 };
-        };
+//cjh        class AssertAbsorber
+//            : public AZ::Debug::TraceMessageBus::Handler
+//        {
+//        public:
+//            AssertAbsorber();
+//            ~AssertAbsorber();
+//
+//            bool OnPreAssert(const char* fileName, int line, const char* func, const char* message) override;
+//            bool OnAssert(const char* message) override;
+//            bool OnPreError(const char* window, const char* fileName, int line, const char* func, const char* message) override;
+//            bool OnError(const char* window, const char* message) override;
+//            bool OnWarning(const char* window, const char* message) override;
+//            bool OnPreWarning(const char* window, const char* fileName, int line, const char* func, const char* message) override;
+//
+//            AZ::u32 m_errorCount{ 0 };
+//            AZ::u32 m_warningCount{ 0 };
+//            AZ::u32 m_assertCount{ 0 };
+//        };
 
     } //namespace Test
 

@@ -14,9 +14,10 @@
 #include <AzCore/PlatformIncl.h>
 #include <AzCore/UnitTest/TestTypes.h>
 #include <AzCore/Memory/Memory.h>
-#include <AzCore/Debug/StackTracer.h>
+//cjh #include <AzCore/Debug/StackTracer.h>
 #include <AzCore/Debug/Trace.h>
 #include <AzCore/Math/Sfmt.h>
+#include <AzCore/std/functional_basic.h>
 
 
 namespace Internal
@@ -35,13 +36,13 @@ namespace Internal
         }
     }
 
-    using AZ::Debug::SymbolStorage;
+//cjh    using AZ::Debug::SymbolStorage;
     using AZ::Debug::Trace;
 
-#define DEBUG_ALLOCATOR
-#include <AzCore/Memory/HphaSchema.cpp>
-#include <AzCore/Memory/MallocSchema.cpp>
-#undef DEBUG_ALLOCATOR
+//cjh #define DEBUG_ALLOCATOR
+//#include <AzCore/Memory/HphaSchema.cpp>
+//#include <AzCore/Memory/MallocSchema.cpp>
+//#undef DEBUG_ALLOCATOR
 } // namespace Internal
 
 namespace UnitTest

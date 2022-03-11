@@ -27,8 +27,8 @@ set(FILES
     # Components.cpp
     # Console/LoggerSystemComponentTests.cpp
     # Console/ConsoleTests.cpp
-    Debug.cpp
-    DLL.cpp
+    # Debug.cpp
+    # DLL.cpp
     # EBus.cpp
     # EntityIdTests.cpp
     # EntityTests.cpp
@@ -54,8 +54,8 @@ set(FILES
     # Patching.cpp
     # RemappableId.cpp
     Rtti.cpp
-    Script.cpp
-    ScriptMath.cpp
+    # Script.cpp
+    # ScriptMath.cpp
     # Serialization.cpp
     # SerializeContextFixture.h
     # Slice.cpp
@@ -67,14 +67,14 @@ set(FILES
     # SystemFile.cpp
     # TaskTests.cpp
     # TickBusTest.cpp
-    UUIDTests.cpp
+    # UUIDTests.cpp
     # XML.cpp
     # Debug/LocalFileEventLoggerTests.cpp
     # Debug/Trace.cpp
     # Debug/UnhandledExceptions.cpp
-    Name/NameJsonSerializerTests.cpp
-    Name/NameTests.cpp
-    RTTI/TypeSafeIntegralTests.cpp
+    # Name/NameJsonSerializerTests.cpp
+    # Name/NameTests.cpp
+    # RTTI/TypeSafeIntegralTests.cpp
     # Settings/CommandLineTests.cpp
     # Settings/ConfigurableStackTests.cpp
     # Settings/SettingsRegistryTests.cpp
@@ -132,96 +132,97 @@ set(FILES
     # Serialization/Json/UnorderedSetSerializerTests.cpp
     # Serialization/Json/UnsupportedTypesSerializerTests.cpp
     # Serialization/Json/UuidSerializerTests.cpp
-    Time/TimeTests.cpp
-    Math/AabbTests.cpp
-    Math/ColorTests.cpp
-    Math/CrcTests.cpp
-    Math/CrcTestsCompileTimeLiterals.h
-    Math/FrustumTests.cpp
-    Math/FrustumPerformanceTests.cpp
-    Math/IntersectionTests.cpp
-    Math/MathIntrinsicsTests.cpp
-    Math/MathStringsTests.cpp
-    Math/MathUtilsTests.cpp
-    Math/Matrix3x3PerformanceTests.cpp
-    Math/Matrix3x3Tests.cpp
-    Math/Matrix3x4PerformanceTests.cpp
-    Math/Matrix3x4Tests.cpp
-    Math/Matrix4x4PerformanceTests.cpp
-    Math/Matrix4x4Tests.cpp
-    Math/MatrixUtilsTests.cpp
-    Math/MathTest.h
-    Math/MathTestData.h
-    Math/ObbPerformanceTests.cpp
-    Math/ObbTests.cpp
-    Math/PlanePerformanceTests.cpp
-    Math/PlaneTests.cpp
-    Math/QuaternionPerformanceTests.cpp
-    Math/QuaternionTests.cpp
-    Math/RandomTests.cpp
-    Math/ShapeIntersectionPerformanceTests.cpp
-    Math/ShapeIntersectionTests.cpp
-    Math/SfmtTests.cpp
-    Math/SimdMathTests.cpp
-    Math/SphereTests.cpp
-    Math/SplineTests.cpp
-    Math/TransformPerformanceTests.cpp
-    Math/TransformTests.cpp
-    Math/Vector2PerformanceTests.cpp
-    Math/Vector2Tests.cpp
-    Math/Vector3PerformanceTests.cpp
-    Math/Vector3Tests.cpp
-    Math/Vector4PerformanceTests.cpp
-    Math/Vector4Tests.cpp
-    Memory/AllocatorBenchmarks.cpp
-    Memory/AllocatorManager.cpp
-    Memory/HphaSchema.cpp
-    Memory/HphaSchemaErrorDetection.cpp
-    Memory/LeakDetection.cpp
-    Memory/MallocSchema.cpp
-    AZStd/Algorithms.cpp
-    AZStd/Allocators.cpp
-    AZStd/Atomics.cpp
-    AZStd/Any.cpp
-    AZStd/Bitset.cpp
-    AZStd/ConceptsTests.cpp
-    AZStd/CreateDestroy.cpp
-    AZStd/ConcurrentAllocators.cpp
-    AZStd/ConcurrentContainers.cpp
-    AZStd/ChronoTests.cpp
-    AZStd/DequeAndSimilar.cpp
-    AZStd/Examples.cpp
-    AZStd/FunctionalBasic.cpp
-    AZStd/FunctorsBind.cpp
-    AZStd/Hashed.cpp
-    AZStd/Invoke.cpp
-    AZStd/Iterators.cpp
-    AZStd/Lists.cpp
-    AZStd/ListsFixed.cpp
-    AZStd/ListsIntrusive.cpp
-    AZStd/LockFreeQueues.cpp
-    AZStd/LockFreeStacks.cpp
-    AZStd/LockTests.cpp
-    AZStd/Math.cpp
-    AZStd/Numeric.cpp
-    AZStd/Ordered.cpp
-    AZStd/Optional.cpp
-    AZStd/Pair.cpp
-    AZStd/Parallel.cpp
-    AZStd/RangesAlgorithmTests.cpp
-    AZStd/RangesTests.cpp
-    AZStd/RangesViewTests.cpp
-    AZStd/ScopedLockTests.cpp
-    AZStd/SetsIntrusive.cpp
-    AZStd/SmartPtr.cpp
-    AZStd/SpanTests.cpp
-    AZStd/String.cpp
-    AZStd/TypeTraits.cpp
-    AZStd/Tuple.cpp
-    AZStd/UserTypes.h
-    AZStd/Variant.cpp
-    AZStd/VariantSerialization.cpp
-    AZStd/VectorAndArray.cpp
+    # Time/TimeTests.cpp
+    # Math/AabbTests.cpp
+    # Math/ColorTests.cpp
+    # Math/CrcTests.cpp
+    # Math/CrcTestsCompileTimeLiterals.h
+    # Math/FrustumTests.cpp
+    # Math/FrustumPerformanceTests.cpp
+    # Math/IntersectionTests.cpp
+    # Math/MathIntrinsicsTests.cpp
+    # Math/MathStringsTests.cpp
+    # Math/MathUtilsTests.cpp
+    # Math/Matrix3x3PerformanceTests.cpp
+    # Math/Matrix3x3Tests.cpp
+    # Math/Matrix3x4PerformanceTests.cpp
+    # Math/Matrix3x4Tests.cpp
+    # Math/Matrix4x4PerformanceTests.cpp
+    # Math/Matrix4x4Tests.cpp
+    # Math/MatrixUtilsTests.cpp
+    # Math/MathTest.h
+    # Math/MathTestData.h
+    # Math/ObbPerformanceTests.cpp
+    # Math/ObbTests.cpp
+    # Math/PlanePerformanceTests.cpp
+    # Math/PlaneTests.cpp
+    # Math/QuaternionPerformanceTests.cpp
+    # Math/QuaternionTests.cpp
+    # Math/RandomTests.cpp
+    # Math/ShapeIntersectionPerformanceTests.cpp
+    # Math/ShapeIntersectionTests.cpp
+    # Math/SfmtTests.cpp
+    # Math/SimdMathTests.cpp
+    # Math/SphereTests.cpp
+    # Math/SplineTests.cpp
+    # Math/TransformPerformanceTests.cpp
+    # Math/TransformTests.cpp
+    # Math/Vector2PerformanceTests.cpp
+    # Math/Vector2Tests.cpp
+    # Math/Vector3PerformanceTests.cpp
+    # Math/Vector3Tests.cpp
+    # Math/Vector4PerformanceTests.cpp
+    # Math/Vector4Tests.cpp
+    # Memory/AllocatorBenchmarks.cpp
+    # Memory/AllocatorManager.cpp
+    # Memory/HphaSchema.cpp
+    # Memory/HphaSchemaErrorDetection.cpp
+    # Memory/LeakDetection.cpp
+    # Memory/MallocSchema.cpp
+    # AZStd/Algorithms.cpp
+    # AZStd/Allocators.cpp
+    # AZStd/Atomics.cpp
+    # AZStd/Any.cpp
+    # AZStd/Bitset.cpp
+    # AZStd/ConceptsTests.cpp
+    # AZStd/CreateDestroy.cpp
+    # AZStd/ConcurrentAllocators.cpp
+    # AZStd/ConcurrentContainers.cpp
+    # AZStd/ChronoTests.cpp
+    # AZStd/DequeAndSimilar.cpp
+    # AZStd/Examples.cpp
+    # AZStd/FunctionalBasic.cpp
+    # AZStd/FunctorsBind.cpp
+    # AZStd/Hashed.cpp
+    # AZStd/Invoke.cpp
+    # AZStd/Iterators.cpp
+    # AZStd/Lists.cpp
+    # AZStd/ListsFixed.cpp
+    # AZStd/ListsIntrusive.cpp
+    # AZStd/LockFreeQueues.cpp
+    # AZStd/LockFreeStacks.cpp
+    # AZStd/LockTests.cpp
+    # AZStd/Math.cpp
+    # AZStd/Numeric.cpp
+    # AZStd/Ordered.cpp
+    # AZStd/Optional.cpp
+    # AZStd/Pair.cpp
+    # AZStd/Parallel.cpp
+    # AZStd/RangesAlgorithmTests.cpp
+    # AZStd/RangesTests.cpp
+    # AZStd/RangesViewTests.cpp
+    # AZStd/ScopedLockTests.cpp
+    # AZStd/SetsIntrusive.cpp
+    # AZStd/SmartPtr.cpp
+    # AZStd/SpanTests.cpp
+    # AZStd/String.cpp
+    # AZStd/TypeTraits.cpp
+    # AZStd/Tuple.cpp
+    # AZStd/UserTypes.h
+    # AZStd/Variant.cpp
+    # AZStd/VectorAndArray.cpp
+
+    # AZStd/VariantSerialization.cpp
     # DOM/DomFixtures.cpp
     # DOM/DomFixtures.h
     # DOM/DomJsonTests.cpp
@@ -238,6 +239,6 @@ set(FILES
 
 # Prevent the following files from being grouped in UNITY builds
 set(SKIP_UNITY_BUILD_INCLUSION_FILES
-    Memory/HphaSchema.cpp
-    Memory/HphaSchemaErrorDetection.cpp
+    # Memory/HphaSchema.cpp
+    # Memory/HphaSchemaErrorDetection.cpp
 )

@@ -9,6 +9,7 @@
 #include <AzCore/UnitTest/TestTypes.h>
 #include <AzCore/IO/Path/Path.h>
 #include <AzCore/std/ranges/ranges.h>
+#include <AzCore/std/containers/deque.h>
 
 namespace UnitTest
 {

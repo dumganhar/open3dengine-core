@@ -25,21 +25,21 @@ namespace UnitTest
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     class AllocatorsTestFixtureLeakDetectionTest
         : public AllocatorsTestFixture
-        , public UnitTest::TraceBusRedirector
+//cjh        , public UnitTest::TraceBusRedirector
     {
     public:
-        void SetUp() override
+        void SetUp()// override
         {
             AllocatorsTestFixture::SetUp();
 
-            AZ::Debug::TraceMessageBus::Handler::BusConnect();
+//cjh            AZ::Debug::TraceMessageBus::Handler::BusConnect();
         }
-        void TearDown() override
+        void TearDown()// override
         {
             AllocatorsTestFixture::TearDown();
 
             EXPECT_EQ(m_leakExpected, m_leakDetected);
-            AZ::Debug::TraceMessageBus::Handler::BusDisconnect();
+//cjh            AZ::Debug::TraceMessageBus::Handler::BusDisconnect();
 
             if (m_leakExpected)
             {
@@ -50,7 +50,7 @@ namespace UnitTest
         void SetLeakExpected() { AZ_TEST_START_TRACE_SUPPRESSION; m_leakExpected = true; }
 
     private:
-        bool OnPreError(const char* window, const char* file, int line, const char* func, const char* message) override
+        bool OnPreError(const char* window, const char* file, int line, const char* func, const char* message)// override
         {
             AZ_UNUSED(file);
             AZ_UNUSED(line);
@@ -67,7 +67,7 @@ namespace UnitTest
             return false;
         }
 
-        bool OnPrintf(const char* window, const char* message) override
+        bool OnPrintf(const char* window, const char* message)// override
         {
             AZ_UNUSED(window);
             AZ_UNUSED(message);
@@ -139,8 +139,8 @@ namespace UnitTest
             // We suppress the traces so they dont produce more abort calls that would cause the debugger to break (i.e. to stop at a breakpoint). Since
             // this is part of a death test, the trace suppression wont leak because death tests are executed in their own process space.
             AZ_TEST_START_TRACE_SUPPRESSION;
-            TraceBusHook* traceBusHook = static_cast<TraceBusHook*>(AZ::Test::sTestEnvironment);
-            traceBusHook->TeardownEnvironment();
+//cjh            TraceBusHook* traceBusHook = static_cast<TraceBusHook*>(AZ::Test::sTestEnvironment);
+//            traceBusHook->TeardownEnvironment();
         }
     };
 
@@ -160,59 +160,59 @@ namespace UnitTest
     {
         // Internal class to manage the bus redirector so we can use construction/destruction order to detect leaks triggered
         // by AllocatorSetup destructor.
-        class BusRedirector
-            : public UnitTest::TraceBusRedirector
-        {
-        public:
-            BusRedirector()
-            {
-                AZ::Debug::TraceMessageBus::Handler::BusConnect();
-            }
-            ~BusRedirector() override
-            {
-                EXPECT_EQ(m_leakExpected, m_leakDetected);
-                AZ::Debug::TraceMessageBus::Handler::BusDisconnect();
-
-                if (m_leakExpected)
-                {
-                    // The macro AZ_TEST_STOP_TRACE_SUPPRESSION contains a return statement, therefore we cannot use it in a destructor, 
-                    // to overcome that, we wrap it in a lambda so we can drop the returned value.
-                    auto stopAsserts = [] {
-                        AZ_TEST_STOP_TRACE_SUPPRESSION(1);
-                    };
-                    stopAsserts();
-                }
-            }
-
-            bool OnPreError(const char* window, const char* file, int line, const char* func, const char* message) override
-            {
-                AZ_UNUSED(file);
-                AZ_UNUSED(line);
-                AZ_UNUSED(func);
-
-                if (AZStd::string_view(window) == "Memory"
-                    && AZStd::string_view(message) == "We still have 1 allocations on record! They must be freed prior to destroy!")
-                {
-                    // Leak detected, flag it so we validate on tear down that this happened. We also will 
-                    // mark this test since it will assert
-                    m_leakDetected = true;
-                    return true;
-                }
-                return false;
-            }
-
-            bool OnPrintf(const char* window, const char* message) override
-            {
-                AZ_UNUSED(window);
-                AZ_UNUSED(message);
-                // Do not print the error message twice. The error message will already be printed by the TraceBusRedirector
-                // in UnitTest.h. Here we override it to prevent it from printing twice.
-                return true;
-            }
-
-            bool m_leakDetected = false;
-            bool m_leakExpected = false;
-        };
+//cjh        class BusRedirector
+//            : public UnitTest::TraceBusRedirector
+//        {
+//        public:
+//            BusRedirector()
+//            {
+//                AZ::Debug::TraceMessageBus::Handler::BusConnect();
+//            }
+//            ~BusRedirector() override
+//            {
+//                EXPECT_EQ(m_leakExpected, m_leakDetected);
+//                AZ::Debug::TraceMessageBus::Handler::BusDisconnect();
+//
+//                if (m_leakExpected)
+//                {
+//                    // The macro AZ_TEST_STOP_TRACE_SUPPRESSION contains a return statement, therefore we cannot use it in a destructor,
+//                    // to overcome that, we wrap it in a lambda so we can drop the returned value.
+//                    auto stopAsserts = [] {
+//                        AZ_TEST_STOP_TRACE_SUPPRESSION(1);
+//                    };
+//                    stopAsserts();
+//                }
+//            }
+//
+//            bool OnPreError(const char* window, const char* file, int line, const char* func, const char* message) override
+//            {
+//                AZ_UNUSED(file);
+//                AZ_UNUSED(line);
+//                AZ_UNUSED(func);
+//
+//                if (AZStd::string_view(window) == "Memory"
+//                    && AZStd::string_view(message) == "We still have 1 allocations on record! They must be freed prior to destroy!")
+//                {
+//                    // Leak detected, flag it so we validate on tear down that this happened. We also will
+//                    // mark this test since it will assert
+//                    m_leakDetected = true;
+//                    return true;
+//                }
+//                return false;
+//            }
+//
+//            bool OnPrintf(const char* window, const char* message) override
+//            {
+//                AZ_UNUSED(window);
+//                AZ_UNUSED(message);
+//                // Do not print the error message twice. The error message will already be printed by the TraceBusRedirector
+//                // in UnitTest.h. Here we override it to prevent it from printing twice.
+//                return true;
+//            }
+//
+//            bool m_leakDetected = false;
+//            bool m_leakExpected = false;
+//        };
 
         // Inheriting to add default implementations for the virtual abstract methods.
         class AllocatorSetup : public ScopedAllocatorSetupFixture
@@ -312,45 +312,45 @@ namespace UnitTest
         };
 
     private:
-        class BusRedirector
-            : public UnitTest::TraceBusRedirector
-        {
-        public:
-            BusRedirector(bool& leakDetected)
-                : m_leakDetected(leakDetected)
-            {}
-
-            bool OnPreError(const char* window, const char* file, int line, const char* func, const char* message) override
-            {
-                AZ_UNUSED(file);
-                AZ_UNUSED(line);
-                AZ_UNUSED(func);
-
-                if (AZStd::string_view(window) == "Memory"
-                    && AZStd::string_view(message) == "We still have 1 allocations on record! They must be freed prior to destroy!")
-                {
-                    // Leak detected, flag it so we validate on tear down that this happened. We also will 
-                    // mark this test since it will assert
-                    m_leakDetected = true;
-                    return true;
-                }
-                return false;
-            }
-
-            bool OnPrintf(const char* window, const char* message) override
-            {
-                AZ_UNUSED(window);
-                AZ_UNUSED(message);
-                // Do not print the error message twice. The error message will already be printed by the TraceBusRedirector
-                // in UnitTest.h. Here we override it to prevent it from printing twice.
-                return true;
-            }
-
-        private:
-            bool& m_leakDetected;
-        };
-
-        BusRedirector m_busRedirector;
+//cjh        class BusRedirector
+//            : public UnitTest::TraceBusRedirector
+//        {
+//        public:
+//            BusRedirector(bool& leakDetected)
+//                : m_leakDetected(leakDetected)
+//            {}
+//
+//            bool OnPreError(const char* window, const char* file, int line, const char* func, const char* message) override
+//            {
+//                AZ_UNUSED(file);
+//                AZ_UNUSED(line);
+//                AZ_UNUSED(func);
+//
+//                if (AZStd::string_view(window) == "Memory"
+//                    && AZStd::string_view(message) == "We still have 1 allocations on record! They must be freed prior to destroy!")
+//                {
+//                    // Leak detected, flag it so we validate on tear down that this happened. We also will
+//                    // mark this test since it will assert
+//                    m_leakDetected = true;
+//                    return true;
+//                }
+//                return false;
+//            }
+//
+//            bool OnPrintf(const char* window, const char* message) override
+//            {
+//                AZ_UNUSED(window);
+//                AZ_UNUSED(message);
+//                // Do not print the error message twice. The error message will already be printed by the TraceBusRedirector
+//                // in UnitTest.h. Here we override it to prevent it from printing twice.
+//                return true;
+//            }
+//
+//        private:
+//            bool& m_leakDetected;
+//        };
+//
+//        BusRedirector m_busRedirector;
         bool m_leakDetected = false;
         bool m_leakExpected = false;
     };

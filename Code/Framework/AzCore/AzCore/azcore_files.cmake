@@ -583,8 +583,8 @@ set(FILES
     # Statistics/StatisticalProfilerProxySystemComponent.cpp
     # Statistics/StatisticalProfilerProxySystemComponent.h
     # Statistics/StatisticsManager.h
-    # StringFunc/StringFunc.cpp
-    # StringFunc/StringFunc.h
+    StringFunc/StringFunc.cpp
+    StringFunc/StringFunc.h
     # UserSettings/UserSettings.cpp
     # UserSettings/UserSettings.h
     # UserSettings/UserSettingsComponent.cpp

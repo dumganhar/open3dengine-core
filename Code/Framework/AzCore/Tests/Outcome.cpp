@@ -6,9 +6,10 @@
  *
  */
 #include "AzCore/Outcome/Outcome.h"
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 #include <AzCore/Memory/PoolAllocator.h>
 #include <AzCore/UnitTest/TestTypes.h>
+#include <AzCore/std/containers/unordered_set.h>
 
 namespace UnitTest
 {
@@ -439,44 +440,44 @@ namespace UnitTest
         run();
     }
 
-    class OutcomeSerializationTest
-        : public AllocatorsFixture
-    {
-    public:
-        // We must expose the class for serialization first.
-        void SetUp() override
-        {
-            AllocatorsFixture::SetUp();
-
-            AZ::AllocatorInstance<AZ::PoolAllocator>::Create();
-            AZ::AllocatorInstance<AZ::ThreadPoolAllocator>::Create();
-
-            m_serializeContext = AZStd::make_unique<AZ::SerializeContext>();
-        }
-
-        void TearDown() override
-        {
-            m_serializeContext.reset();
-
-            AZ::AllocatorInstance<AZ::ThreadPoolAllocator>::Destroy();
-            AZ::AllocatorInstance<AZ::PoolAllocator>::Destroy();
-
-            AllocatorsFixture::TearDown();
-        }
-
-    protected:
-        AZStd::unique_ptr<AZ::SerializeContext> m_serializeContext;
-    };
-
-
-    TEST_F(OutcomeSerializationTest, ReflectingOutcomeTwiceDoesNotLogError)
-    {
-        using TestOutcome = AZ::Outcome<int, int>;
-        AZ::GenericClassInfo* outcomeGenericInfo = AZ::SerializeGenericTypeInfo<TestOutcome>::GetGenericInfo();
-        ASSERT_NE(nullptr, outcomeGenericInfo);
-        outcomeGenericInfo->Reflect(m_serializeContext.get());
-        AZ_TEST_START_TRACE_SUPPRESSION;
-        outcomeGenericInfo->Reflect(m_serializeContext.get());
-        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
-    }
+//cjh    class OutcomeSerializationTest
+//        : public AllocatorsFixture
+//    {
+//    public:
+//        // We must expose the class for serialization first.
+//        void SetUp() override
+//        {
+//            AllocatorsFixture::SetUp();
+//
+//            AZ::AllocatorInstance<AZ::PoolAllocator>::Create();
+//            AZ::AllocatorInstance<AZ::ThreadPoolAllocator>::Create();
+//
+//            m_serializeContext = AZStd::make_unique<AZ::SerializeContext>();
+//        }
+//
+//        void TearDown() override
+//        {
+//            m_serializeContext.reset();
+//
+//            AZ::AllocatorInstance<AZ::ThreadPoolAllocator>::Destroy();
+//            AZ::AllocatorInstance<AZ::PoolAllocator>::Destroy();
+//
+//            AllocatorsFixture::TearDown();
+//        }
+//
+//    protected:
+//        AZStd::unique_ptr<AZ::SerializeContext> m_serializeContext;
+//    };
+//
+//
+//    TEST_F(OutcomeSerializationTest, ReflectingOutcomeTwiceDoesNotLogError)
+//    {
+//        using TestOutcome = AZ::Outcome<int, int>;
+//        AZ::GenericClassInfo* outcomeGenericInfo = AZ::SerializeGenericTypeInfo<TestOutcome>::GetGenericInfo();
+//        ASSERT_NE(nullptr, outcomeGenericInfo);
+//        outcomeGenericInfo->Reflect(m_serializeContext.get());
+//        AZ_TEST_START_TRACE_SUPPRESSION;
+//        outcomeGenericInfo->Reflect(m_serializeContext.get());
+//        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
+//    }
 } // namespace UnitTest

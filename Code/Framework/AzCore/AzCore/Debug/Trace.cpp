@@ -53,9 +53,9 @@ namespace AZ::Debug
 //
 //    //////////////////////////////////////////////////////////////////////////
 //    // Globals
-//    const int       g_maxMessageLength = 4096;
+    const int       g_maxMessageLength = 4096;
 //    static const char*    g_dbgSystemWnd = "System";
-//    Trace g_tracer;
+    Trace g_tracer;
 //    void* g_exceptionInfo = nullptr;
 //
 //    // Environment var needed to track ignored asserts across systems and disable native UI under certain conditions
@@ -239,7 +239,7 @@ namespace AZ::Debug
     bool Trace::IsTraceLoggingEnabledForLevel(LogLevel level)
     {
 //cjh        return bg_traceLogLevel >= level;
-        return false;
+        return true;
     }
 
     //=========================================================================
@@ -393,10 +393,10 @@ namespace AZ::Debug
     void
     Trace::Error(const char* fileName, int line, const char* funcName, const char* window, const char* format, ...)
     {
-//        if (!IsTraceLoggingEnabledForLevel(LogLevel::Errors))
-//        {
-//            return;
-//        }
+        if (!IsTraceLoggingEnabledForLevel(LogLevel::Errors))
+        {
+            return;
+        }
 //
 //        using namespace DebugInternal;
 //        if (!window)
@@ -404,19 +404,19 @@ namespace AZ::Debug
 //            window = g_dbgSystemWnd;
 //        }
 //
-//        char message[g_maxMessageLength];
-//        char header[g_maxMessageLength];
-//
+        char message[g_maxMessageLength];
+        char header[g_maxMessageLength];
+
 //        if (g_alreadyHandlingAssertOrFatal)
 //        {
 //            return;
 //        }
 //        g_alreadyHandlingAssertOrFatal = true;
-//
-//        va_list mark;
-//        va_start(mark, format);
-//        azvsnprintf(message, g_maxMessageLength-1, format, mark); // -1 to make room for the "/n" that will be appended below
-//        va_end(mark);
+
+        va_list mark;
+        va_start(mark, format);
+        azvsnprintf(message, g_maxMessageLength-1, format, mark); // -1 to make room for the "/n" that will be appended below
+        va_end(mark);
 //
 //cjh        if (auto logger = Interface<IEventLogger>::Get(); logger)
 //        {
@@ -431,14 +431,14 @@ namespace AZ::Debug
 //            return;
 //        }
 //
-//        Output(window, "\n==================================================================\n");
-//        azsnprintf(header, g_maxMessageLength, "Trace::Error\n %s(%d): '%s'\n", fileName, line, funcName);
-//        Output(window, header);
-//        azstrcat(message, g_maxMessageLength, "\n");
-//        Output(window, message);
-//
-//        EBUS_EVENT_RESULT(result, TraceMessageBus, OnError, window, message);
-//        Output(window, "==================================================================\n");
+        Output(window, "\n==================================================================\n");
+        azsnprintf(header, g_maxMessageLength, "Trace::Error\n %s(%d): '%s'\n", fileName, line, funcName);
+        Output(window, header);
+        azstrcat(message, g_maxMessageLength, "\n");
+        Output(window, message);
+
+//cjh        EBUS_EVENT_RESULT(result, TraceMessageBus, OnError, window, message);
+        Output(window, "==================================================================\n");
 //        if (result.m_value)
 //        {
 //            g_alreadyHandlingAssertOrFatal = false;
@@ -454,18 +454,18 @@ namespace AZ::Debug
     void
     Trace::Warning(const char* fileName, int line, const char* funcName, const char* window, const char* format, ...)
     {
-//cjh        if (!IsTraceLoggingEnabledForLevel(LogLevel::Warnings))
-//        {
-//            return;
-//        }
-//
-//        char message[g_maxMessageLength];
-//        char header[g_maxMessageLength];
-//
-//        va_list mark;
-//        va_start(mark, format);
-//        azvsnprintf(message, g_maxMessageLength - 1, format, mark); // -1 to make room for the "/n" that will be appended below
-//        va_end(mark);
+        if (!IsTraceLoggingEnabledForLevel(LogLevel::Warnings))
+        {
+            return;
+        }
+
+        char message[g_maxMessageLength];
+        char header[g_maxMessageLength];
+
+        va_list mark;
+        va_start(mark, format);
+        azvsnprintf(message, g_maxMessageLength - 1, format, mark); // -1 to make room for the "/n" that will be appended below
+        va_end(mark);
 //
 //        if (auto logger = Interface<IEventLogger>::Get(); logger)
 //        {
@@ -479,14 +479,14 @@ namespace AZ::Debug
 //            return;
 //        }
 //
-//        Output(window, "\n==================================================================\n");
-//        azsnprintf(header, g_maxMessageLength, "Trace::Warning\n %s(%d): '%s'\n", fileName, line, funcName);
-//        Output(window, header);
-//        azstrcat(message, g_maxMessageLength, "\n");
-//        Output(window, message);
-//
+        Output(window, "\n==================================================================\n");
+        azsnprintf(header, g_maxMessageLength, "Trace::Warning\n %s(%d): '%s'\n", fileName, line, funcName);
+        Output(window, header);
+        azstrcat(message, g_maxMessageLength, "\n");
+        Output(window, message);
+
 //        EBUS_EVENT_RESULT(result, TraceMessageBus, OnWarning, window, message);
-//        Output(window, "==================================================================\n");
+        Output(window, "==================================================================\n");
     }
 
     //=========================================================================
@@ -550,10 +550,13 @@ namespace AZ::Debug
 //        }
 //
 //        RawOutput(window, message);
+
+        printf("%s, %s\n", window, message);
     }
 
     void Trace::RawOutput(const char* window, const char* message)
     {
+        printf("%s, %s\n", window, message);
 //cjh        if (!window)
 //        {
 //            window = g_dbgSystemWnd;

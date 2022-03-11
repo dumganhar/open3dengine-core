@@ -82,33 +82,35 @@ if(PAL_TRAIT_BUILD_TESTS_SUPPORTED)
                 3rdParty::GoogleBenchmark
     )
 
-    ly_add_target(
-        NAME AzTestShared STATIC
-        NAMESPACE AZ
-        FILES_CMAKE
-            Tests/aztestshared_files.cmake
-        INCLUDE_DIRECTORIES
-            PUBLIC
-                Tests
-        BUILD_DEPENDENCIES
-            PRIVATE
-                AZ::AzTest
-                AZ::AzCore
-    )
+    set_target_properties(AzCoreTestCommon PROPERTIES LINKER_LANGUAGE CXX) #cjh add
 
-    ly_add_target(
-        NAME AzCoreTestDLL MODULE
-        NAMESPACE AZ
-        FILES_CMAKE
-            Tests/azcoretestdll_files.cmake
-        INCLUDE_DIRECTORIES
-            PUBLIC
-                Tests
-        BUILD_DEPENDENCIES
-            PRIVATE
-                AZ::AzCore
-                AZ::AzTest
-    )
+    #cjh ly_add_target(
+    #     NAME AzTestShared STATIC
+    #     NAMESPACE AZ
+    #     FILES_CMAKE
+    #         Tests/aztestshared_files.cmake
+    #     INCLUDE_DIRECTORIES
+    #         PUBLIC
+    #             Tests
+    #     BUILD_DEPENDENCIES
+    #         PRIVATE
+    #             AZ::AzTest
+    #             AZ::AzCore
+    # )
+
+    # ly_add_target(
+    #     NAME AzCoreTestDLL MODULE
+    #     NAMESPACE AZ
+    #     FILES_CMAKE
+    #         Tests/azcoretestdll_files.cmake
+    #     INCLUDE_DIRECTORIES
+    #         PUBLIC
+    #             Tests
+    #     BUILD_DEPENDENCIES
+    #         PRIVATE
+    #             AZ::AzCore
+    #             AZ::AzTest
+    # )
 
     o3de_pal_dir(pal_tests_dir ${CMAKE_CURRENT_LIST_DIR}/Tests/Platform/${PAL_PLATFORM_NAME} ${O3DE_ENGINE_RESTRICTED_PATH} ${LY_ROOT_FOLDER})
     ly_add_target(
@@ -128,11 +130,11 @@ if(PAL_TRAIT_BUILD_TESTS_SUPPORTED)
         BUILD_DEPENDENCIES
             PRIVATE
                 AZ::AzCore
-                AZ::AzCoreTestCommon
-                AZ::AzTestShared
+                # AZ::AzCoreTestCommon
+                # AZ::AzTestShared
                 AZ::AzTest
-        RUNTIME_DEPENDENCIES
-            AZ::AzCoreTestDLL
+        # RUNTIME_DEPENDENCIES
+        #     AZ::AzCoreTestDLL
     )
     ly_add_googletest(
         NAME AZ::AzCore.Tests

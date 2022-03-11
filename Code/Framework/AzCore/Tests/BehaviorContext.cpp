@@ -182,21 +182,21 @@ namespace UnitTest
             ;
     }
 
-    class EBusWithConstEvent
-        : public AZ::EBusTraits
-    {
-    public:
-        virtual void ConstEvent() const = 0;
-    };
-    using EBusWithConstEventBus = AZ::EBus<EBusWithConstEvent>;
-
-    TEST_F(BehaviorContextConstTest, BehaviorContext_BindConstEvents_Compiles)
-    {
-        AZ::BehaviorContext bc;
-        bc.EBus<EBusWithConstEventBus>("EBusWithConstEventBus")
-            ->Event("ConstEvent", &EBusWithConstEvent::ConstEvent)
-            ;
-    }
+//cjh    class EBusWithConstEvent
+//        : public AZ::EBusTraits
+//    {
+//    public:
+//        virtual void ConstEvent() const = 0;
+//    };
+//    using EBusWithConstEventBus = AZ::EBus<EBusWithConstEvent>;
+//
+//    TEST_F(BehaviorContextConstTest, BehaviorContext_BindConstEvents_Compiles)
+//    {
+//        AZ::BehaviorContext bc;
+//        bc.EBus<EBusWithConstEventBus>("EBusWithConstEventBus")
+//            ->Event("ConstEvent", &EBusWithConstEvent::ConstEvent)
+//            ;
+//    }
 
     void MethodAcceptingTemplate(const AZStd::string&)
     { }
@@ -384,73 +384,73 @@ namespace UnitTest
         }
     }
 
-    class EBusWithAZStdVectorEvent
-        : public AZ::EBusTraits
-    {
-    public:
-        virtual AZStd::string MoveContainer(const AZStd::vector<int>&) = 0;
-        virtual AZStd::pair<AZStd::string, AZStd::string> ExtractPair(const AZStd::unordered_map<AZStd::string, AZStd::string>&) = 0;
-    };
-
-    using EBusWithAZStdVectorEventBus = AZ::EBus<EBusWithAZStdVectorEvent>;
-
-    class BehaviorEBusWithAZStdVectorHandler
-        : public EBusWithAZStdVectorEventBus::Handler
-        , public AZ::BehaviorEBusHandler
-    {
-    public:
-        AZ_EBUS_BEHAVIOR_BINDER(BehaviorEBusWithAZStdVectorHandler, "{B372D229-AE1F-411D-882E-0984AA3DC6F7}", AZ::SystemAllocator
-            , MoveContainer
-            , ExtractPair
-        );
-
-        // User code
-        AZStd::string MoveContainer(const AZStd::vector<int>& lvalueContainer) override
-        {
-            // you can get the index yourself or use the FN_xxx enum FN_OnEvent
-            AZStd::string result{};
-            CallResult(result, FN_MoveContainer, lvalueContainer);
-            return result;
-        }
-
-        AZStd::pair<AZStd::string, AZStd::string> ExtractPair(const AZStd::unordered_map<AZStd::string, AZStd::string>& stringMap) override
-        {
-            AZStd::pair<AZStd::string, AZStd::string> result{};
-            CallResult(result, FN_ExtractPair, stringMap);
-            return result;
-        }
-
-    };
-
-    TEST_F(BehaviorContextTestFixture, EBusHandlers_Events_OnDemandReflection_Parameters)
-    {
-        // Test reflecting with EBus handler with an event that accepts an AZStd::vector
-        m_behaviorContext.EBus<EBusWithAZStdVectorEventBus>("EBusWithAZStdVectorEventBus")
-            ->Handler<BehaviorEBusWithAZStdVectorHandler>();
-
-        // Validate that OnDemandReflection for function parameters works
-        const AZ::Uuid vectorIntTypeid = AZ::AzTypeInfo<AZStd::vector<int>>::Uuid();
-        auto vectorIntClassIt = m_behaviorContext.m_typeToClassMap.find(vectorIntTypeid);
-        EXPECT_NE(m_behaviorContext.m_typeToClassMap.end(), vectorIntClassIt);
-        EXPECT_TRUE(m_behaviorContext.IsOnDemandTypeReflected(vectorIntTypeid));
-
-        // Validate that OnDemandReflection for the return value works
-        const AZ::Uuid stringTypeid = AZ::AzTypeInfo<AZStd::string>::Uuid();
-        auto stringClassIt = m_behaviorContext.m_typeToClassMap.find(stringTypeid);
-        EXPECT_NE(m_behaviorContext.m_typeToClassMap.end(), stringClassIt);
-        EXPECT_TRUE(m_behaviorContext.IsOnDemandTypeReflected(stringTypeid));
-
-        // Validate that OnDemandReflection works for all handler member functions
-        const AZ::Uuid stringToStringMapTypeid = AZ::AzTypeInfo<AZStd::unordered_map<AZStd::string, AZStd::string>>::Uuid();
-        auto stringToStringMapClassIt = m_behaviorContext.m_typeToClassMap.find(stringToStringMapTypeid);
-        EXPECT_NE(m_behaviorContext.m_typeToClassMap.end(), stringToStringMapClassIt);
-        EXPECT_TRUE(m_behaviorContext.IsOnDemandTypeReflected(stringToStringMapTypeid));
-
-        const AZ::Uuid pairStringStringTypeid = AZ::AzTypeInfo<AZStd::pair<AZStd::string, AZStd::string>>::Uuid();
-        auto pairStringsTringTypeid = m_behaviorContext.m_typeToClassMap.find(pairStringStringTypeid);
-        EXPECT_NE(m_behaviorContext.m_typeToClassMap.end(), pairStringsTringTypeid);
-        EXPECT_TRUE(m_behaviorContext.IsOnDemandTypeReflected(pairStringStringTypeid));
-    }
+//    class EBusWithAZStdVectorEvent
+//        : public AZ::EBusTraits
+//    {
+//    public:
+//        virtual AZStd::string MoveContainer(const AZStd::vector<int>&) = 0;
+//        virtual AZStd::pair<AZStd::string, AZStd::string> ExtractPair(const AZStd::unordered_map<AZStd::string, AZStd::string>&) = 0;
+//    };
+//
+//    using EBusWithAZStdVectorEventBus = AZ::EBus<EBusWithAZStdVectorEvent>;
+//
+//    class BehaviorEBusWithAZStdVectorHandler
+//        : public EBusWithAZStdVectorEventBus::Handler
+//        , public AZ::BehaviorEBusHandler
+//    {
+//    public:
+//        AZ_EBUS_BEHAVIOR_BINDER(BehaviorEBusWithAZStdVectorHandler, "{B372D229-AE1F-411D-882E-0984AA3DC6F7}", AZ::SystemAllocator
+//            , MoveContainer
+//            , ExtractPair
+//        );
+//
+//        // User code
+//        AZStd::string MoveContainer(const AZStd::vector<int>& lvalueContainer) override
+//        {
+//            // you can get the index yourself or use the FN_xxx enum FN_OnEvent
+//            AZStd::string result{};
+//            CallResult(result, FN_MoveContainer, lvalueContainer);
+//            return result;
+//        }
+//
+//        AZStd::pair<AZStd::string, AZStd::string> ExtractPair(const AZStd::unordered_map<AZStd::string, AZStd::string>& stringMap) override
+//        {
+//            AZStd::pair<AZStd::string, AZStd::string> result{};
+//            CallResult(result, FN_ExtractPair, stringMap);
+//            return result;
+//        }
+//
+//    };
+//
+//    TEST_F(BehaviorContextTestFixture, EBusHandlers_Events_OnDemandReflection_Parameters)
+//    {
+//        // Test reflecting with EBus handler with an event that accepts an AZStd::vector
+//        m_behaviorContext.EBus<EBusWithAZStdVectorEventBus>("EBusWithAZStdVectorEventBus")
+//            ->Handler<BehaviorEBusWithAZStdVectorHandler>();
+//
+//        // Validate that OnDemandReflection for function parameters works
+//        const AZ::Uuid vectorIntTypeid = AZ::AzTypeInfo<AZStd::vector<int>>::Uuid();
+//        auto vectorIntClassIt = m_behaviorContext.m_typeToClassMap.find(vectorIntTypeid);
+//        EXPECT_NE(m_behaviorContext.m_typeToClassMap.end(), vectorIntClassIt);
+//        EXPECT_TRUE(m_behaviorContext.IsOnDemandTypeReflected(vectorIntTypeid));
+//
+//        // Validate that OnDemandReflection for the return value works
+//        const AZ::Uuid stringTypeid = AZ::AzTypeInfo<AZStd::string>::Uuid();
+//        auto stringClassIt = m_behaviorContext.m_typeToClassMap.find(stringTypeid);
+//        EXPECT_NE(m_behaviorContext.m_typeToClassMap.end(), stringClassIt);
+//        EXPECT_TRUE(m_behaviorContext.IsOnDemandTypeReflected(stringTypeid));
+//
+//        // Validate that OnDemandReflection works for all handler member functions
+//        const AZ::Uuid stringToStringMapTypeid = AZ::AzTypeInfo<AZStd::unordered_map<AZStd::string, AZStd::string>>::Uuid();
+//        auto stringToStringMapClassIt = m_behaviorContext.m_typeToClassMap.find(stringToStringMapTypeid);
+//        EXPECT_NE(m_behaviorContext.m_typeToClassMap.end(), stringToStringMapClassIt);
+//        EXPECT_TRUE(m_behaviorContext.IsOnDemandTypeReflected(stringToStringMapTypeid));
+//
+//        const AZ::Uuid pairStringStringTypeid = AZ::AzTypeInfo<AZStd::pair<AZStd::string, AZStd::string>>::Uuid();
+//        auto pairStringsTringTypeid = m_behaviorContext.m_typeToClassMap.find(pairStringStringTypeid);
+//        EXPECT_NE(m_behaviorContext.m_typeToClassMap.end(), pairStringsTringTypeid);
+//        EXPECT_TRUE(m_behaviorContext.IsOnDemandTypeReflected(pairStringStringTypeid));
+//    }
 
     void FuncWithAcceptsVectorWithPointerValueTypeByRef(AZStd::vector<int*>&)
     {
@@ -468,148 +468,148 @@ namespace UnitTest
     {
     }
 
-    TEST_F(BehaviorContextTestFixture, MethodReflectionWithRefParam_DoesNotCauseAssert_WhenBoundToScriptContext)
-    {
-        m_behaviorContext.Method("MethodWithVectorParam", &FuncWithAcceptsVectorWithPointerValueTypeByRef);
-        AZ::ScriptContext scriptContext;
-        AZ_TEST_START_TRACE_SUPPRESSION;
-        scriptContext.BindTo(&m_behaviorContext);
-        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
-    }
-
-    TEST_F(BehaviorContextTestFixture, MethodReflectionWithConstRefParam_DoesNotCauseAssert_WhenBoundToScriptContext)
-    {
-        m_behaviorContext.Method("MethodWithVectorParam", &FuncWithAcceptsVectorWithPointerValueTypeByConstRef);
-        AZ::ScriptContext scriptContext;
-        AZ_TEST_START_TRACE_SUPPRESSION;
-        scriptContext.BindTo(&m_behaviorContext);
-        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
-    }
-
-    TEST_F(BehaviorContextTestFixture, MethodReflectionWithPointerParam_DoesNotCauseAssert_WhenBoundToScriptContext)
-    {
-        m_behaviorContext.Method("MethodWithVectorParam", &FuncWithAcceptsVectorWithPointerValueTypeByPointer);
-        AZ::ScriptContext scriptContext;
-        AZ_TEST_START_TRACE_SUPPRESSION;
-        scriptContext.BindTo(&m_behaviorContext);
-        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
-    }
-
-    TEST_F(BehaviorContextTestFixture, MethodReflectionWithConstPointerParam_DoesNotCauseAssert_WhenBoundToScriptContext)
-    {
-        m_behaviorContext.Method("MethodWithVectorParam", &FuncWithAcceptsVectorWithPointerValueTypeByConstPointer);
-        AZ::ScriptContext scriptContext;
-        AZ_TEST_START_TRACE_SUPPRESSION;
-        scriptContext.BindTo(&m_behaviorContext);
-        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
-    }
-
-    TEST_F(BehaviorContextTestFixture, MethodReflectionWithConstParam_DoesNotCauseAssert_WhenBoundToScriptContext)
-    {
-        m_behaviorContext.Method("MethodWithVectorParam", &FuncWithAcceptsVectorWithPointerValueTypeByConst);
-        AZ::ScriptContext scriptContext;
-        AZ_TEST_START_TRACE_SUPPRESSION;
-        scriptContext.BindTo(&m_behaviorContext);
-        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
-    }
-
-    TEST_F(BehaviorContextTestFixture, MethodWhichReturnsAzEvent_WithNoAzBehaviorAzEventDescription_FailsValidation)
-    {
-        using TestAzEvent = AZ::Event<float>;
-        auto TestMethodWhichReturnsAzEvent = [](TestAzEvent& testEvent) -> TestAzEvent&
-        {
-            return testEvent;
-        };
-
-        UnitTest::TestRunner::Instance().StartAssertTests();
-        // Test reflecting function which returns AZ::Event
-        m_behaviorContext.Method("TestMethodWhichReturnsAzEvent", TestMethodWhichReturnsAzEvent);
-        int numErrors = UnitTest::TestRunner::Instance().StopAssertTests();
-        EXPECT_EQ(1, numErrors);
-    }
-
-    TEST_F(BehaviorContextTestFixture, MethodWhichReturnsAzEvent_WithEmptyEventName_FailsValidation)
-    {
-        using TestAzEvent = AZ::Event<float>;
-        auto TestMethodWhichReturnsAzEvent = [](TestAzEvent& testEvent) -> TestAzEvent&
-        {
-            return testEvent;
-        };
-
-        // Test reflecting function which returns AZ::Event
-        AZ::BehaviorAzEventDescription behaviorEventDesc;
-        // m_eventName member is not set, validation should fail
-        behaviorEventDesc.m_parameterNames.push_back("Scale");
-
-        UnitTest::TestRunner::Instance().StartAssertTests();
-        m_behaviorContext.Method("TestMethodWhichReturnsAzEvent", TestMethodWhichReturnsAzEvent)
-            ->Attribute(AZ::Script::Attributes::AzEventDescription, AZStd::move(behaviorEventDesc));
-        int numErrors = UnitTest::TestRunner::Instance().StopAssertTests();
-        EXPECT_EQ(1, numErrors);
-    }
-
-    TEST_F(BehaviorContextTestFixture, MethodWhichReturnsAzEvent_WithParameterNameWhichIsEmpty_FailsValidation)
-    {
-        using TestAzEvent = AZ::Event<float>;
-        auto TestMethodWhichReturnsAzEvent = [](TestAzEvent& testEvent) -> TestAzEvent&
-        {
-            return testEvent;
-        };
-
-        // Test reflecting function which returns AZ::Event
-        AZ::BehaviorAzEventDescription behaviorEventDesc;
-        behaviorEventDesc.m_eventName = "TestAzEvent";
-        behaviorEventDesc.m_parameterNames.push_back(""); // Parameter name is empty, validation should fail
-
-        UnitTest::TestRunner::Instance().StartAssertTests();
-        m_behaviorContext.Method("TestMethodWhichReturnsAzEvent", TestMethodWhichReturnsAzEvent)
-            ->Attribute(AZ::Script::Attributes::AzEventDescription, AZStd::move(behaviorEventDesc));
-        int numErrors = UnitTest::TestRunner::Instance().StopAssertTests();
-        EXPECT_EQ(1, numErrors);
-    }
-
-    TEST_F(BehaviorContextTestFixture, MethodWhichReturnsAzEvent_WithMismatchNumberOfParameters_FailsValidation)
-    {
-        using TestAzEvent = AZ::Event<float>;
-        auto TestMethodWhichReturnsAzEvent = [](TestAzEvent& testEvent) -> TestAzEvent&
-        {
-            return testEvent;
-        };
-
-        // Test reflecting function which returns AZ::Event
-        AZ::BehaviorAzEventDescription behaviorEventDesc;
-        behaviorEventDesc.m_eventName = "TestAzEvent";
-        // The AZ Event accepts one parameters.
-        // Two parameter names are being added here
-        behaviorEventDesc.m_parameterNames.push_back("Scale");
-        behaviorEventDesc.m_parameterNames.push_back("Size");
-
-        UnitTest::TestRunner::Instance().StartAssertTests();
-        m_behaviorContext.Method("TestMethodWhichReturnsAzEvent", TestMethodWhichReturnsAzEvent)
-            ->Attribute(AZ::Script::Attributes::AzEventDescription, AZStd::move(behaviorEventDesc));
-        int numErrors = UnitTest::TestRunner::Instance().StopAssertTests();
-        EXPECT_LE(1, numErrors);
-    }
-
-    TEST_F(BehaviorContextTestFixture, MethodWhichReturnsAzEvent_WithCompleteAzBehaviorAzEventDescriptionription_PassesValidation)
-    {
-        using TestAzEvent = AZ::Event<float>;
-        auto TestMethodWhichReturnsAzEvent = [](TestAzEvent& testEvent) -> TestAzEvent&
-        {
-            return testEvent;
-        };
-
-        // Test reflecting function which returns AZ::Event
-        AZ::BehaviorAzEventDescription behaviorEventDesc;
-        behaviorEventDesc.m_eventName = "TestAzEvent";
-        behaviorEventDesc.m_parameterNames.push_back("Scale");
-
-        UnitTest::TestRunner::Instance().StartAssertTests();
-        m_behaviorContext.Method("TestMethodWhichReturnsAzEvent", TestMethodWhichReturnsAzEvent)
-            ->Attribute(AZ::Script::Attributes::AzEventDescription, AZStd::move(behaviorEventDesc));
-        int numErrors = UnitTest::TestRunner::Instance().StopAssertTests();
-        EXPECT_EQ(0, numErrors);
-    }
+//cjh    TEST_F(BehaviorContextTestFixture, MethodReflectionWithRefParam_DoesNotCauseAssert_WhenBoundToScriptContext)
+//    {
+//        m_behaviorContext.Method("MethodWithVectorParam", &FuncWithAcceptsVectorWithPointerValueTypeByRef);
+//        AZ::ScriptContext scriptContext;
+//        AZ_TEST_START_TRACE_SUPPRESSION;
+//        scriptContext.BindTo(&m_behaviorContext);
+//        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
+//    }
+//
+//    TEST_F(BehaviorContextTestFixture, MethodReflectionWithConstRefParam_DoesNotCauseAssert_WhenBoundToScriptContext)
+//    {
+//        m_behaviorContext.Method("MethodWithVectorParam", &FuncWithAcceptsVectorWithPointerValueTypeByConstRef);
+//        AZ::ScriptContext scriptContext;
+//        AZ_TEST_START_TRACE_SUPPRESSION;
+//        scriptContext.BindTo(&m_behaviorContext);
+//        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
+//    }
+//
+//    TEST_F(BehaviorContextTestFixture, MethodReflectionWithPointerParam_DoesNotCauseAssert_WhenBoundToScriptContext)
+//    {
+//        m_behaviorContext.Method("MethodWithVectorParam", &FuncWithAcceptsVectorWithPointerValueTypeByPointer);
+//        AZ::ScriptContext scriptContext;
+//        AZ_TEST_START_TRACE_SUPPRESSION;
+//        scriptContext.BindTo(&m_behaviorContext);
+//        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
+//    }
+//
+//    TEST_F(BehaviorContextTestFixture, MethodReflectionWithConstPointerParam_DoesNotCauseAssert_WhenBoundToScriptContext)
+//    {
+//        m_behaviorContext.Method("MethodWithVectorParam", &FuncWithAcceptsVectorWithPointerValueTypeByConstPointer);
+//        AZ::ScriptContext scriptContext;
+//        AZ_TEST_START_TRACE_SUPPRESSION;
+//        scriptContext.BindTo(&m_behaviorContext);
+//        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
+//    }
+//
+//    TEST_F(BehaviorContextTestFixture, MethodReflectionWithConstParam_DoesNotCauseAssert_WhenBoundToScriptContext)
+//    {
+//        m_behaviorContext.Method("MethodWithVectorParam", &FuncWithAcceptsVectorWithPointerValueTypeByConst);
+//        AZ::ScriptContext scriptContext;
+//        AZ_TEST_START_TRACE_SUPPRESSION;
+//        scriptContext.BindTo(&m_behaviorContext);
+//        AZ_TEST_STOP_TRACE_SUPPRESSION(0);
+//    }
+//
+//    TEST_F(BehaviorContextTestFixture, MethodWhichReturnsAzEvent_WithNoAzBehaviorAzEventDescription_FailsValidation)
+//    {
+//        using TestAzEvent = AZ::Event<float>;
+//        auto TestMethodWhichReturnsAzEvent = [](TestAzEvent& testEvent) -> TestAzEvent&
+//        {
+//            return testEvent;
+//        };
+//
+//        UnitTest::TestRunner::Instance().StartAssertTests();
+//        // Test reflecting function which returns AZ::Event
+//        m_behaviorContext.Method("TestMethodWhichReturnsAzEvent", TestMethodWhichReturnsAzEvent);
+//        int numErrors = UnitTest::TestRunner::Instance().StopAssertTests();
+//        EXPECT_EQ(1, numErrors);
+//    }
+//
+//    TEST_F(BehaviorContextTestFixture, MethodWhichReturnsAzEvent_WithEmptyEventName_FailsValidation)
+//    {
+//        using TestAzEvent = AZ::Event<float>;
+//        auto TestMethodWhichReturnsAzEvent = [](TestAzEvent& testEvent) -> TestAzEvent&
+//        {
+//            return testEvent;
+//        };
+//
+//        // Test reflecting function which returns AZ::Event
+//        AZ::BehaviorAzEventDescription behaviorEventDesc;
+//        // m_eventName member is not set, validation should fail
+//        behaviorEventDesc.m_parameterNames.push_back("Scale");
+//
+//        UnitTest::TestRunner::Instance().StartAssertTests();
+//        m_behaviorContext.Method("TestMethodWhichReturnsAzEvent", TestMethodWhichReturnsAzEvent)
+//            ->Attribute(AZ::Script::Attributes::AzEventDescription, AZStd::move(behaviorEventDesc));
+//        int numErrors = UnitTest::TestRunner::Instance().StopAssertTests();
+//        EXPECT_EQ(1, numErrors);
+//    }
+//
+//    TEST_F(BehaviorContextTestFixture, MethodWhichReturnsAzEvent_WithParameterNameWhichIsEmpty_FailsValidation)
+//    {
+//        using TestAzEvent = AZ::Event<float>;
+//        auto TestMethodWhichReturnsAzEvent = [](TestAzEvent& testEvent) -> TestAzEvent&
+//        {
+//            return testEvent;
+//        };
+//
+//        // Test reflecting function which returns AZ::Event
+//        AZ::BehaviorAzEventDescription behaviorEventDesc;
+//        behaviorEventDesc.m_eventName = "TestAzEvent";
+//        behaviorEventDesc.m_parameterNames.push_back(""); // Parameter name is empty, validation should fail
+//
+//        UnitTest::TestRunner::Instance().StartAssertTests();
+//        m_behaviorContext.Method("TestMethodWhichReturnsAzEvent", TestMethodWhichReturnsAzEvent)
+//            ->Attribute(AZ::Script::Attributes::AzEventDescription, AZStd::move(behaviorEventDesc));
+//        int numErrors = UnitTest::TestRunner::Instance().StopAssertTests();
+//        EXPECT_EQ(1, numErrors);
+//    }
+//
+//    TEST_F(BehaviorContextTestFixture, MethodWhichReturnsAzEvent_WithMismatchNumberOfParameters_FailsValidation)
+//    {
+//        using TestAzEvent = AZ::Event<float>;
+//        auto TestMethodWhichReturnsAzEvent = [](TestAzEvent& testEvent) -> TestAzEvent&
+//        {
+//            return testEvent;
+//        };
+//
+//        // Test reflecting function which returns AZ::Event
+//        AZ::BehaviorAzEventDescription behaviorEventDesc;
+//        behaviorEventDesc.m_eventName = "TestAzEvent";
+//        // The AZ Event accepts one parameters.
+//        // Two parameter names are being added here
+//        behaviorEventDesc.m_parameterNames.push_back("Scale");
+//        behaviorEventDesc.m_parameterNames.push_back("Size");
+//
+//        UnitTest::TestRunner::Instance().StartAssertTests();
+//        m_behaviorContext.Method("TestMethodWhichReturnsAzEvent", TestMethodWhichReturnsAzEvent)
+//            ->Attribute(AZ::Script::Attributes::AzEventDescription, AZStd::move(behaviorEventDesc));
+//        int numErrors = UnitTest::TestRunner::Instance().StopAssertTests();
+//        EXPECT_LE(1, numErrors);
+//    }
+//
+//    TEST_F(BehaviorContextTestFixture, MethodWhichReturnsAzEvent_WithCompleteAzBehaviorAzEventDescriptionription_PassesValidation)
+//    {
+//        using TestAzEvent = AZ::Event<float>;
+//        auto TestMethodWhichReturnsAzEvent = [](TestAzEvent& testEvent) -> TestAzEvent&
+//        {
+//            return testEvent;
+//        };
+//
+//        // Test reflecting function which returns AZ::Event
+//        AZ::BehaviorAzEventDescription behaviorEventDesc;
+//        behaviorEventDesc.m_eventName = "TestAzEvent";
+//        behaviorEventDesc.m_parameterNames.push_back("Scale");
+//
+//        UnitTest::TestRunner::Instance().StartAssertTests();
+//        m_behaviorContext.Method("TestMethodWhichReturnsAzEvent", TestMethodWhichReturnsAzEvent)
+//            ->Attribute(AZ::Script::Attributes::AzEventDescription, AZStd::move(behaviorEventDesc));
+//        int numErrors = UnitTest::TestRunner::Instance().StopAssertTests();
+//        EXPECT_EQ(0, numErrors);
+//    }
 
     class ClassWithEnumClass
     {
@@ -646,4 +646,92 @@ namespace UnitTest
 
         behaviorClass->Destroy(instance);
     }
+
+struct MyClass1 {
+    AZ_RTTI(MyClass1, "{BEA0AEE2-9D09-4C02-B3F2-28CE74573EE9}")
+    MyClass1() {
+
+    }
+
+    virtual ~MyClass1() {
+
+    }
+
+    void foo1(int a, bool b) {
+        m_a = a;
+        m_b = b;
+    }
+
+    virtual void virtualMethod(const AZStd::string& str) {
+        m_c = str;
+    }
+
+    int m_a{0};
+    bool m_b{false};
+    AZStd::string m_c;
+};
+
+struct MySubClass : public MyClass1 {
+    AZ_RTTI(MyClass1, "{26D8063E-0B16-4194-AF5F-298970239C3A}", MyClass1)
+
+    MySubClass() {
+
+    }
+
+    ~MySubClass() override {
+
+    }
+
+    void virtualMethod(const AZStd::string& str) override {
+        m_c = str + "+sub";
+    }
+
+    AZStd::string getResult() {
+        return "i'm result";
+    }
+};
+
+    TEST_F(BehaviorContextTestFixture, MyInvokeMethod)
+    {
+        m_behaviorContext.Class<MyClass1>("MyClass1")
+            ->Constructor<>()
+            ->Method("foo1", &MyClass1::foo1)
+            ->Method("virtualMethod", &MyClass1::virtualMethod)
+        ;
+
+        m_behaviorContext.Class<MySubClass>("MySubClass")
+            ->Constructor<>()
+            ->Method("getResult", &MySubClass::getResult)
+        ;
+
+        AZ::BehaviorClass* baseClass = m_behaviorContext.m_classes["MyClass1"];
+        AZ::BehaviorClass* behaviorClass = m_behaviorContext.m_classes["MySubClass"];
+        AZ::BehaviorObject instance = behaviorClass->Create();
+
+        MyClass1* pClass = reinterpret_cast<MyClass1*>(instance.m_address);
+
+        auto iter = baseClass->m_methods.find("foo1");
+        assert(iter != baseClass->m_methods.end());
+
+        iter->second->Invoke(instance, 100, true);
+
+        EXPECT_EQ(pClass->m_a, 100);
+        EXPECT_EQ(pClass->m_b, true);
+
+        iter = baseClass->m_methods.find("virtualMethod");
+        assert(iter != baseClass->m_methods.end());
+        iter->second->Invoke(instance, AZStd::string("hello world"));
+
+        EXPECT_EQ(pClass->m_c, "hello world+sub");
+
+        iter = behaviorClass->m_methods.find("getResult");
+        assert(iter != behaviorClass->m_methods.end());
+
+        AZStd::string strRet;
+        iter->second->InvokeResult(strRet, instance);
+        EXPECT_EQ(strRet, "i'm result");
+
+        behaviorClass->Destroy(instance);
+    }
+
 }

@@ -7,11 +7,11 @@
 #
 
 set(FILES
-    UnitTest/MockComponentApplication.h
-    UnitTest/MockComponentApplication.cpp
+    #cjh UnitTest/MockComponentApplication.h
+    # UnitTest/MockComponentApplication.cpp
     UnitTest/UnitTest.h
     UnitTest/TestTypes.h
     UnitTest/Mocks/MockFileIOBase.h
     UnitTest/Mocks/MockITime.h
-    UnitTest/Mocks/MockSettingsRegistry.h
+    # UnitTest/Mocks/MockSettingsRegistry.h
 )

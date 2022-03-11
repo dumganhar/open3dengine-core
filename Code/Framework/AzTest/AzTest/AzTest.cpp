@@ -313,7 +313,7 @@ namespace AZ
 
         ITestEnvironment* DefaultTestEnv()
         {
-            return new UnitTest::TraceBusHook();
+            return nullptr; //cjh new UnitTest::TraceBusHook();
         }
     } // Test
 } // AZ

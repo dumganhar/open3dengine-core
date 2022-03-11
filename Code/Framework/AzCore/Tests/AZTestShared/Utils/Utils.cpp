@@ -8,9 +8,9 @@
  */
 
 #include <AZTestShared/Utils/Utils.h>
-#include <AzCore/Component/Entity.h>
-#include <AzCore/Asset/AssetManager.h>
-#include <AzCore/Slice/SliceComponent.h>
+//cjh #include <AzCore/Component/Entity.h>
+//#include <AzCore/Asset/AssetManager.h>
+//#include <AzCore/Slice/SliceComponent.h>
 
 namespace UnitTest
 {
@@ -31,12 +31,12 @@ namespace UnitTest
         , m_expectedWarningCount(0)
         , m_errorPattern(errorPattern)
     {
-        AZ::Debug::TraceMessageBus::Handler::BusConnect();
+//cjh        AZ::Debug::TraceMessageBus::Handler::BusConnect();
     }
 
     ErrorHandler::~ErrorHandler()
     {
-        AZ::Debug::TraceMessageBus::Handler::BusDisconnect();
+//cjh        AZ::Debug::TraceMessageBus::Handler::BusDisconnect();
     }
 
     int ErrorHandler::GetErrorCount() const
@@ -94,87 +94,87 @@ namespace AZ
 {
     namespace Test
     {
-        AZ::Data::Asset<AZ::SliceAsset> CreateSliceFromComponent(AZ::Component* assetComponent, AZ::Data::AssetId sliceAssetId)
-        {
-            auto* sliceEntity = aznew AZ::Entity;
-            auto* contentEntity = aznew AZ::Entity;
-
-            if (assetComponent)
-            {
-                contentEntity->AddComponent(assetComponent);
-            }
-
-            auto sliceAsset = Data::AssetManager::Instance().CreateAsset<AZ::SliceAsset>(sliceAssetId, AZ::Data::AssetLoadBehavior::Default);
-
-            AZ::SliceComponent* component = sliceEntity->CreateComponent<AZ::SliceComponent>();
-            component->SetIsDynamic(true);
-            sliceAsset.Get()->SetData(sliceEntity, component);
-            component->AddEntity(contentEntity);
-
-            return sliceAsset;
-        }
-
-        AssertAbsorber::AssertAbsorber()
-        {
-            AZ::Debug::TraceMessageBus::Handler::BusConnect();
-        }
-
-        AssertAbsorber::~AssertAbsorber()
-        {
-            AZ::Debug::TraceMessageBus::Handler::BusDisconnect();
-        }
-
-        bool AssertAbsorber::OnPreAssert(const char* fileName, int line, const char* func, const char* message)
-        {
-            AZ_UNUSED(fileName);
-            AZ_UNUSED(line);
-            AZ_UNUSED(func);
-            AZ_UNUSED(message);
-            ++m_assertCount;
-            return true;
-        }
-
-        bool AssertAbsorber::OnAssert(const char* message)
-        {
-            AZ_UNUSED(message);
-            return true;
-        }
-
-        bool AssertAbsorber::OnPreError(const char* window, const char* fileName, int line, const char* func, const char* message)
-        {
-            AZ_UNUSED(window);
-            AZ_UNUSED(fileName);
-            AZ_UNUSED(line);
-            AZ_UNUSED(func);
-            AZ_UNUSED(message);
-            ++m_errorCount;
-            return true;
-        }
-
-        bool AssertAbsorber::OnError(const char* window, const char* message)
-        {
-            AZ_UNUSED(window);
-            AZ_UNUSED(message);
-            return true;
-        }
-
-        bool AssertAbsorber::OnWarning(const char* window, const char* message)
-        {
-            AZ_UNUSED(window);
-            AZ_UNUSED(message);
-            return true;
-        }
-
-        bool AssertAbsorber::OnPreWarning(const char* window, const char* fileName, int line, const char* func, const char* message)
-        {
-            AZ_UNUSED(window);
-            AZ_UNUSED(fileName);
-            AZ_UNUSED(line);
-            AZ_UNUSED(func);
-            AZ_UNUSED(message);
-            ++m_warningCount;
-            return true;
-        }
+//cjh        AZ::Data::Asset<AZ::SliceAsset> CreateSliceFromComponent(AZ::Component* assetComponent, AZ::Data::AssetId sliceAssetId)
+//        {
+//            auto* sliceEntity = aznew AZ::Entity;
+//            auto* contentEntity = aznew AZ::Entity;
+//
+//            if (assetComponent)
+//            {
+//                contentEntity->AddComponent(assetComponent);
+//            }
+//
+//            auto sliceAsset = Data::AssetManager::Instance().CreateAsset<AZ::SliceAsset>(sliceAssetId, AZ::Data::AssetLoadBehavior::Default);
+//
+//            AZ::SliceComponent* component = sliceEntity->CreateComponent<AZ::SliceComponent>();
+//            component->SetIsDynamic(true);
+//            sliceAsset.Get()->SetData(sliceEntity, component);
+//            component->AddEntity(contentEntity);
+//
+//            return sliceAsset;
+//        }
+//
+//        AssertAbsorber::AssertAbsorber()
+//        {
+//            AZ::Debug::TraceMessageBus::Handler::BusConnect();
+//        }
+//
+//        AssertAbsorber::~AssertAbsorber()
+//        {
+//            AZ::Debug::TraceMessageBus::Handler::BusDisconnect();
+//        }
+//
+//        bool AssertAbsorber::OnPreAssert(const char* fileName, int line, const char* func, const char* message)
+//        {
+//            AZ_UNUSED(fileName);
+//            AZ_UNUSED(line);
+//            AZ_UNUSED(func);
+//            AZ_UNUSED(message);
+//            ++m_assertCount;
+//            return true;
+//        }
+//
+//        bool AssertAbsorber::OnAssert(const char* message)
+//        {
+//            AZ_UNUSED(message);
+//            return true;
+//        }
+//
+//        bool AssertAbsorber::OnPreError(const char* window, const char* fileName, int line, const char* func, const char* message)
+//        {
+//            AZ_UNUSED(window);
+//            AZ_UNUSED(fileName);
+//            AZ_UNUSED(line);
+//            AZ_UNUSED(func);
+//            AZ_UNUSED(message);
+//            ++m_errorCount;
+//            return true;
+//        }
+//
+//        bool AssertAbsorber::OnError(const char* window, const char* message)
+//        {
+//            AZ_UNUSED(window);
+//            AZ_UNUSED(message);
+//            return true;
+//        }
+//
+//        bool AssertAbsorber::OnWarning(const char* window, const char* message)
+//        {
+//            AZ_UNUSED(window);
+//            AZ_UNUSED(message);
+//            return true;
+//        }
+//
+//        bool AssertAbsorber::OnPreWarning(const char* window, const char* fileName, int line, const char* func, const char* message)
+//        {
+//            AZ_UNUSED(window);
+//            AZ_UNUSED(fileName);
+//            AZ_UNUSED(line);
+//            AZ_UNUSED(func);
+//            AZ_UNUSED(message);
+//            ++m_warningCount;
+//            return true;
+//        }
 
     }// namespace Test
 }// namespace AZ

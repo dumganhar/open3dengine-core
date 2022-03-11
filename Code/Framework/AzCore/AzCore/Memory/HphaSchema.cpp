@@ -22,7 +22,7 @@
 #endif
 
 #ifdef DEBUG_ALLOCATOR
-#include <AzCore/Debug/StackTracer.h>
+//cjh #include <AzCore/Debug/StackTracer.h>
 #include <AzCore/std/containers/set.h>
 #endif
 

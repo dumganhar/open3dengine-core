@@ -12,8 +12,8 @@
 #include <AzCore/std/functional.h>
 #include <AzCore/IO/Path/Path.h>
 #include <AzCore/IO/SystemFile.h>
-#include <AzCore/Settings/SettingsRegistryImpl.h>
-#include <AzCore/Settings/SettingsRegistryMergeUtils.h>
+//cjh #include <AzCore/Settings/SettingsRegistryImpl.h>
+//#include <AzCore/Settings/SettingsRegistryMergeUtils.h>
 #include <AzCore/StringFunc/StringFunc.h>
 #include <AzCore/Utils/Utils.h>
 
@@ -168,15 +168,16 @@ namespace AZ
 
         AZStd::string GetEngineRootPath()
         {
-            if (auto registry = AZ::SettingsRegistry::Get(); registry != nullptr)
-            {
-                return AZ::SettingsRegistryMergeUtils::FindEngineRoot(*registry).String();
-            }
-            else
-            {
-                AZ::SettingsRegistryImpl localRegistry;
-                return AZ::SettingsRegistryMergeUtils::FindEngineRoot(localRegistry).String();
-            }
+            return "";
+//cjh            if (auto registry = AZ::SettingsRegistry::Get(); registry != nullptr)
+//            {
+//                return AZ::SettingsRegistryMergeUtils::FindEngineRoot(*registry).String();
+//            }
+//            else
+//            {
+//                AZ::SettingsRegistryImpl localRegistry;
+//                return AZ::SettingsRegistryMergeUtils::FindEngineRoot(localRegistry).String();
+//            }
         }
 
         AZStd::string ScopedAutoTempDirectory::Resolve(const char* path) const

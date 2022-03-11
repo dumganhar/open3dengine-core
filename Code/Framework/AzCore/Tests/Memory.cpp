@@ -13,7 +13,7 @@
 #include <AzCore/Memory/HphaSchema.h>
 
 #include <AzCore/Memory/AllocationRecords.h>
-#include <AzCore/Debug/StackTracer.h>
+//cjh #include <AzCore/Debug/StackTracer.h>
 #include <AzCore/UnitTest/TestTypes.h>
 
 #include <AzCore/std/parallel/thread.h>

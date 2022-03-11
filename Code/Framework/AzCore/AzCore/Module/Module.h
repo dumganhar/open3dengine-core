@@ -12,8 +12,8 @@
 #include <AzCore/Memory/SystemAllocator.h>
 #include <AzCore/Module/Environment.h>
 #include <AzCore/Interface/Interface.h>
-#include <AzCore/Console/Console.h>
-#include <AzCore/Console/ConsoleFunctor.h>
+//cjh #include <AzCore/Console/Console.h>
+//#include <AzCore/Console/ConsoleFunctor.h>
 
 namespace AZ
 {
