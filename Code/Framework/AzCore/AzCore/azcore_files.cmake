@@ -451,7 +451,7 @@ set(FILES
     RTTI/BehaviorContextUtilities.h
     RTTI/BehaviorContextUtilities.cpp
     RTTI/BehaviorInterfaceProxy.h
-    RTTI/BehaviorObjectSignals.h
+    # RTTI/BehaviorObjectSignals.h
     RTTI/TypeSafeIntegral.h
     # Script/ScriptAsset.cpp
     # Script/ScriptAsset.h

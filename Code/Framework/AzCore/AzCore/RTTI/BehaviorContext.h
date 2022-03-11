@@ -9,7 +9,7 @@
 
 //cjh #include <AzCore/Component/ComponentApplicationBus.h>
 //#include <AzCore/EBus/EBus.h>
-#include <AzCore/Preprocessor/Sequences.h> // for AZ_EBUS_BEHAVIOR_BINDER
+//#include <AzCore/Preprocessor/Sequences.h> // for AZ_EBUS_BEHAVIOR_BINDER
 //cjh #include <AzCore/RTTI/BehaviorObjectSignals.h>
 #include <AzCore/RTTI/ReflectContext.h>
 #include <AzCore/std/containers/array.h>
