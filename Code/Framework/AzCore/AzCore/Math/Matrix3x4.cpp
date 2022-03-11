@@ -23,210 +23,210 @@ namespace AZ
             new (thisPtr) Matrix3x4(Matrix3x4::CreateIdentity());
         }
 
-        void Matrix3x4SetRowGeneric(Matrix3x4* thisPtr, ScriptDataContext& dc)
-        {
-            [[maybe_unused]] bool rowIsSet = false;
-            if (dc.GetNumArguments() >= 5)
-            {
-                if (dc.IsNumber(0))
-                {
-                    int index = 0;
-                    dc.ReadArg(0, index);
-
-                    if (dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3) && dc.IsNumber(4))
-                    {
-                        float x = 0;
-                        float y = 0;
-                        float z = 0;
-                        float w = 0;
-                        dc.ReadArg(1, x);
-                        dc.ReadArg(2, y);
-                        dc.ReadArg(3, z);
-                        dc.ReadArg(4, w);
-                        thisPtr->SetRow(index, Vector4(x, y, z, w));
-                        rowIsSet = true;
-                    }
-                }
-            }
-            else if (dc.GetNumArguments() == 3)
-            {
-                if (dc.IsNumber(0) && dc.IsClass<Vector3>(1) && dc.IsNumber(2))
-                {
-                    int index = 0;
-                    dc.ReadArg(0, index);
-
-                    Vector3 vector3 = Vector3::CreateZero();
-                    dc.ReadArg(1, vector3);
-
-                    float w = 0;
-                    dc.ReadArg(2, w);
-                    thisPtr->SetRow(index, vector3, w);
-                    rowIsSet = true;
-                }
-            }
-            else if (dc.GetNumArguments() >= 2)
-            {
-                if (dc.IsNumber(0))
-                {
-                    int index = 0;
-                    dc.ReadArg(0, index);
-
-                    if (dc.IsClass<Vector4>(1))
-                    {
-                        Vector4 vector4 = Vector4::CreateZero();
-                        dc.ReadArg(1, vector4);
-                        thisPtr->SetRow(index, vector4);
-                        rowIsSet = true;
-                    }
-                }
-            }
-
-            AZ_Error("Script", rowIsSet,
-                "Matrix3x4 SetRow only supports the following signatures: "
-                "SetRow(index, Vector4), SetRow(index, Vector3, number) or SetRow(index, x, y, z, w).");
-        }
-
-        void Matrix3x4SetColumnGeneric(Matrix3x4* thisPtr, ScriptDataContext& dc)
-        {
-            [[maybe_unused]] bool columnIsSet = false;
-            if (dc.GetNumArguments() >= 4)
-            {
-                if (dc.IsNumber(0))
-                {
-                    int index = 0;
-                    dc.ReadArg(0, index);
-
-                    if (dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3))
-                    {
-                        float x = 0;
-                        float y = 0;
-                        float z = 0;
-                        dc.ReadArg(1, x);
-                        dc.ReadArg(2, y);
-                        dc.ReadArg(3, z);
-                        thisPtr->SetColumn(index, Vector3(x, y, z));
-                        columnIsSet = true;
-                    }
-                }
-            }
-            else if (dc.GetNumArguments() >= 2)
-            {
-                if (dc.IsNumber(0))
-                {
-                    int index = 0;
-                    dc.ReadArg(0, index);
-
-                    if (dc.IsClass<Vector3>(1))
-                    {
-                        Vector3 vector3 = Vector3::CreateZero();
-                        dc.ReadArg(1, vector3);
-                        thisPtr->SetColumn(index, vector3);
-                        columnIsSet = true;
-                    }
-                }
-            }
-
-            AZ_Error("Script", columnIsSet,
-                "Matrix3x4 SetColumn only supports the following signatures: "
-                "SetColumn(index, Vector4), SetColumn(index, Vector3, number) or SetColumn(index, x, y, z, w).");
-        }
-
-        void Matrix3x4SetTranslationGeneric(Matrix3x4* thisPtr, ScriptDataContext& dc)
-        {
-            [[maybe_unused]] bool translationIsSet = false;
-
-            if (dc.GetNumArguments() == 3 &&
-                dc.IsNumber(0) &&
-                dc.IsNumber(1) &&
-                dc.IsNumber(2))
-            {
-                float x = 0;
-                float y = 0;
-                float z = 0;
-                dc.ReadArg(0, x);
-                dc.ReadArg(1, y);
-                dc.ReadArg(2, z);
-                thisPtr->SetTranslation(x, y, z);
-                translationIsSet = true;
-            }
-            else if (dc.GetNumArguments() == 1 &&
-                dc.IsClass<Vector3>(0))
-            {
-                Vector3 translation = Vector3::CreateZero();
-                dc.ReadArg(0, translation);
-                thisPtr->SetTranslation(translation);
-                translationIsSet = true;
-            }
-
-            AZ_Error("Script", translationIsSet,
-                "Matrix3x4 SetTranslation only supports the following signatures: "
-                "SetTranslation(Vector3), SetTranslation(number, number, number).");
-        }
-
-        void Matrix3x4MultiplyGeneric(const Matrix3x4* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() == 1)
-            {
-                if (dc.IsClass<Matrix3x4>(0))
-                {
-                    Matrix3x4 rhs = Matrix3x4::CreateZero();
-                    dc.ReadArg(0, rhs);
-                    Matrix3x4 result = *thisPtr * rhs;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Vector3>(0))
-                {
-                    Vector3 vector3 = Vector3::CreateZero();
-                    dc.ReadArg(0, vector3);
-                    Vector3 result = *thisPtr * vector3;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Vector4>(0))
-                {
-                    Vector4 vector4 = Vector4::CreateZero();
-                    dc.ReadArg(0, vector4);
-                    Vector4 result = *thisPtr * vector4;
-                    dc.PushResult(result);
-                }
-            }
-
-            if (!dc.GetNumResults())
-            {
-                AZ_Error("Script", false, "Matrix3x4 Multiply should have only 1 argument - Matrix3x4, Vector3 or a Vector4.");
-                dc.PushResult(Matrix3x4::CreateIdentity());
-            }
-        }
-
-        void Matrix3x4GetRowsMultipleReturn(const Matrix3x4* thisPtr, ScriptDataContext& dc)
-        {
-            Vector4 row0(Vector4::CreateZero()), row1(Vector4::CreateZero()), row2(Vector4::CreateZero());
-            thisPtr->GetRows(&row0, &row1, &row2);
-            dc.PushResult(row0);
-            dc.PushResult(row1);
-            dc.PushResult(row2);
-        }
-
-        void Matrix3x4GetColumnsMultipleReturn(const Matrix3x4* thisPtr, ScriptDataContext& dc)
-        {
-            Vector3 column0(Vector3::CreateZero()), column1(Vector3::CreateZero()), column2(Vector3::CreateZero()),
-                column3(Vector3::CreateZero());
-            thisPtr->GetColumns(&column0, &column1, &column2, &column3);
-            dc.PushResult(column0);
-            dc.PushResult(column1);
-            dc.PushResult(column2);
-            dc.PushResult(column3);
-        }
-
-        void Matrix3x4GetBasisAndTranslationMultipleReturn(const Matrix3x4* thisPtr, ScriptDataContext& dc)
-        {
-            Vector3 basisX(Vector3::CreateZero()), basisY(Vector3::CreateZero()), basisZ(Vector3::CreateZero()),
-                translation(Vector3::CreateZero());
-            thisPtr->GetBasisAndTranslation(&basisX, &basisY, &basisZ, &translation);
-            dc.PushResult(basisX);
-            dc.PushResult(basisY);
-            dc.PushResult(basisZ);
-            dc.PushResult(translation);
-        }
+//cjh        void Matrix3x4SetRowGeneric(Matrix3x4* thisPtr, ScriptDataContext& dc)
+//        {
+//            [[maybe_unused]] bool rowIsSet = false;
+//            if (dc.GetNumArguments() >= 5)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    int index = 0;
+//                    dc.ReadArg(0, index);
+//
+//                    if (dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3) && dc.IsNumber(4))
+//                    {
+//                        float x = 0;
+//                        float y = 0;
+//                        float z = 0;
+//                        float w = 0;
+//                        dc.ReadArg(1, x);
+//                        dc.ReadArg(2, y);
+//                        dc.ReadArg(3, z);
+//                        dc.ReadArg(4, w);
+//                        thisPtr->SetRow(index, Vector4(x, y, z, w));
+//                        rowIsSet = true;
+//                    }
+//                }
+//            }
+//            else if (dc.GetNumArguments() == 3)
+//            {
+//                if (dc.IsNumber(0) && dc.IsClass<Vector3>(1) && dc.IsNumber(2))
+//                {
+//                    int index = 0;
+//                    dc.ReadArg(0, index);
+//
+//                    Vector3 vector3 = Vector3::CreateZero();
+//                    dc.ReadArg(1, vector3);
+//
+//                    float w = 0;
+//                    dc.ReadArg(2, w);
+//                    thisPtr->SetRow(index, vector3, w);
+//                    rowIsSet = true;
+//                }
+//            }
+//            else if (dc.GetNumArguments() >= 2)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    int index = 0;
+//                    dc.ReadArg(0, index);
+//
+//                    if (dc.IsClass<Vector4>(1))
+//                    {
+//                        Vector4 vector4 = Vector4::CreateZero();
+//                        dc.ReadArg(1, vector4);
+//                        thisPtr->SetRow(index, vector4);
+//                        rowIsSet = true;
+//                    }
+//                }
+//            }
+//
+//            AZ_Error("Script", rowIsSet,
+//                "Matrix3x4 SetRow only supports the following signatures: "
+//                "SetRow(index, Vector4), SetRow(index, Vector3, number) or SetRow(index, x, y, z, w).");
+//        }
+//
+//        void Matrix3x4SetColumnGeneric(Matrix3x4* thisPtr, ScriptDataContext& dc)
+//        {
+//            [[maybe_unused]] bool columnIsSet = false;
+//            if (dc.GetNumArguments() >= 4)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    int index = 0;
+//                    dc.ReadArg(0, index);
+//
+//                    if (dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3))
+//                    {
+//                        float x = 0;
+//                        float y = 0;
+//                        float z = 0;
+//                        dc.ReadArg(1, x);
+//                        dc.ReadArg(2, y);
+//                        dc.ReadArg(3, z);
+//                        thisPtr->SetColumn(index, Vector3(x, y, z));
+//                        columnIsSet = true;
+//                    }
+//                }
+//            }
+//            else if (dc.GetNumArguments() >= 2)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    int index = 0;
+//                    dc.ReadArg(0, index);
+//
+//                    if (dc.IsClass<Vector3>(1))
+//                    {
+//                        Vector3 vector3 = Vector3::CreateZero();
+//                        dc.ReadArg(1, vector3);
+//                        thisPtr->SetColumn(index, vector3);
+//                        columnIsSet = true;
+//                    }
+//                }
+//            }
+//
+//            AZ_Error("Script", columnIsSet,
+//                "Matrix3x4 SetColumn only supports the following signatures: "
+//                "SetColumn(index, Vector4), SetColumn(index, Vector3, number) or SetColumn(index, x, y, z, w).");
+//        }
+//
+//        void Matrix3x4SetTranslationGeneric(Matrix3x4* thisPtr, ScriptDataContext& dc)
+//        {
+//            [[maybe_unused]] bool translationIsSet = false;
+//
+//            if (dc.GetNumArguments() == 3 &&
+//                dc.IsNumber(0) &&
+//                dc.IsNumber(1) &&
+//                dc.IsNumber(2))
+//            {
+//                float x = 0;
+//                float y = 0;
+//                float z = 0;
+//                dc.ReadArg(0, x);
+//                dc.ReadArg(1, y);
+//                dc.ReadArg(2, z);
+//                thisPtr->SetTranslation(x, y, z);
+//                translationIsSet = true;
+//            }
+//            else if (dc.GetNumArguments() == 1 &&
+//                dc.IsClass<Vector3>(0))
+//            {
+//                Vector3 translation = Vector3::CreateZero();
+//                dc.ReadArg(0, translation);
+//                thisPtr->SetTranslation(translation);
+//                translationIsSet = true;
+//            }
+//
+//            AZ_Error("Script", translationIsSet,
+//                "Matrix3x4 SetTranslation only supports the following signatures: "
+//                "SetTranslation(Vector3), SetTranslation(number, number, number).");
+//        }
+//
+//        void Matrix3x4MultiplyGeneric(const Matrix3x4* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() == 1)
+//            {
+//                if (dc.IsClass<Matrix3x4>(0))
+//                {
+//                    Matrix3x4 rhs = Matrix3x4::CreateZero();
+//                    dc.ReadArg(0, rhs);
+//                    Matrix3x4 result = *thisPtr * rhs;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Vector3>(0))
+//                {
+//                    Vector3 vector3 = Vector3::CreateZero();
+//                    dc.ReadArg(0, vector3);
+//                    Vector3 result = *thisPtr * vector3;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Vector4>(0))
+//                {
+//                    Vector4 vector4 = Vector4::CreateZero();
+//                    dc.ReadArg(0, vector4);
+//                    Vector4 result = *thisPtr * vector4;
+//                    dc.PushResult(result);
+//                }
+//            }
+//
+//            if (!dc.GetNumResults())
+//            {
+//                AZ_Error("Script", false, "Matrix3x4 Multiply should have only 1 argument - Matrix3x4, Vector3 or a Vector4.");
+//                dc.PushResult(Matrix3x4::CreateIdentity());
+//            }
+//        }
+//
+//        void Matrix3x4GetRowsMultipleReturn(const Matrix3x4* thisPtr, ScriptDataContext& dc)
+//        {
+//            Vector4 row0(Vector4::CreateZero()), row1(Vector4::CreateZero()), row2(Vector4::CreateZero());
+//            thisPtr->GetRows(&row0, &row1, &row2);
+//            dc.PushResult(row0);
+//            dc.PushResult(row1);
+//            dc.PushResult(row2);
+//        }
+//
+//        void Matrix3x4GetColumnsMultipleReturn(const Matrix3x4* thisPtr, ScriptDataContext& dc)
+//        {
+//            Vector3 column0(Vector3::CreateZero()), column1(Vector3::CreateZero()), column2(Vector3::CreateZero()),
+//                column3(Vector3::CreateZero());
+//            thisPtr->GetColumns(&column0, &column1, &column2, &column3);
+//            dc.PushResult(column0);
+//            dc.PushResult(column1);
+//            dc.PushResult(column2);
+//            dc.PushResult(column3);
+//        }
+//
+//        void Matrix3x4GetBasisAndTranslationMultipleReturn(const Matrix3x4* thisPtr, ScriptDataContext& dc)
+//        {
+//            Vector3 basisX(Vector3::CreateZero()), basisY(Vector3::CreateZero()), basisZ(Vector3::CreateZero()),
+//                translation(Vector3::CreateZero());
+//            thisPtr->GetBasisAndTranslation(&basisX, &basisY, &basisZ, &translation);
+//            dc.PushResult(basisX);
+//            dc.PushResult(basisY);
+//            dc.PushResult(basisZ);
+//            dc.PushResult(translation);
+//        }
 
         AZStd::string Matrix3x4ToString(const Matrix3x4& t)
         {
@@ -238,12 +238,12 @@ namespace AZ
 
     void Matrix3x4::Reflect(ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<SerializeContext*>(context))
-        {
-            serializeContext->Class<Matrix3x4>()
-                ->Serializer<FloatBasedContainerSerializer<Matrix3x4, &Matrix3x4::CreateFromColumnMajorFloat12,
-                    &Matrix3x4::StoreToColumnMajorFloat12, &GetTransformEpsilon, 12>>();
-        }
+//cjh        if (auto serializeContext = azrtti_cast<SerializeContext*>(context))
+//        {
+//            serializeContext->Class<Matrix3x4>()
+//                ->Serializer<FloatBasedContainerSerializer<Matrix3x4, &Matrix3x4::CreateFromColumnMajorFloat12,
+//                    &Matrix3x4::StoreToColumnMajorFloat12, &GetTransformEpsilon, 12>>();
+//        }
 
         if (auto behaviorContext = azrtti_cast<BehaviorContext*>(context))
         {
@@ -266,7 +266,7 @@ namespace AZ
                 ->Method<Vector3(Matrix3x4::*)(const Vector3&) const>("MultiplyVector3", &Matrix3x4::operator*)
                 ->Method<Vector4(Matrix3x4::*)(const Vector4&) const>("MultiplyVector4", &Matrix3x4::operator*)
                 ->Method<Matrix3x4(Matrix3x4::*)(const Matrix3x4&) const>("MultiplyMatrix3x4", &Matrix3x4::operator*)
-                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4MultiplyGeneric)
+//cjh                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4MultiplyGeneric)
                     ->Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::Mul)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method("Equal", &Matrix3x4::operator==)
@@ -279,20 +279,20 @@ namespace AZ
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method("GetRow", [](const Matrix3x4& matrix, int row) { return matrix.GetRow(AZ::GetClamp(row, 0, 2)); })
                 ->Method("GetRows", &Matrix3x4::GetRows)
-                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4GetRowsMultipleReturn)
+//cjh                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4GetRowsMultipleReturn)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method("GetRowAsVector3", [](const Matrix3x4& matrix, int row) { return matrix.GetRowAsVector3(AZ::GetClamp(row, 0, 2)); })
                 ->Method<void (Matrix3x4::*)(int, const Vector4&)>("SetRow", &Matrix3x4::SetRow)
-                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4SetRowGeneric)
+//cjh                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4SetRowGeneric)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method("SetRows", &Matrix3x4::SetRows)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method("GetColumn", [](const Matrix3x4& matrix, int col) { return matrix.GetColumn(AZ::GetClamp(col, 0, 3)); })
                 ->Method("GetColumns", &Matrix3x4::GetColumns)
-                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4GetColumnsMultipleReturn)
+//cjh                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4GetColumnsMultipleReturn)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method<void (Matrix3x4::*)(int, const Vector3&)>("SetColumn", &Matrix3x4::SetColumn)
-                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4SetColumnGeneric)
+//cjh                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4SetColumnGeneric)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method("SetColumns", &Matrix3x4::SetColumns)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
@@ -300,7 +300,7 @@ namespace AZ
                 ->Method("SetBasisAndTranslation", &Matrix3x4::SetBasisAndTranslation)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method("GetBasisAndTranslation", &Matrix3x4::GetBasisAndTranslation)
-                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4GetBasisAndTranslationMultipleReturn)
+//cjh                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4GetBasisAndTranslationMultipleReturn)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method("Multiply3x3", &Matrix3x4::Multiply3x3)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
@@ -309,7 +309,7 @@ namespace AZ
                 ->Method("Transpose3x3", &Matrix3x4::Transpose3x3)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method<void (Matrix3x4::*)(const Vector3&)>("SetTranslation", &Matrix3x4::SetTranslation)
-                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4SetTranslationGeneric)
+//cjh                    ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Matrix3x4SetTranslationGeneric)
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Method("GetTranspose", &Matrix3x4::GetTranspose)
                 ->Method("Transpose", &Matrix3x4::Transpose)

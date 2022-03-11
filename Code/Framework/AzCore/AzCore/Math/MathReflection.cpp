@@ -8,25 +8,25 @@
 
 #include <AzCore/Math/MathReflection.h>
 
-#include <AzCore/Serialization/Json/RegistrationContext.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/Json/RegistrationContext.h>
+//#include <AzCore/Serialization/SerializeContext.h>
 
-#include <AzCore/Script/ScriptContext.h>
+//#include <AzCore/Script/ScriptContext.h>
 #include <AzCore/RTTI/BehaviorContext.h>
 
 #include <AzCore/Math/Uuid.h>
-#include <AzCore/Math/UuidSerializer.h>
+//cjh #include <AzCore/Math/UuidSerializer.h>
 #include <AzCore/Math/Crc.h>
 #include <AzCore/Math/Vector2.h>
 #include <AzCore/Math/Vector3.h>
 #include <AzCore/Math/Vector4.h>
-#include <AzCore/Math/MathMatrixSerializer.h>
-#include <AzCore/Math/MathVectorSerializer.h>
+//cjh #include <AzCore/Math/MathMatrixSerializer.h>
+//#include <AzCore/Math/MathVectorSerializer.h>
 #include <AzCore/Math/Color.h>
-#include <AzCore/Math/ColorSerializer.h>
+//cjh #include <AzCore/Math/ColorSerializer.h>
 #include <AzCore/Math/Quaternion.h>
 #include <AzCore/Math/Transform.h>
-#include <AzCore/Math/TransformSerializer.h>
+//cjh #include <AzCore/Math/TransformSerializer.h>
 #include <AzCore/Math/Matrix3x3.h>
 #include <AzCore/Math/Matrix3x4.h>
 #include <AzCore/Math/Matrix4x4.h>
@@ -42,14 +42,14 @@
 
 namespace AZ
 {
-    void MathReflect(SerializeContext& context)
-    {
-        // aggregates
-        context.Class<Uuid>()->
-            Serializer<UuidSerializer>();
-
-        Crc32::Reflect(context);
-    }
+//cjh    void MathReflect(SerializeContext& context)
+//    {
+//        // aggregates
+//        context.Class<Uuid>()->
+//            Serializer<UuidSerializer>();
+//
+//        Crc32::Reflect(context);
+//    }
 
 
     namespace Internal
@@ -59,31 +59,31 @@ namespace AZ
          */
 
          //////////////////////////////////////////////////////////////////////////
-        void ScriptUuidConstructor(Uuid* thisPtr, ScriptDataContext& dc)
-        {
-            int numArgs = dc.GetNumArguments();
-            switch (numArgs)
-            {
-            case 1:
-            {
-                if (dc.IsString(0))
-                {
-                    const char* value = nullptr;
-                    if (dc.ReadArg(0, value))
-                    {
-                        *thisPtr = Uuid(value);
-                    }
-                }
-                else
-                {
-                    AZ_Warning("Script", false, "You should provide only 1 string containing the Uuid in allowed formats!");
-                }
-            } break;
-            default:
-                *thisPtr = Uuid::CreateNull();
-                break;
-            }
-        }
+//cjh        void ScriptUuidConstructor(Uuid* thisPtr, ScriptDataContext& dc)
+//        {
+//            int numArgs = dc.GetNumArguments();
+//            switch (numArgs)
+//            {
+//            case 1:
+//            {
+//                if (dc.IsString(0))
+//                {
+//                    const char* value = nullptr;
+//                    if (dc.ReadArg(0, value))
+//                    {
+//                        *thisPtr = Uuid(value);
+//                    }
+//                }
+//                else
+//                {
+//                    AZ_Warning("Script", false, "You should provide only 1 string containing the Uuid in allowed formats!");
+//                }
+//            } break;
+//            default:
+//                *thisPtr = Uuid::CreateNull();
+//                break;
+//            }
+//        }
 
         void UuidDefaultConstructor(AZ::Uuid* thisPtr)
         {
@@ -91,46 +91,46 @@ namespace AZ
         }
 
         //////////////////////////////////////////////////////////////////////////
-        void UuidCreateStringGeneric(ScriptDataContext& dc)
-        {
-            int numArgs = dc.GetNumArguments();
-            switch (numArgs)
-            {
-            case 1:
-            {
-                if (dc.IsString(0))
-                {
-                    const char* value = nullptr;
-                    if (dc.ReadArg(0, value))
-                    {
-                        dc.PushResult(Uuid(value));
-                    }
-                }
-                else
-                {
-                    AZ_Warning("Script", false, "CreateString can have one parameter (null terminated string) or two parameters string and stringLength CreateString(string 'uuid', number stringLen = 0)!");
-                }
-            } break;
-            case 2:
-            {
-                if (dc.IsString(0) && dc.IsNumber(1))
-                {
-                    const char* uuidString = nullptr;
-                    unsigned int uuidStringLength = 0;
-                    if (dc.ReadArg(0, uuidString) && dc.ReadArg(1, uuidStringLength))
-                    {
-                        dc.PushResult(Uuid(uuidString, uuidStringLength));
-                    }
-                }
-                else
-                {
-                    AZ_Warning("Script", false, "CreateString can have one parameter (null terminated string) or two parameters string and stringLength CreateString(string 'uuid', number stringLen = 0)!");
-                }
-            }
-            default:
-                break;
-            }
-        }
+//cjh        void UuidCreateStringGeneric(ScriptDataContext& dc)
+//        {
+//            int numArgs = dc.GetNumArguments();
+//            switch (numArgs)
+//            {
+//            case 1:
+//            {
+//                if (dc.IsString(0))
+//                {
+//                    const char* value = nullptr;
+//                    if (dc.ReadArg(0, value))
+//                    {
+//                        dc.PushResult(Uuid(value));
+//                    }
+//                }
+//                else
+//                {
+//                    AZ_Warning("Script", false, "CreateString can have one parameter (null terminated string) or two parameters string and stringLength CreateString(string 'uuid', number stringLen = 0)!");
+//                }
+//            } break;
+//            case 2:
+//            {
+//                if (dc.IsString(0) && dc.IsNumber(1))
+//                {
+//                    const char* uuidString = nullptr;
+//                    unsigned int uuidStringLength = 0;
+//                    if (dc.ReadArg(0, uuidString) && dc.ReadArg(1, uuidStringLength))
+//                    {
+//                        dc.PushResult(Uuid(uuidString, uuidStringLength));
+//                    }
+//                }
+//                else
+//                {
+//                    AZ_Warning("Script", false, "CreateString can have one parameter (null terminated string) or two parameters string and stringLength CreateString(string 'uuid', number stringLen = 0)!");
+//                }
+//            }
+//            default:
+//                break;
+//            }
+//        }
 
         //////////////////////////////////////////////////////////////////////////
         AZStd::string UuidToString(const Uuid& id)
@@ -149,49 +149,49 @@ namespace AZ
          */
 
          //////////////////////////////////////////////////////////////////////////
-        void ScriptCrc32Constructor(Crc32* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() > 0)
-            {
-                if (dc.IsString(0))
-                {
-                    const char* str = nullptr;
-                    if (dc.ReadArg(0, str))
-                    {
-                        *thisPtr = Crc32(str);
-                    }
-                }
-                else if (dc.IsClass<Crc32>(0))
-                {
-                    Crc32 crc32;
-                    dc.ReadArg(0, crc32);
-                    *thisPtr = crc32;
-                }
-                else if (dc.IsNumber(0))
-                {
-                    u32 value = 0;
-                    dc.ReadArg(0, value);
-                    *thisPtr = value;
-                }
-            }
-        }
-
-        //////////////////////////////////////////////////////////////////////////
-        void Crc32AddGeneric(Crc32* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() > 0)
-            {
-                if (dc.IsString(0))
-                {
-                    const char* str = nullptr;
-                    if (dc.ReadArg(0, str))
-                    {
-                        thisPtr->Add(str);
-                    }
-                }
-                //else if ()
-            }
-        }
+//cjh        void ScriptCrc32Constructor(Crc32* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() > 0)
+//            {
+//                if (dc.IsString(0))
+//                {
+//                    const char* str = nullptr;
+//                    if (dc.ReadArg(0, str))
+//                    {
+//                        *thisPtr = Crc32(str);
+//                    }
+//                }
+//                else if (dc.IsClass<Crc32>(0))
+//                {
+//                    Crc32 crc32;
+//                    dc.ReadArg(0, crc32);
+//                    *thisPtr = crc32;
+//                }
+//                else if (dc.IsNumber(0))
+//                {
+//                    u32 value = 0;
+//                    dc.ReadArg(0, value);
+//                    *thisPtr = value;
+//                }
+//            }
+//        }
+//
+//        //////////////////////////////////////////////////////////////////////////
+//        void Crc32AddGeneric(Crc32* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() > 0)
+//            {
+//                if (dc.IsString(0))
+//                {
+//                    const char* str = nullptr;
+//                    if (dc.ReadArg(0, str))
+//                    {
+//                        thisPtr->Add(str);
+//                    }
+//                }
+//                //else if ()
+//            }
+//        }
 
         //////////////////////////////////////////////////////////////////////////
         AZStd::string Crc32ToString(const Crc32& crc32)
@@ -204,40 +204,40 @@ namespace AZ
         */
 
         //////////////////////////////////////////////////////////////////////////
-        void ScriptRandomConstructor(SimpleLcgRandom* thisPtr, ScriptDataContext& dc)
-        {
-            int numArgs = dc.GetNumArguments();
-            switch (numArgs)
-            {
-            case 1:
-            {
-                if (dc.IsNumber(0))
-                {
-                    float number;
-                    if (dc.ReadArg(0, number))
-                    {
-                        AZ::u64 seed = static_cast<AZ::u64>(number);
-                        *thisPtr = SimpleLcgRandom(seed);
-                    }
-                }
-                else
-                {
-                    AZ_Warning("Script", false, "You should provde only 1 number containing the random seed!");
-                }
-            } break;
-            default:
-                *thisPtr = SimpleLcgRandom();
-                break;
-            }
-        }
-
-        void GetSinCosMultipleReturn(const float* thisPtr, ScriptDataContext& dc)
-        {
-            float sin, cos;
-            AZ::SinCos(*thisPtr, sin, cos);
-            dc.PushResult(sin);
-            dc.PushResult(cos);
-        }
+//cjh        void ScriptRandomConstructor(SimpleLcgRandom* thisPtr, ScriptDataContext& dc)
+//        {
+//            int numArgs = dc.GetNumArguments();
+//            switch (numArgs)
+//            {
+//            case 1:
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float number;
+//                    if (dc.ReadArg(0, number))
+//                    {
+//                        AZ::u64 seed = static_cast<AZ::u64>(number);
+//                        *thisPtr = SimpleLcgRandom(seed);
+//                    }
+//                }
+//                else
+//                {
+//                    AZ_Warning("Script", false, "You should provde only 1 number containing the random seed!");
+//                }
+//            } break;
+//            default:
+//                *thisPtr = SimpleLcgRandom();
+//                break;
+//            }
+//        }
+//
+//        void GetSinCosMultipleReturn(const float* thisPtr, ScriptDataContext& dc)
+//        {
+//            float sin, cos;
+//            AZ::SinCos(*thisPtr, sin, cos);
+//            dc.PushResult(sin);
+//            dc.PushResult(cos);
+//        }
     } // namespace Internal
 
     class MathGlobals
@@ -284,7 +284,7 @@ namespace AZ
             ->Method<float(float,float)>("Mod", &GetMod)
             ->Method<void(float, float&, float&)>("GetSinCos", &AZ::SinCos)
                 ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
-                ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::GetSinCosMultipleReturn)
+//cjh                ->Attribute(AZ::Script::Attributes::MethodOverride, &Internal::GetSinCosMultipleReturn)
             ->Method<bool(double, double, double)>("IsClose", &AZ::IsClose, context.MakeDefaultValues(static_cast<double>(Constants::FloatEpsilon)))
             ->Method<float(float)>("Abs", &GetAbs)
             ->Method("Divide By Number", [](float lhs, float rhs) { return lhs / rhs; })
@@ -298,15 +298,15 @@ namespace AZ
             Attribute(AZ::Script::Attributes::Scope, AZ::Script::Attributes::ScopeFlags::Common)->
             Attribute(AZ::Script::Attributes::Module, "math")->
             Attribute(AZ::Script::Attributes::Storage, AZ::Script::Attributes::StorageType::Value)->
-            Attribute(AZ::Script::Attributes::ConstructorOverride, &Internal::ScriptUuidConstructor)->
+//cjh            Attribute(AZ::Script::Attributes::ConstructorOverride, &Internal::ScriptUuidConstructor)->
             Attribute(AZ::Script::Attributes::GenericConstructorOverride, &Internal::UuidDefaultConstructor)->
             Method("ToString", &Internal::UuidToString)->
                 Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::ToString)->
             Method("LessThan", &Uuid::operator<)->
                 Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::LessThan)->
                 Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
-            Method<bool (Uuid::*)(const Uuid&) const>("Equal", &Uuid::operator==)->
-                Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::Equal)->
+//cjh            Method<bool (Uuid::*)(const Uuid&) const>("Equal", &Uuid::operator==)->
+//                Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::Equal)->
             Method("Clone", [](const Uuid& rhs) -> Uuid { return rhs; })->
                 Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
             Method("IsNull", &Uuid::IsNull)->
@@ -315,7 +315,7 @@ namespace AZ
             Method("CreateNull", &Uuid::CreateNull)->
                 Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
             Method("CreateString", &Uuid::CreateString)->
-                Attribute(AZ::Script::Attributes::MethodOverride, &Internal::UuidCreateStringGeneric)->
+//cjh                Attribute(AZ::Script::Attributes::MethodOverride, &Internal::UuidCreateStringGeneric)->
                 Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
             Method("CreateName", &Uuid::CreateName)->
                 Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
@@ -324,7 +324,7 @@ namespace AZ
         // Random
         context.Class<SimpleLcgRandom>("Random")->
             Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
-            Attribute(AZ::Script::Attributes::ConstructorOverride, &Internal::ScriptRandomConstructor)->
+//cjh            Attribute(AZ::Script::Attributes::ConstructorOverride, &Internal::ScriptRandomConstructor)->
             Method("SetSeed", &SimpleLcgRandom::SetSeed, {{{ "Seed", "" }}})->
             Method("GetRandom", &SimpleLcgRandom::GetRandom)->
             Method("GetRandomFloat", &SimpleLcgRandom::GetRandomFloat);
@@ -335,7 +335,7 @@ namespace AZ
             Attribute(AZ::Script::Attributes::Module, "math")->
             Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
             Attribute(AZ::Script::Attributes::Storage, AZ::Script::Attributes::StorageType::Value)->
-            Attribute(AZ::Script::Attributes::ConstructorOverride, &Internal::ScriptCrc32Constructor)->
+//cjh            Attribute(AZ::Script::Attributes::ConstructorOverride, &Internal::ScriptCrc32Constructor)->
             Property("value", &Crc32::operator u32, nullptr)->
             Method("ToString", &Internal::Crc32ToString)->
                 Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::ToString)->
@@ -345,7 +345,7 @@ namespace AZ
             Method("Clone", [](const Crc32& rhs) -> Crc32 { return rhs; })->
                 Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
             Method<void(Crc32::*)(AZStd::string_view)>("Add", &Crc32::Add)->
-                Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Crc32AddGeneric)->
+//cjh                Attribute(AZ::Script::Attributes::MethodOverride, &Internal::Crc32AddGeneric)->
                 Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
             Property("stringValue", nullptr, [](Crc32* thisPtr, AZStd::string_view value) { *thisPtr  = Crc32(value); })->
             Method("CreateCrc32", [](AZStd::string_view value) -> Crc32 { return Crc32(value); }, { { { "value", "String to compute to Crc32" } } })->
@@ -359,19 +359,19 @@ namespace AZ
             Enum<(int)AZ::InterpolationMode::LinearInterpolation>("LinearInterpolation");
     }
 
-    void MathReflect(JsonRegistrationContext& context)
-    {
-        context.Serializer<JsonColorSerializer>()->HandlesType<Color>();
-        context.Serializer<JsonUuidSerializer>()->HandlesType<Uuid>();
-        context.Serializer<JsonMatrix3x3Serializer>()->HandlesType<Matrix3x3>();
-        context.Serializer<JsonMatrix3x4Serializer>()->HandlesType<Matrix3x4>();
-        context.Serializer<JsonMatrix4x4Serializer>()->HandlesType<Matrix4x4>();
-        context.Serializer<JsonVector2Serializer>()->HandlesType<Vector2>();
-        context.Serializer<JsonVector3Serializer>()->HandlesType<Vector3>();
-        context.Serializer<JsonVector4Serializer>()->HandlesType<Vector4>();
-        context.Serializer<JsonQuaternionSerializer>()->HandlesType<Quaternion>();
-        context.Serializer<JsonTransformSerializer>()->HandlesType<Transform>();
-    }
+//cjh    void MathReflect(JsonRegistrationContext& context)
+//    {
+//        context.Serializer<JsonColorSerializer>()->HandlesType<Color>();
+//        context.Serializer<JsonUuidSerializer>()->HandlesType<Uuid>();
+//        context.Serializer<JsonMatrix3x3Serializer>()->HandlesType<Matrix3x3>();
+//        context.Serializer<JsonMatrix3x4Serializer>()->HandlesType<Matrix3x4>();
+//        context.Serializer<JsonMatrix4x4Serializer>()->HandlesType<Matrix4x4>();
+//        context.Serializer<JsonVector2Serializer>()->HandlesType<Vector2>();
+//        context.Serializer<JsonVector3Serializer>()->HandlesType<Vector3>();
+//        context.Serializer<JsonVector4Serializer>()->HandlesType<Vector4>();
+//        context.Serializer<JsonQuaternionSerializer>()->HandlesType<Quaternion>();
+//        context.Serializer<JsonTransformSerializer>()->HandlesType<Transform>();
+//    }
 
     void MathReflect(ReflectContext* context)
     {
@@ -391,11 +391,11 @@ namespace AZ
             Plane::Reflect(context);
             Transform::Reflect(context);
 
-            SerializeContext* serializeContext = azrtti_cast<SerializeContext*>(context);
-            if (serializeContext)
-            {
-                MathReflect(*serializeContext);
-            }
+//cjh            SerializeContext* serializeContext = azrtti_cast<SerializeContext*>(context);
+//            if (serializeContext)
+//            {
+//                MathReflect(*serializeContext);
+//            }
 
             BehaviorContext* behaviorContext = azrtti_cast<BehaviorContext*>(context);
             if (behaviorContext)
@@ -403,11 +403,11 @@ namespace AZ
                 MathReflect(*behaviorContext);
             }
 
-            JsonRegistrationContext* jsonContext = azrtti_cast<JsonRegistrationContext*>(context);
-            if (jsonContext)
-            {
-                MathReflect(*jsonContext);
-            }
+//cjh            JsonRegistrationContext* jsonContext = azrtti_cast<JsonRegistrationContext*>(context);
+//            if (jsonContext)
+//            {
+//                MathReflect(*jsonContext);
+//            }
         }
     }
 }

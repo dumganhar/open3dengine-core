@@ -62,7 +62,7 @@ namespace BehaviorContextUtilitiesCPP
     {
         using namespace AZ;
         BehaviorContext* behaviorContext = nullptr;
-        ComponentApplicationBus::BroadcastResult(behaviorContext, &ComponentApplicationRequests::GetBehaviorContext);
+//cjh        ComponentApplicationBus::BroadcastResult(behaviorContext, &ComponentApplicationRequests::GetBehaviorContext);
 
         if (behaviorContext)
         {
@@ -88,7 +88,7 @@ namespace AZ
     AZ::BehaviorContext* GetDefaultBehaviorContext()
     {
         AZ::BehaviorContext* behaviorContext(nullptr);
-        AZ::ComponentApplicationBus::BroadcastResult(behaviorContext, &AZ::ComponentApplicationRequests::GetBehaviorContext);
+//cjh        AZ::ComponentApplicationBus::BroadcastResult(behaviorContext, &AZ::ComponentApplicationRequests::GetBehaviorContext);
         AZ_Assert(behaviorContext, "BehaviorContext is required");
         return behaviorContext;
     }

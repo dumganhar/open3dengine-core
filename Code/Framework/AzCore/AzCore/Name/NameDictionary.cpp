@@ -9,7 +9,7 @@
 #include <AzCore/Name/NameDictionary.h>
 #include <AzCore/Name/Internal/NameData.h>
 #include <AzCore/std/hash.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 #include <AzCore/std/parallel/lock.h>
 #include <AzCore/std/string/conversions.h>
 #include <AzCore/Module/Environment.h>

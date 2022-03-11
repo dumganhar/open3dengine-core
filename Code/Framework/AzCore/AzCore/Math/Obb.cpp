@@ -55,15 +55,15 @@ namespace AZ
 
     void Obb::Reflect(ReflectContext* context)
     {
-        auto serializeContext = azrtti_cast<SerializeContext*>(context);
-        if (serializeContext)
-        {
-            serializeContext->Class<Obb>()
-                ->Field("position", &Obb::m_position)
-                ->Field("rotation", &Obb::m_rotation)
-                ->Field("halfLengths", &Obb::m_halfLengths)
-                ;
-        }
+//cjh        auto serializeContext = azrtti_cast<SerializeContext*>(context);
+//        if (serializeContext)
+//        {
+//            serializeContext->Class<Obb>()
+//                ->Field("position", &Obb::m_position)
+//                ->Field("rotation", &Obb::m_rotation)
+//                ->Field("halfLengths", &Obb::m_halfLengths)
+//                ;
+//        }
 
         auto behaviorContext = azrtti_cast<BehaviorContext*>(context);
         if (behaviorContext)

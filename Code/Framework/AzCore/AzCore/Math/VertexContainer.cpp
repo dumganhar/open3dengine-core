@@ -10,7 +10,7 @@
 #include <AzCore/Math/Vector3.h>
 #include <AzCore/Math/Vector2.h>
 #include <AzCore/Memory/SystemAllocator.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 
 namespace AZ
 {

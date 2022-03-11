@@ -8,13 +8,13 @@
 
 #include <AzCore/Name/Name.h>
 #include <AzCore/Name/NameDictionary.h>
-#include <AzCore/Name/NameSerializer.h>
-#include <AzCore/Name/NameJsonSerializer.h>
-#include <AzCore/Serialization/SerializeContext.h>
-#include <AzCore/Serialization/Json/RegistrationContext.h>
+//cjh #include <AzCore/Name/NameSerializer.h>
+//#include <AzCore/Name/NameJsonSerializer.h>
+//#include <AzCore/Serialization/SerializeContext.h>
+//#include <AzCore/Serialization/Json/RegistrationContext.h>
 #include <AzCore/RTTI/BehaviorContext.h>
 #include <AzCore/RTTI/ReflectContext.h>
-#include <AzCore/Script/ScriptContext.h>
+//cjh #include <AzCore/Script/ScriptContext.h>
 
 namespace AZ
 {
@@ -139,49 +139,49 @@ namespace AZ
         return m_view.empty();
     }
 
-    void Name::ScriptConstructor(Name* thisPtr, ScriptDataContext& dc)
-    {
-        int numArgs = dc.GetNumArguments();
-        switch (numArgs)
-        {
-        case 1:
-        {
-            if (dc.IsString(0, false))
-            {
-                const char* name = nullptr;
-                dc.ReadArg<const char*>(0, name);
-                new (thisPtr) Name(name);
-            }
-            else
-            {
-                dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "String argument expected for Name constructor!");
-                new (thisPtr) Name();
-            }
-        }
-        break;
-        default:
-        {
-            dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "Unexpected argument count for Name constructor!");
-            new (thisPtr) Name();
-        }
-        break;
-        }
-    }
+//cjh    void Name::ScriptConstructor(Name* thisPtr, ScriptDataContext& dc)
+//    {
+//        int numArgs = dc.GetNumArguments();
+//        switch (numArgs)
+//        {
+//        case 1:
+//        {
+//            if (dc.IsString(0, false))
+//            {
+//                const char* name = nullptr;
+//                dc.ReadArg<const char*>(0, name);
+//                new (thisPtr) Name(name);
+//            }
+//            else
+//            {
+//                dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "String argument expected for Name constructor!");
+//                new (thisPtr) Name();
+//            }
+//        }
+//        break;
+//        default:
+//        {
+//            dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "Unexpected argument count for Name constructor!");
+//            new (thisPtr) Name();
+//        }
+//        break;
+//        }
+//    }
 
     void Name::Reflect(AZ::ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context))
-        {
-            serializeContext->Class<Name>()->
-                Serializer<NameSerializer>();
-        }
+//cjh        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context))
+//        {
+//            serializeContext->Class<Name>()->
+//                Serializer<NameSerializer>();
+//        }
         if (auto behaviorContext = azrtti_cast<AZ::BehaviorContext*>(context))
         {
             behaviorContext->Class<Name>("Name")
                 ->Attribute(AZ::Script::Attributes::Scope, AZ::Script::Attributes::ScopeFlags::Common)
                 ->Attribute(AZ::Script::Attributes::Module, "name")
                 ->Attribute(AZ::Script::Attributes::Storage, AZ::Script::Attributes::StorageType::Value)
-                ->Attribute(AZ::Script::Attributes::ConstructorOverride, &Name::ScriptConstructor)
+//cjh                ->Attribute(AZ::Script::Attributes::ConstructorOverride, &Name::ScriptConstructor)
                 ->Constructor()
                 ->Constructor<AZStd::string_view>()
                 ->Method("ToString", &Name::GetCStr)
@@ -192,10 +192,10 @@ namespace AZ
                 ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ;
         }
-        if (JsonRegistrationContext* jsonContext = azrtti_cast<JsonRegistrationContext*>(context))
-        {
-            jsonContext->Serializer<NameJsonSerializer>()->HandlesType<Name>();
-        }
+//cjh        if (JsonRegistrationContext* jsonContext = azrtti_cast<JsonRegistrationContext*>(context))
+//        {
+//            jsonContext->Serializer<NameJsonSerializer>()->HandlesType<Name>();
+//        }
     }
     
 } // namespace AZ

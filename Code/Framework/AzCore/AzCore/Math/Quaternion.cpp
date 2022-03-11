@@ -15,154 +15,154 @@ namespace AZ
 {
     namespace Internal
     {
-        void QuaternionScriptConstructor(Quaternion* thisPtr, ScriptDataContext& dc)
-        {
-            int numArgs = dc.GetNumArguments();
-            switch (numArgs)
-            {
-            case 1:
-            {
-                if (dc.IsNumber(0))
-                {
-                    float number = 0;
-                    dc.ReadArg(0, number);
-                    *thisPtr = Quaternion(number);
-                }
-                else
-                {
-                    AZ_Warning("Script", false, "You should provide only 1 number/float to be splatted");
-                }
-            } break;
-            case 4:
-            {
-                if (dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3))
-                {
-                    float x = 0;
-                    float y = 0;
-                    float z = 0;
-                    float w = 0;
-                    dc.ReadArg(0, x);
-                    dc.ReadArg(1, y);
-                    dc.ReadArg(2, z);
-                    dc.ReadArg(3, w);
-                    *thisPtr = Quaternion(x, y, z, w);
-                }
-            } break;
-            }
-        }
-
-        void QuaternionDefaultConstructor(AZ::Quaternion* thisPtr)
-        {
-            new (thisPtr) AZ::Quaternion(AZ::Quaternion::CreateIdentity());
-        }
-
-
-        void QuaternionMultiplyGeneric(const Quaternion* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() == 1)
-            {
-                if (dc.IsNumber(0))
-                {
-                    float scalar = 0;
-                    dc.ReadArg(0, scalar);
-                    Quaternion result = *thisPtr * scalar;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Quaternion>(0))
-                {
-                    Quaternion quaternion = Quaternion::CreateZero();
-                    dc.ReadArg(0, quaternion);
-                    Quaternion result = *thisPtr * quaternion;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Vector3>(0))
-                {
-                    Vector3 vector3(Vector3::CreateZero());
-                    dc.ReadArg(0, vector3);
-                    Vector3 result = thisPtr->TransformVector(vector3);
-                    dc.PushResult(result);
-                }
-            }
-
-            if (!dc.GetNumResults())
-            {
-                AZ_Error("Script", false, "Quaternion multiply should have only 1 argument - Quaternion or a Float/Number");
-                dc.PushResult(Quaternion::CreateIdentity());
-            }
-        }
-
-
-        void QuaternionDivideGeneric(const Quaternion* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() == 1)
-            {
-                if (dc.IsNumber(0))
-                {
-                    float scalar = 0;
-                    dc.ReadArg(0, scalar);
-                    Quaternion result = *thisPtr / scalar;
-                    dc.PushResult(result);
-                }
-            }
-
-            if (!dc.GetNumResults())
-            {
-                AZ_Error("Script", false, "Quaternion divide should have only 1 argument - Float/Number");
-                dc.PushResult(Quaternion::CreateIdentity());
-            }
-        }
-
-
-        void QuaternionSetGeneric(Quaternion* thisPtr, ScriptDataContext& dc)
-        {
-            bool valueWasSet = false;
-
-            if (dc.GetNumArguments() == 1 && dc.IsNumber(0))
-            {
-                float setValue = 0;
-                dc.ReadArg(0, setValue);
-                thisPtr->Set(setValue);
-                valueWasSet = true;
-            }
-            else if (dc.GetNumArguments() == 2 && dc.IsClass<Vector3>(0) && dc.IsNumber(1))
-            {
-                Vector3 vector3 = Vector3::CreateZero();
-                float w = 0;
-                dc.ReadArg(0, vector3);
-                dc.ReadArg(1, w);
-                thisPtr->Set(vector3, w);
-                valueWasSet = true;
-            }
-            else if (dc.GetNumArguments() == 4 && dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3))
-            {
-                float x = 0;
-                float y = 0;
-                float z = 0;
-                float w = 0;
-                dc.ReadArg(0, x);
-                dc.ReadArg(1, y);
-                dc.ReadArg(2, z);
-                dc.ReadArg(3, w);
-                thisPtr->Set(x, y, z, w);
-                valueWasSet = true;
-            }
-
-            if (!valueWasSet)
-            {
-                AZ_Error("Script", false, "Quaternion.Set only supports Set(number), Set(number, number, number, number), Set(Vector3, number)");
-            }
-        }
+//cjh        void QuaternionScriptConstructor(Quaternion* thisPtr, ScriptDataContext& dc)
+//        {
+//            int numArgs = dc.GetNumArguments();
+//            switch (numArgs)
+//            {
+//            case 1:
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float number = 0;
+//                    dc.ReadArg(0, number);
+//                    *thisPtr = Quaternion(number);
+//                }
+//                else
+//                {
+//                    AZ_Warning("Script", false, "You should provide only 1 number/float to be splatted");
+//                }
+//            } break;
+//            case 4:
+//            {
+//                if (dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3))
+//                {
+//                    float x = 0;
+//                    float y = 0;
+//                    float z = 0;
+//                    float w = 0;
+//                    dc.ReadArg(0, x);
+//                    dc.ReadArg(1, y);
+//                    dc.ReadArg(2, z);
+//                    dc.ReadArg(3, w);
+//                    *thisPtr = Quaternion(x, y, z, w);
+//                }
+//            } break;
+//            }
+//        }
+//
+//        void QuaternionDefaultConstructor(AZ::Quaternion* thisPtr)
+//        {
+//            new (thisPtr) AZ::Quaternion(AZ::Quaternion::CreateIdentity());
+//        }
+//
+//
+//        void QuaternionMultiplyGeneric(const Quaternion* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() == 1)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float scalar = 0;
+//                    dc.ReadArg(0, scalar);
+//                    Quaternion result = *thisPtr * scalar;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Quaternion>(0))
+//                {
+//                    Quaternion quaternion = Quaternion::CreateZero();
+//                    dc.ReadArg(0, quaternion);
+//                    Quaternion result = *thisPtr * quaternion;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Vector3>(0))
+//                {
+//                    Vector3 vector3(Vector3::CreateZero());
+//                    dc.ReadArg(0, vector3);
+//                    Vector3 result = thisPtr->TransformVector(vector3);
+//                    dc.PushResult(result);
+//                }
+//            }
+//
+//            if (!dc.GetNumResults())
+//            {
+//                AZ_Error("Script", false, "Quaternion multiply should have only 1 argument - Quaternion or a Float/Number");
+//                dc.PushResult(Quaternion::CreateIdentity());
+//            }
+//        }
+//
+//
+//        void QuaternionDivideGeneric(const Quaternion* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() == 1)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float scalar = 0;
+//                    dc.ReadArg(0, scalar);
+//                    Quaternion result = *thisPtr / scalar;
+//                    dc.PushResult(result);
+//                }
+//            }
+//
+//            if (!dc.GetNumResults())
+//            {
+//                AZ_Error("Script", false, "Quaternion divide should have only 1 argument - Float/Number");
+//                dc.PushResult(Quaternion::CreateIdentity());
+//            }
+//        }
+//
+//
+//        void QuaternionSetGeneric(Quaternion* thisPtr, ScriptDataContext& dc)
+//        {
+//            bool valueWasSet = false;
+//
+//            if (dc.GetNumArguments() == 1 && dc.IsNumber(0))
+//            {
+//                float setValue = 0;
+//                dc.ReadArg(0, setValue);
+//                thisPtr->Set(setValue);
+//                valueWasSet = true;
+//            }
+//            else if (dc.GetNumArguments() == 2 && dc.IsClass<Vector3>(0) && dc.IsNumber(1))
+//            {
+//                Vector3 vector3 = Vector3::CreateZero();
+//                float w = 0;
+//                dc.ReadArg(0, vector3);
+//                dc.ReadArg(1, w);
+//                thisPtr->Set(vector3, w);
+//                valueWasSet = true;
+//            }
+//            else if (dc.GetNumArguments() == 4 && dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3))
+//            {
+//                float x = 0;
+//                float y = 0;
+//                float z = 0;
+//                float w = 0;
+//                dc.ReadArg(0, x);
+//                dc.ReadArg(1, y);
+//                dc.ReadArg(2, z);
+//                dc.ReadArg(3, w);
+//                thisPtr->Set(x, y, z, w);
+//                valueWasSet = true;
+//            }
+//
+//            if (!valueWasSet)
+//            {
+//                AZ_Error("Script", false, "Quaternion.Set only supports Set(number), Set(number, number, number, number), Set(Vector3, number)");
+//            }
+//        }
     }
 
 
     void Quaternion::Reflect(ReflectContext* context)
     {
-        auto serializeContext = azrtti_cast<SerializeContext*>(context);
-        if (serializeContext)
-        {
-            serializeContext->Class<Quaternion>()->
-                Serializer<FloatBasedContainerSerializer<Quaternion, &Quaternion::CreateFromFloat4, &Quaternion::StoreToFloat4, &GetTransformEpsilon, 4> >();
-        }
+//cjh        auto serializeContext = azrtti_cast<SerializeContext*>(context);
+//        if (serializeContext)
+//        {
+//            serializeContext->Class<Quaternion>()->
+//                Serializer<FloatBasedContainerSerializer<Quaternion, &Quaternion::CreateFromFloat4, &Quaternion::StoreToFloat4, &GetTransformEpsilon, 4> >();
+//        }
 
         auto behaviorContext = azrtti_cast<BehaviorContext*>(context);
         if (behaviorContext)
@@ -174,8 +174,8 @@ namespace AZ
                 Constructor<float>()->
                 Constructor<float, float, float, float>()->
                 Attribute(AZ::Script::Attributes::Storage, AZ::Script::Attributes::StorageType::Value)->
-                Attribute(AZ::Script::Attributes::ConstructorOverride, &Internal::QuaternionScriptConstructor)->
-                Attribute(AZ::Script::Attributes::GenericConstructorOverride, &Internal::QuaternionDefaultConstructor)->
+//cjh                Attribute(AZ::Script::Attributes::ConstructorOverride, &Internal::QuaternionScriptConstructor)->
+//                Attribute(AZ::Script::Attributes::GenericConstructorOverride, &Internal::QuaternionDefaultConstructor)->
                 Property("x", &Quaternion::GetX, &Quaternion::SetX)->
                 Property("y", &Quaternion::GetY, &Quaternion::SetY)->
                 Property("z", &Quaternion::GetZ, &Quaternion::SetZ)->
@@ -185,13 +185,13 @@ namespace AZ
                 Method("ToString", &QuaternionToString)->
                     Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::ToString)->
                 Method<Quaternion(Quaternion::*)(float) const>("MultiplyFloat", &Quaternion::operator*)->
-                    Attribute(AZ::Script::Attributes::MethodOverride, &Internal::QuaternionMultiplyGeneric)->
+//cjh                    Attribute(AZ::Script::Attributes::MethodOverride, &Internal::QuaternionMultiplyGeneric)->
                     Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::Mul)->
                 Method<Quaternion(Quaternion::*)(const Quaternion&) const>("MultiplyQuaternion", &Quaternion::operator*)->
                     Attribute(AZ::Script::Attributes::Ignore, 0)-> // ignore for script since we already got the generic multiply above
                     Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
                 Method<Quaternion(Quaternion::*)(float) const>("DivideFloat", &Quaternion::operator/)->
-                    Attribute(AZ::Script::Attributes::MethodOverride, &Internal::QuaternionDivideGeneric)->
+//cjh                    Attribute(AZ::Script::Attributes::MethodOverride, &Internal::QuaternionDivideGeneric)->
                     Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::Div)->
                     Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
                 Method("Clone", [](const Quaternion& rhs) -> Quaternion { return rhs; })->
@@ -206,7 +206,7 @@ namespace AZ
                     Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::Sub)->
                     Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
                 Method<void (Quaternion::*)(float, float, float, float)>("Set", &Quaternion::Set)->
-                    Attribute(AZ::Script::Attributes::MethodOverride, &Internal::QuaternionSetGeneric)->
+//cjh                    Attribute(AZ::Script::Attributes::MethodOverride, &Internal::QuaternionSetGeneric)->
                     Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)->
                 Method("GetElement", &Quaternion::GetElement)->
                 Method("SetElement", &Quaternion::SetElement)->

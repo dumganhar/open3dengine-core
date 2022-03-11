@@ -8,130 +8,130 @@
 
 set(FILES
     Main.cpp
-    Asset/AssetCommon.cpp
-    Asset/AssetDataStreamTests.cpp
-    Asset/AssetManagerLoadingTests.cpp
-    Asset/AssetManagerStreamingTests.cpp
-    Asset/BaseAssetManagerTest.cpp
-    Asset/BaseAssetManagerTest.h
-    Asset/MockLoadAssetCatalogAndHandler.h
-    Asset/TestAssetTypes.h
-    AssetJsonSerializerTests.cpp
-    EBus/ScheduledEventTests.cpp
-    AssetManager.cpp
-    TestCatalog.h
-    TestCatalog.cpp
-    AssetSerializerTests.cpp
+    # Asset/AssetCommon.cpp
+    # Asset/AssetDataStreamTests.cpp
+    # Asset/AssetManagerLoadingTests.cpp
+    # Asset/AssetManagerStreamingTests.cpp
+    # Asset/BaseAssetManagerTest.cpp
+    # Asset/BaseAssetManagerTest.h
+    # Asset/MockLoadAssetCatalogAndHandler.h
+    # Asset/TestAssetTypes.h
+    # AssetJsonSerializerTests.cpp
+    # EBus/ScheduledEventTests.cpp
+    # AssetManager.cpp
+    # TestCatalog.h
+    # TestCatalog.cpp
+    # AssetSerializerTests.cpp
     BehaviorContext.cpp
     BehaviorContextFixture.h
-    Components.cpp
-    Console/LoggerSystemComponentTests.cpp
-    Console/ConsoleTests.cpp
+    # Components.cpp
+    # Console/LoggerSystemComponentTests.cpp
+    # Console/ConsoleTests.cpp
     Debug.cpp
     DLL.cpp
-    EBus.cpp
-    EntityIdTests.cpp
-    EntityTests.cpp
-    EnumTests.cpp
-    EventTests.cpp
-    FileIOBaseTestTypes.h
-    Geometry2DUtils.cpp
+    # EBus.cpp
+    # EntityIdTests.cpp
+    # EntityTests.cpp
+    # EnumTests.cpp
+    # EventTests.cpp
+    # FileIOBaseTestTypes.h
+    # Geometry2DUtils.cpp
     Interface.cpp
-    IO/FileReaderTests.cpp
-    IO/Path/PathTests.cpp
-    IPC.cpp
-    Jobs.cpp
-    JSON.cpp
-    FixedWidthIntegers.cpp
-    GenericStreamMock.h
-    GenericStreamTests.cpp
+    # IO/FileReaderTests.cpp
+    # IO/Path/PathTests.cpp
+    # IPC.cpp
+    # Jobs.cpp
+    # JSON.cpp
+    # FixedWidthIntegers.cpp
+    # GenericStreamMock.h
+    # GenericStreamTests.cpp
     Memory.cpp
-    Module.cpp
-    ModuleTestBus.h
-    OrderedEventBenchmarks.cpp
-    OrderedEventTests.cpp
+    # Module.cpp
+    # ModuleTestBus.h
+    # OrderedEventBenchmarks.cpp
+    # OrderedEventTests.cpp
     Outcome.cpp
-    Patching.cpp
-    RemappableId.cpp
+    # Patching.cpp
+    # RemappableId.cpp
     Rtti.cpp
     Script.cpp
     ScriptMath.cpp
-    Serialization.cpp
-    SerializeContextFixture.h
-    Slice.cpp
-    State.cpp
-    Statistics.cpp
-    StatisticalProfiler.cpp
-    StreamerTests.cpp
-    StringFunc.cpp
-    SystemFile.cpp
-    TaskTests.cpp
-    TickBusTest.cpp
+    # Serialization.cpp
+    # SerializeContextFixture.h
+    # Slice.cpp
+    # State.cpp
+    # Statistics.cpp
+    # StatisticalProfiler.cpp
+    # StreamerTests.cpp
+    # StringFunc.cpp
+    # SystemFile.cpp
+    # TaskTests.cpp
+    # TickBusTest.cpp
     UUIDTests.cpp
-    XML.cpp
-    Debug/LocalFileEventLoggerTests.cpp
-    Debug/Trace.cpp
-    Debug/UnhandledExceptions.cpp
+    # XML.cpp
+    # Debug/LocalFileEventLoggerTests.cpp
+    # Debug/Trace.cpp
+    # Debug/UnhandledExceptions.cpp
     Name/NameJsonSerializerTests.cpp
     Name/NameTests.cpp
     RTTI/TypeSafeIntegralTests.cpp
-    Settings/CommandLineTests.cpp
-    Settings/ConfigurableStackTests.cpp
-    Settings/SettingsRegistryTests.cpp
-    Settings/SettingsRegistryConsoleUtilsTests.cpp
-    Settings/SettingsRegistryMergeUtilsTests.cpp
-    Settings/SettingsRegistryScriptUtilsTests.cpp
-    Settings/SettingsRegistryVisitorUtilsTests.cpp
-    Streamer/BlockCacheTests.cpp
-    Streamer/DedicatedCacheTests.cpp
-    Streamer/FullDecompressorTests.cpp
-    Streamer/IStreamerMock.h
-    Streamer/IStreamerTypesMock.h
-    Streamer/ReadSplitterTests.cpp
-    Streamer/SchedulerTests.cpp
-    Streamer/StreamStackEntryConformityTests.h
-    Streamer/StreamStackEntryMock.h
-    Streamer/StreamStackEntryTests.cpp
-    Serialization/Json/ArraySerializerTests.cpp
-    Serialization/Json/BaseJsonSerializerFixture.h
-    Serialization/Json/BaseJsonSerializerTests.cpp
-    Serialization/Json/BasicContainerSerializerTests.cpp
-    Serialization/Json/BoolSerializerTests.cpp
-    Serialization/Json/ByteStreamSerializerTests.cpp
-    Serialization/Json/ColorSerializerTests.cpp
-    Serialization/Json/DoubleSerializerTests.cpp
-    Serialization/Json/IntSerializerTests.cpp
-    Serialization/Json/JsonRegistrationContextTests.cpp
-    Serialization/Json/JsonSerializationMetadataTests.cpp
-    Serialization/Json/JsonSerializationResultTests.cpp
-    Serialization/Json/JsonSerializationTests.h
-    Serialization/Json/JsonSerializationTests.cpp
-    Serialization/Json/JsonSerializationUtilsTests.cpp
-    Serialization/Json/JsonSerializerConformityTests.h
-    Serialization/Json/JsonSerializerMock.h
-    Serialization/Json/MapSerializerTests.cpp
-    Serialization/Json/MathVectorSerializerTests.cpp
-    Serialization/Json/MathMatrixSerializerTests.cpp
-    Serialization/Json/PathSerializerTests.cpp
-    Serialization/Json/SmartPointerSerializerTests.cpp
-    Serialization/Json/StringSerializerTests.cpp
-    Serialization/Json/TestCases.h
-    Serialization/Json/TestCases_Base.h
-    Serialization/Json/TestCases_Base.cpp
-    Serialization/Json/TestCases_Classes.h
-    Serialization/Json/TestCases_Classes.cpp
-    Serialization/Json/TestCases_Compare.cpp
-    Serialization/Json/TestCases_Enum.cpp
-    Serialization/Json/TestCases_Importing.cpp
-    Serialization/Json/TestCases_Patching.cpp
-    Serialization/Json/TestCases_Pointers.h
-    Serialization/Json/TestCases_Pointers.cpp
-    Serialization/Json/TestCases_TypeId.cpp
-    Serialization/Json/TransformSerializerTests.cpp
-    Serialization/Json/TupleSerializerTests.cpp
-    Serialization/Json/UnorderedSetSerializerTests.cpp
-    Serialization/Json/UnsupportedTypesSerializerTests.cpp
-    Serialization/Json/UuidSerializerTests.cpp
+    # Settings/CommandLineTests.cpp
+    # Settings/ConfigurableStackTests.cpp
+    # Settings/SettingsRegistryTests.cpp
+    # Settings/SettingsRegistryConsoleUtilsTests.cpp
+    # Settings/SettingsRegistryMergeUtilsTests.cpp
+    # Settings/SettingsRegistryScriptUtilsTests.cpp
+    # Settings/SettingsRegistryVisitorUtilsTests.cpp
+    # Streamer/BlockCacheTests.cpp
+    # Streamer/DedicatedCacheTests.cpp
+    # Streamer/FullDecompressorTests.cpp
+    # Streamer/IStreamerMock.h
+    # Streamer/IStreamerTypesMock.h
+    # Streamer/ReadSplitterTests.cpp
+    # Streamer/SchedulerTests.cpp
+    # Streamer/StreamStackEntryConformityTests.h
+    # Streamer/StreamStackEntryMock.h
+    # Streamer/StreamStackEntryTests.cpp
+    # Serialization/Json/ArraySerializerTests.cpp
+    # Serialization/Json/BaseJsonSerializerFixture.h
+    # Serialization/Json/BaseJsonSerializerTests.cpp
+    # Serialization/Json/BasicContainerSerializerTests.cpp
+    # Serialization/Json/BoolSerializerTests.cpp
+    # Serialization/Json/ByteStreamSerializerTests.cpp
+    # Serialization/Json/ColorSerializerTests.cpp
+    # Serialization/Json/DoubleSerializerTests.cpp
+    # Serialization/Json/IntSerializerTests.cpp
+    # Serialization/Json/JsonRegistrationContextTests.cpp
+    # Serialization/Json/JsonSerializationMetadataTests.cpp
+    # Serialization/Json/JsonSerializationResultTests.cpp
+    # Serialization/Json/JsonSerializationTests.h
+    # Serialization/Json/JsonSerializationTests.cpp
+    # Serialization/Json/JsonSerializationUtilsTests.cpp
+    # Serialization/Json/JsonSerializerConformityTests.h
+    # Serialization/Json/JsonSerializerMock.h
+    # Serialization/Json/MapSerializerTests.cpp
+    # Serialization/Json/MathVectorSerializerTests.cpp
+    # Serialization/Json/MathMatrixSerializerTests.cpp
+    # Serialization/Json/PathSerializerTests.cpp
+    # Serialization/Json/SmartPointerSerializerTests.cpp
+    # Serialization/Json/StringSerializerTests.cpp
+    # Serialization/Json/TestCases.h
+    # Serialization/Json/TestCases_Base.h
+    # Serialization/Json/TestCases_Base.cpp
+    # Serialization/Json/TestCases_Classes.h
+    # Serialization/Json/TestCases_Classes.cpp
+    # Serialization/Json/TestCases_Compare.cpp
+    # Serialization/Json/TestCases_Enum.cpp
+    # Serialization/Json/TestCases_Importing.cpp
+    # Serialization/Json/TestCases_Patching.cpp
+    # Serialization/Json/TestCases_Pointers.h
+    # Serialization/Json/TestCases_Pointers.cpp
+    # Serialization/Json/TestCases_TypeId.cpp
+    # Serialization/Json/TransformSerializerTests.cpp
+    # Serialization/Json/TupleSerializerTests.cpp
+    # Serialization/Json/UnorderedSetSerializerTests.cpp
+    # Serialization/Json/UnsupportedTypesSerializerTests.cpp
+    # Serialization/Json/UuidSerializerTests.cpp
     Time/TimeTests.cpp
     Math/AabbTests.cpp
     Math/ColorTests.cpp
@@ -222,18 +222,18 @@ set(FILES
     AZStd/Variant.cpp
     AZStd/VariantSerialization.cpp
     AZStd/VectorAndArray.cpp
-    DOM/DomFixtures.cpp
-    DOM/DomFixtures.h
-    DOM/DomJsonTests.cpp
-    DOM/DomJsonBenchmarks.cpp
-    DOM/DomPathTests.cpp
-    DOM/DomPathBenchmarks.cpp
-    DOM/DomPatchTests.cpp
-    DOM/DomPatchBenchmarks.cpp
-    DOM/DomValueTests.cpp
-    DOM/DomValueBenchmarks.cpp
-    DOM/DomPrefixTreeTests.cpp
-    DOM/DomPrefixTreeBenchmarks.cpp
+    # DOM/DomFixtures.cpp
+    # DOM/DomFixtures.h
+    # DOM/DomJsonTests.cpp
+    # DOM/DomJsonBenchmarks.cpp
+    # DOM/DomPathTests.cpp
+    # DOM/DomPathBenchmarks.cpp
+    # DOM/DomPatchTests.cpp
+    # DOM/DomPatchBenchmarks.cpp
+    # DOM/DomValueTests.cpp
+    # DOM/DomValueBenchmarks.cpp
+    # DOM/DomPrefixTreeTests.cpp
+    # DOM/DomPrefixTreeBenchmarks.cpp
 )
 
 # Prevent the following files from being grouped in UNITY builds

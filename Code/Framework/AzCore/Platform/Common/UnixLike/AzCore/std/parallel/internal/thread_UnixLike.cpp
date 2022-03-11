@@ -8,7 +8,7 @@
 
 #include <AzCore/std/parallel/thread.h>
 
-#include <AzCore/std/parallel/threadbus.h>
+//cjh #include <AzCore/std/parallel/threadbus.h>
 
 #include <sched.h>
 #include <errno.h>
@@ -35,7 +35,7 @@ namespace AZStd
             ti->execute();
 
             destroy_thread_info(ti);
-            ThreadEventBus::Broadcast(&ThreadEventBus::Events::OnThreadExit, this_thread::get_id());
+//cjh            ThreadEventBus::Broadcast(&ThreadEventBus::Events::OnThreadExit, this_thread::get_id());
             pthread_exit(nullptr);
             return nullptr;
         }
@@ -88,7 +88,7 @@ namespace AZStd
             // Platform specific post thread creation action (setting thread name on some, affinity on others)
             Platform::PostCreateThread(tId, name, cpuId);
 
-            ThreadEventBus::Broadcast(&ThreadEventBus::Events::OnThreadEnter, thread::id(tId), desc);
+//cjh            ThreadEventBus::Broadcast(&ThreadEventBus::Events::OnThreadEnter, thread::id(tId), desc);
             return tId;
         }
     }

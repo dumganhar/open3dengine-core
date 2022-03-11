@@ -17,7 +17,7 @@
 #include <AzCore/std/parallel/lock.h>
 #include <AzCore/std/parallel/shared_mutex.h>
 #include <AzCore/std/parallel/condition_variable.h>
-#include <AzCore/std/parallel/threadbus.h>
+//cjh #include <AzCore/std/parallel/threadbus.h>
 
 #include <AzCore/std/parallel/thread.h>
 #include <AzCore/std/delegate/delegate.h>

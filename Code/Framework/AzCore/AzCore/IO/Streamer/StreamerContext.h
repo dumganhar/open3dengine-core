@@ -11,7 +11,7 @@
 #include <AzCore/IO/Streamer/Statistics.h>
 #include <AzCore/IO/Streamer/StreamerConfiguration.h>
 #include <AzCore/IO/Streamer/StreamerContext_Platform.h>
-#include <AzCore/Statistics/RunningStatistic.h>
+//cjh #include <AzCore/Statistics/RunningStatistic.h>
 #include <AzCore/std/containers/deque.h>
 #include <AzCore/std/containers/queue.h>
 #include <AzCore/std/containers/vector.h>

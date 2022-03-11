@@ -108,7 +108,7 @@ namespace AZ
         // This constructor is used by NameDictionary to construct from a dictionary-held NameData instance.
         Name(Internal::NameData* nameData);
 
-        static void ScriptConstructor(Name* thisPtr, ScriptDataContext& dc);
+//cjh        static void ScriptConstructor(Name* thisPtr, ScriptDataContext& dc);
 
         // Points to the string that represents the value of this name.
         // Most of the time this same information is available in m_data, but keeping it here too...

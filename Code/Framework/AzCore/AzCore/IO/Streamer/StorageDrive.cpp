@@ -12,7 +12,7 @@
 #include <AzCore/IO/Streamer/FileRequest.h>
 #include <AzCore/IO/Streamer/StreamerContext.h>
 #include <AzCore/IO/Streamer/StorageDrive.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 #include <AzCore/std/smart_ptr/make_shared.h>
 #include <AzCore/std/typetraits/decay.h>
 
@@ -26,12 +26,12 @@ namespace AZ::IO
 
     void StorageDriveConfig::Reflect(AZ::ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
-        {
-            serializeContext->Class<StorageDriveConfig, IStreamerStackConfig>()
-                ->Version(1)
-                ->Field("MaxFileHandles", &StorageDriveConfig::m_maxFileHandles);
-        }
+//cjh        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
+//        {
+//            serializeContext->Class<StorageDriveConfig, IStreamerStackConfig>()
+//                ->Version(1)
+//                ->Field("MaxFileHandles", &StorageDriveConfig::m_maxFileHandles);
+//        }
     }
 
     const AZStd::chrono::microseconds StorageDrive::s_averageSeekTime =

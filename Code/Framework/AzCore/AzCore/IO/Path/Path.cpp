@@ -7,7 +7,7 @@
  */
 
 #include <AzCore/IO/Path/Path.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 
 // Explicit instantations of our support Path classes
 namespace AZ::IO

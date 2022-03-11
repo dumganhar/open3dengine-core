@@ -86,7 +86,7 @@ namespace AZ::IO
         AZStd::vector<AZStd::unique_ptr<BlockCache>> m_cachedFileCaches;
         AZStd::vector<size_t> m_cachedFileRefCounts;
 
-        AZ::Statistics::RunningStatistic m_usagePercentageStat;
+//cjh        AZ::Statistics::RunningStatistic m_usagePercentageStat;
 #if AZ_STREAMER_ADD_EXTRA_PROFILING_INFO
         AZ::Statistics::RunningStatistic m_overallHitRateStat;
         AZ::Statistics::RunningStatistic m_overallCacheableRateStat;

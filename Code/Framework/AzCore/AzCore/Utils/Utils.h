@@ -13,7 +13,7 @@
 #include <AzCore/IO/Path/Path.h>
 #include <AzCore/Outcome/Outcome.h>
 #include <AzCore/IO/Path/Path.h>
-#include <AzCore/Settings/SettingsRegistry.h>
+//cjh #include <AzCore/Settings/SettingsRegistry.h>
 #include <AzCore/std/optional.h>
 #include <AzCore/std/string/string.h>
 #include <AzCore/std/string/fixed_string.h>
@@ -78,7 +78,7 @@ namespace AZ
         AZ::IO::FixedMaxPathString GetProjectPath();
 
         //! Retrieves the project name from the settings registry
-        AZ::SettingsRegistryInterface::FixedValueString GetProjectName();
+//cjh        AZ::SettingsRegistryInterface::FixedValueString GetProjectName();
 
         //! Retrieves the full directory to the Home directory, i.e. "<userhome> or overrideHomeDirectory"
         AZ::IO::FixedMaxPathString GetHomeDirectory();

@@ -22,29 +22,29 @@ namespace AZ::Utils
 
     AZ::IO::FixedMaxPathString GetHomeDirectory()
     {
-        constexpr AZStd::string_view overrideHomeDirKey = "/Amazon/Settings/override_home_dir";
-        AZ::IO::FixedMaxPathString overrideHomeDir;
-        if (auto settingsRegistry = AZ::SettingsRegistry::Get(); settingsRegistry != nullptr)
-        {
-            if (settingsRegistry->Get(overrideHomeDir, overrideHomeDirKey))
-            {
-                AZ::IO::FixedMaxPath path{overrideHomeDir};
-                return path.Native();
-            }
-        }
-
-        if (const char* homePath = std::getenv("HOME"); homePath != nullptr)
-        {
-            AZ::IO::FixedMaxPath path{homePath};
-            return path.Native();
-        }
-
-        struct passwd* pass = getpwuid(getuid());
-        if (pass)
-        {
-            AZ::IO::FixedMaxPath path{pass->pw_dir};
-            return path.Native();
-        }
+//cjh        constexpr AZStd::string_view overrideHomeDirKey = "/Amazon/Settings/override_home_dir";
+//        AZ::IO::FixedMaxPathString overrideHomeDir;
+//        if (auto settingsRegistry = AZ::SettingsRegistry::Get(); settingsRegistry != nullptr)
+//        {
+//            if (settingsRegistry->Get(overrideHomeDir, overrideHomeDirKey))
+//            {
+//                AZ::IO::FixedMaxPath path{overrideHomeDir};
+//                return path.Native();
+//            }
+//        }
+//
+//        if (const char* homePath = std::getenv("HOME"); homePath != nullptr)
+//        {
+//            AZ::IO::FixedMaxPath path{homePath};
+//            return path.Native();
+//        }
+//
+//        struct passwd* pass = getpwuid(getuid());
+//        if (pass)
+//        {
+//            AZ::IO::FixedMaxPath path{pass->pw_dir};
+//            return path.Native();
+//        }
 
         return {};
     }

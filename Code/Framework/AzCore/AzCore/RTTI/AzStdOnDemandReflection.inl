@@ -7,14 +7,16 @@
  */
 #pragma once
 
-#include <AzCore/Script/ScriptContext.h>
+//cjh #include <AzCore/Script/ScriptContext.h>
 #include <AzCore/Script/ScriptContextAttributes.h>
 #include <AzCore/ScriptCanvas/ScriptCanvasAttributes.h>
 #include <AzCore/ScriptCanvas/ScriptCanvasOnDemandNames.h>
 #include <AzCore/RTTI/AzStdOnDemandPrettyName.inl>
-#include <AzCore/RTTI/AzStdOnDemandReflectionLuaFunctions.inl>
+//cjh #include <AzCore/RTTI/AzStdOnDemandReflectionLuaFunctions.inl>
 #include <AzCore/std/optional.h>
+#include <AzCore/std/any.h>
 
+#define AZ_USE_CUSTOM_SCRIPT_BIND //cjh
 #ifndef AZ_USE_CUSTOM_SCRIPT_BIND
 struct lua_State;
 struct lua_Debug;
@@ -55,10 +57,10 @@ namespace AZ
     class BehaviorContext;
     class ScriptDataContext;
 
-    namespace OnDemandLuaFunctions
-    {
-        inline void AnyToLua(lua_State* lua, BehaviorValueParameter& param);
-    }
+//cjh    namespace OnDemandLuaFunctions
+//    {
+//        inline void AnyToLua(lua_State* lua, BehaviorValueParameter& param);
+//    }
     namespace ScriptCanvasOnDemandReflection
     {
         template<typename T>
@@ -118,7 +120,7 @@ namespace AZ
         using ContainerType = AZStd::intrusive_ptr<T>;
 
         // TODO: Count reflection types for a proper un-reflect
-
+/*cjh
         static void CustomConstructor(ContainerType* thisPtr, ScriptDataContext& dc)
         {
             if (dc.GetNumArguments() == 1)
@@ -136,7 +138,7 @@ namespace AZ
                 }
             }
         }
-
+*/
         static void Reflect(ReflectContext* context)
         {
             BehaviorContext* behaviorContext = azrtti_cast<BehaviorContext*>(context);
@@ -144,14 +146,14 @@ namespace AZ
             {
                 behaviorContext->Class<ContainerType>()
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
-                    ->Attribute(AZ::ScriptCanvasAttributes::PrettyName, ScriptCanvasOnDemandReflection::OnDemandPrettyName<ContainerType>::Get(*behaviorContext))
+//cjh                    ->Attribute(AZ::ScriptCanvasAttributes::PrettyName, ScriptCanvasOnDemandReflection::OnDemandPrettyName<ContainerType>::Get(*behaviorContext))
                     ->Attribute(AZ::Script::Attributes::ToolTip, ScriptCanvasOnDemandReflection::OnDemandToolTip<ContainerType>::Get(*behaviorContext))
                     ->Attribute(AZ::Script::Attributes::Category, ScriptCanvasOnDemandReflection::OnDemandCategoryName<ContainerType>::Get(*behaviorContext))
-                    ->Attribute(AZ::ScriptCanvasAttributes::VariableCreationForbidden, AZ::AttributeIsValid::IfPresent)
+//cjh                    ->Attribute(AZ::ScriptCanvasAttributes::VariableCreationForbidden, AZ::AttributeIsValid::IfPresent)
                     ->Attribute(AZ::Script::Attributes::Storage, AZ::Script::Attributes::StorageType::Value)
                     ->Attribute(AZ::Script::Attributes::ConstructibleFromNil, true)
                     ->template Constructor<typename ContainerType::value_type*>()
-                        ->Attribute(AZ::Script::Attributes::ConstructorOverride, &CustomConstructor)
+//cjh                        ->Attribute(AZ::Script::Attributes::ConstructorOverride, &CustomConstructor)
                     ->template WrappingMember<typename ContainerType::value_type>(&ContainerType::get)
                     ->Method("get", &ContainerType::get)
                     ;
@@ -166,7 +168,7 @@ namespace AZ
         using ContainerType = AZStd::shared_ptr<T>;
 
         // TODO: Count reflection types for a proper un-reflect
-
+/*cjh
         static void CustomConstructor(ContainerType* thisPtr, ScriptDataContext& dc)
         {
             if (dc.GetNumArguments() == 1)
@@ -184,21 +186,21 @@ namespace AZ
                 }
             }
         }
-
+*/
         static void Reflect(ReflectContext* context)
         {
             if (BehaviorContext* behaviorContext = azrtti_cast<BehaviorContext*>(context))
             {
                 behaviorContext->Class<ContainerType>()
                     ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
-                    ->Attribute(AZ::ScriptCanvasAttributes::PrettyName, ScriptCanvasOnDemandReflection::OnDemandPrettyName<ContainerType>::Get(*behaviorContext))
+//cjh                    ->Attribute(AZ::ScriptCanvasAttributes::PrettyName, ScriptCanvasOnDemandReflection::OnDemandPrettyName<ContainerType>::Get(*behaviorContext))
                     ->Attribute(AZ::Script::Attributes::ToolTip, ScriptCanvasOnDemandReflection::OnDemandToolTip<ContainerType>::Get(*behaviorContext))
                     ->Attribute(AZ::Script::Attributes::Category, ScriptCanvasOnDemandReflection::OnDemandCategoryName<ContainerType>::Get(*behaviorContext))
-                    ->Attribute(AZ::ScriptCanvasAttributes::VariableCreationForbidden, AZ::AttributeIsValid::IfPresent)
+//cjh                    ->Attribute(AZ::ScriptCanvasAttributes::VariableCreationForbidden, AZ::AttributeIsValid::IfPresent)
                     ->Attribute(AZ::Script::Attributes::Storage, AZ::Script::Attributes::StorageType::Value)
                     ->Attribute(AZ::Script::Attributes::ConstructibleFromNil, true)
                     ->template Constructor<typename ContainerType::value_type*>()
-                    ->Attribute(AZ::Script::Attributes::ConstructorOverride, &CustomConstructor)
+//cjh                    ->Attribute(AZ::Script::Attributes::ConstructorOverride, &CustomConstructor)
                     ->template WrappingMember<typename ContainerType::value_type>(&ContainerType::get)
                     ->Method("get", &ContainerType::get)
                     ;
@@ -250,6 +252,7 @@ namespace AZ
     template<typename T>
     using decay_array = AZStd::conditional_t<AZStd::is_array_v<AZStd::remove_reference_t<T>>, std::remove_extent_t<AZStd::remove_reference_t<T>>*, T&&>;
 
+    /*cjh
     template<typename... T>
     BehaviorObject CreateConnectedAZEventHandler(void* voidPtr, BehaviorFunction&& function)
     {
@@ -304,7 +307,7 @@ namespace AZ
             }
         }
     };
-
+*/
     /// OnDemand reflection for AZStd::vector
     template<class T, class A>
     struct OnDemandReflection< AZStd::vector<T, A> >
@@ -370,7 +373,7 @@ namespace AZ
 
         static bool IsScriptEventType()
         {
-            return AZStd::is_same<T, AZ::EntityId>::value;
+            return false; //cjh AZStd::is_same<T, AZ::EntityId>::value;
         }
 
         static ContainerType& PushBack_VM(ContainerType& thisType, const T& value)

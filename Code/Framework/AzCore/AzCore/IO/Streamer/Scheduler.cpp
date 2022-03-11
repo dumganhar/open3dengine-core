@@ -12,6 +12,7 @@
 #include <AzCore/Debug/Profiler.h>
 #include <AzCore/IO/Streamer/FileRequest.h>
 #include <AzCore/std/containers/deque.h>
+#include <AzCore/std/parallel/scoped_lock.h>
 #include <AzCore/std/sort.h>
 
 namespace AZ::IO

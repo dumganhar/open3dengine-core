@@ -7,7 +7,7 @@
  */
 #pragma once
 
-#include <AzCore/EBus/EBus.h>
+//cjh #include <AzCore/EBus/EBus.h>
 #include <AzCore/IO/Streamer/RequestPath.h>
 #include <AzCore/std/parallel/mutex.h>
 #include <AzCore/std/functional.h>
@@ -63,23 +63,23 @@ namespace AZ
             bool m_isSharedPak = false; 
         };
 
-        class Compression
-            : public AZ::EBusTraits
-        {
-        public:
-            static const AZ::EBusHandlerPolicy HandlerPolicy = AZ::EBusHandlerPolicy::Multiple;
-            using MutexType = AZStd::recursive_mutex;
+        //cjh class Compression
+        //     : public AZ::EBusTraits
+        // {
+        // public:
+        //     static const AZ::EBusHandlerPolicy HandlerPolicy = AZ::EBusHandlerPolicy::Multiple;
+        //     using MutexType = AZStd::recursive_mutex;
             
-            virtual ~Compression() = default;
+        //     virtual ~Compression() = default;
 
-            virtual void FindCompressionInfo(bool& found, CompressionInfo& info, const AZStd::string_view filename) = 0;
-        };
+        //     virtual void FindCompressionInfo(bool& found, CompressionInfo& info, const AZStd::string_view filename) = 0;
+        // };
 
-        using CompressionBus = AZ::EBus<Compression>;
+        // using CompressionBus = AZ::EBus<Compression>;
 
-        namespace CompressionUtils
-        {
-            bool FindCompressionInfo(CompressionInfo& info, const AZStd::string_view filename);
-        }
+        // namespace CompressionUtils
+        // {
+        //     bool FindCompressionInfo(CompressionInfo& info, const AZStd::string_view filename);
+        // }
     }
 }

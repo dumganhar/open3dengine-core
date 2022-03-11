@@ -7,7 +7,7 @@
  */
 #pragma once
 
-#include <AzCore/EBus/EBus.h>
+//cjh #include <AzCore/EBus/EBus.h>
 
 namespace AZ
 {

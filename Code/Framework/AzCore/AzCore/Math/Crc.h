@@ -49,7 +49,7 @@
 //////////////////////////////////////////////////////////////////////////
 namespace AZ
 {
-    class SerializeContext;
+//cjh    class SerializeContext;
 
     /**
      * Class for all of our crc32 types, better than just using ints everywhere.
@@ -92,7 +92,7 @@ namespace AZ
 
         constexpr bool operator!() const             { return (m_value == 0); }
 
-        static void Reflect(AZ::SerializeContext& context);
+//cjh        static void Reflect(AZ::SerializeContext& context);
 
     protected:
         // A constant expression cannot contain a conversion from const-volatile void to any pointer to object type

@@ -11,7 +11,7 @@
 #include <AzCore/IO/Streamer/BlockCache.h>
 #include <AzCore/IO/Streamer/FileRequest.h>
 #include <AzCore/IO/Streamer/StreamerContext.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 #include <AzCore/std/algorithm.h>
 #include <AzCore/std/smart_ptr/make_shared.h>
 
@@ -53,19 +53,19 @@ namespace AZ::IO
 
     void BlockCacheConfig::Reflect(AZ::ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
-        {
-            serializeContext->Enum<BlockSize>()
-                ->Version(1)
-                ->Value("MaxTransfer", BlockSize::MaxTransfer)
-                ->Value("MemoryAlignment", BlockSize::MemoryAlignment)
-                ->Value("SizeAlignment", BlockSize::SizeAlignment);
-
-            serializeContext->Class<BlockCacheConfig, IStreamerStackConfig>()
-                ->Version(1)
-                ->Field("CacheSizeMib", &BlockCacheConfig::m_cacheSizeMib)
-                ->Field("BlockSize", &BlockCacheConfig::m_blockSize);
-        }
+//cjh        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
+//        {
+//            serializeContext->Enum<BlockSize>()
+//                ->Version(1)
+//                ->Value("MaxTransfer", BlockSize::MaxTransfer)
+//                ->Value("MemoryAlignment", BlockSize::MemoryAlignment)
+//                ->Value("SizeAlignment", BlockSize::SizeAlignment);
+//
+//            serializeContext->Class<BlockCacheConfig, IStreamerStackConfig>()
+//                ->Version(1)
+//                ->Field("CacheSizeMib", &BlockCacheConfig::m_cacheSizeMib)
+//                ->Field("BlockSize", &BlockCacheConfig::m_blockSize);
+//        }
     }
 
     static constexpr char CacheHitRateName[] = "Cache hit rate";
@@ -283,14 +283,14 @@ namespace AZ::IO
 
         if (prolog.m_used || epilog.m_used)
         {
-            m_cacheableStat.PushSample(1.0);
-            Statistic::PlotImmediate(m_name, CacheableName, m_cacheableStat.GetMostRecentSample());
+//cjh            m_cacheableStat.PushSample(1.0);
+//            Statistic::PlotImmediate(m_name, CacheableName, m_cacheableStat.GetMostRecentSample());
         }
         else
         {
             // Nothing to cache so simply forward the call to the next entry in the stack for direct reading.
-            m_cacheableStat.PushSample(0.0);
-            Statistic::PlotImmediate(m_name, CacheableName, m_cacheableStat.GetMostRecentSample());
+//cjh            m_cacheableStat.PushSample(0.0);
+//            Statistic::PlotImmediate(m_name, CacheableName, m_cacheableStat.GetMostRecentSample());
             m_next->QueueRequest(request);
             return;
         }
@@ -309,13 +309,13 @@ namespace AZ::IO
                     // so it's read in one read request. If main wasn't used, prefixing the prolog
                     // will cause it to be filled in and used.
                     main.Prefix(prolog);
-                    m_hitRateStat.PushSample(0.0);
-                    Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
+//cjh                    m_hitRateStat.PushSample(0.0);
+//                    Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
                 }
                 else
                 {
-                    m_hitRateStat.PushSample(1.0);
-                    Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
+//cjh                    m_hitRateStat.PushSample(1.0);
+//                    Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
                 }
             }
             else
@@ -327,8 +327,8 @@ namespace AZ::IO
                 bool readFromCache = (ServiceFromCache(request, prolog, data.m_path, data.m_sharedRead) == CacheResult::ReadFromCache);
                 fullyCached = readFromCache && fullyCached;
 
-                m_hitRateStat.PushSample(readFromCache ? 1.0 : 0.0);
-                Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
+//cjh                m_hitRateStat.PushSample(readFromCache ? 1.0 : 0.0);
+//                Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
             }
         }
 
@@ -347,8 +347,8 @@ namespace AZ::IO
             bool readFromCache = (ServiceFromCache(request, epilog, data.m_path, data.m_sharedRead) == CacheResult::ReadFromCache);
             fullyCached = readFromCache && fullyCached;
 
-            m_hitRateStat.PushSample(readFromCache ? 1.0 : 0.0);
-            Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
+//cjh            m_hitRateStat.PushSample(readFromCache ? 1.0 : 0.0);
+//            Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
         }
 
         if (fullyCached)
@@ -385,12 +385,12 @@ namespace AZ::IO
 
     double BlockCache::CalculateHitRatePercentage() const
     {
-        return m_hitRateStat.GetAverage();
+        return 0.0; //cjh m_hitRateStat.GetAverage();
     }
 
     double BlockCache::CalculateCacheableRatePercentage() const
     {
-        return m_cacheableStat.GetAverage();
+        return 0.0; //cjh m_cacheableStat.GetAverage();
     }
 
     s32 BlockCache::CalculateAvailableRequestSlots() const
@@ -441,8 +441,8 @@ namespace AZ::IO
         u32 cacheLocation = FindInCache(filePath, section.m_readOffset);
         if (cacheLocation == s_fileNotCached)
         {
-            m_hitRateStat.PushSample(0.0);
-            Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
+//cjh            m_hitRateStat.PushSample(0.0);
+//            Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
 
             section.m_parent = request;
             cacheLocation = RecycleOldestBlock(filePath, section.m_readOffset);
@@ -494,8 +494,8 @@ namespace AZ::IO
                 section.m_wait = nullptr;
             }
 
-            m_hitRateStat.PushSample(1.0);
-            Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
+//cjh            m_hitRateStat.PushSample(1.0);
+//            Statistic::PlotImmediate(m_name, CacheHitRateName, m_hitRateStat.GetMostRecentSample());
 
             return ReadFromCache(request, section, cacheLocation);
         }

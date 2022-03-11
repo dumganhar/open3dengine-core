@@ -9,8 +9,8 @@
 #include <AzCore/Math/PolygonPrism.h>
 #include <AzCore/Memory/SystemAllocator.h>
 #include <AzCore/RTTI/BehaviorContext.h>
-#include <AzCore/Serialization/EditContext.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/EditContext.h>
+//#include <AzCore/Serialization/SerializeContext.h>
 
 namespace AZ
 {
@@ -21,30 +21,30 @@ namespace AZ
 
     void PolygonPrism::Reflect(ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<SerializeContext*>(context))
-        {
-            serializeContext->Class<PolygonPrism>()
-                ->Version(1)
-                ->Field("Height", &PolygonPrism::m_height)
-                ->Field("VertexContainer", &PolygonPrism::m_vertexContainer)
-                ;
-
-            if (EditContext* editContext = serializeContext->GetEditContext())
-            {
-                editContext->Class<PolygonPrism>("PolygonPrism", "Polygon prism shape")
-                    ->ClassElement(Edit::ClassElements::EditorData, "")
-                    ->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::ShowChildrenOnly)
-                    ->DataElement(Edit::UIHandlers::Default, &PolygonPrism::m_height, "Height", "Shape Height")
-                        ->Attribute(Edit::Attributes::Suffix, " m")
-                        ->Attribute(Edit::Attributes::Step, 0.05f)
-                        ->Attribute(Edit::Attributes::Min, 0.0f)
-                        ->Attribute(Edit::Attributes::ChangeNotify, &PolygonPrism::OnChangeHeight)
-                    ->DataElement(Edit::UIHandlers::Default, &PolygonPrism::m_vertexContainer, "Vertices", "Data representing the polygon, in the entity's local coordinate space")
-                        ->Attribute(Edit::Attributes::ContainerCanBeModified, false)
-                        ->Attribute(Edit::Attributes::AutoExpand, true)
-                        ;
-            }
-        }
+//cjh        if (auto serializeContext = azrtti_cast<SerializeContext*>(context))
+//        {
+//            serializeContext->Class<PolygonPrism>()
+//                ->Version(1)
+//                ->Field("Height", &PolygonPrism::m_height)
+//                ->Field("VertexContainer", &PolygonPrism::m_vertexContainer)
+//                ;
+//
+//            if (EditContext* editContext = serializeContext->GetEditContext())
+//            {
+//                editContext->Class<PolygonPrism>("PolygonPrism", "Polygon prism shape")
+//                    ->ClassElement(Edit::ClassElements::EditorData, "")
+//                    ->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::ShowChildrenOnly)
+//                    ->DataElement(Edit::UIHandlers::Default, &PolygonPrism::m_height, "Height", "Shape Height")
+//                        ->Attribute(Edit::Attributes::Suffix, " m")
+//                        ->Attribute(Edit::Attributes::Step, 0.05f)
+//                        ->Attribute(Edit::Attributes::Min, 0.0f)
+//                        ->Attribute(Edit::Attributes::ChangeNotify, &PolygonPrism::OnChangeHeight)
+//                    ->DataElement(Edit::UIHandlers::Default, &PolygonPrism::m_vertexContainer, "Vertices", "Data representing the polygon, in the entity's local coordinate space")
+//                        ->Attribute(Edit::Attributes::ContainerCanBeModified, false)
+//                        ->Attribute(Edit::Attributes::AutoExpand, true)
+//                        ;
+//            }
+//        }
 
         if (auto behaviorContext = azrtti_cast<BehaviorContext*>(context))
         {

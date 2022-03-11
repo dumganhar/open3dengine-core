@@ -41,9 +41,9 @@ set(FILES
     ../Common/UnixLikeDefault/AzCore/IO/SystemFile_UnixLikeDefault.cpp
     AzCore/IO/Streamer/StreamerContext_Platform.h
     AzCore/IO/SystemFile_Platform.h
-    AzCore/IPC/SharedMemory_Platform.h
-    AzCore/IPC/SharedMemory_Mac.h
-    AzCore/IPC/SharedMemory_Mac.cpp
+#cjh AzCore/IPC/SharedMemory_Platform.h
+# AzCore/IPC/SharedMemory_Mac.h
+# AzCore/IPC/SharedMemory_Mac.cpp
     ../Common/Apple/AzCore/Memory/OSAllocator_Apple.h
     ../Common/Unimplemented/AzCore/Memory/OverrunDetectionAllocator_Unimplemented.h
     AzCore/Memory/HeapSchema_Mac.cpp
@@ -54,17 +54,17 @@ set(FILES
     AzCore/Math/Random_Platform.h
     ../Common/UnixLike/AzCore/Math/Random_UnixLike.cpp
     ../Common/UnixLike/AzCore/Math/Random_UnixLike.h
-    ../Common/Apple/AzCore/Module/DynamicModuleHandle_Apple.cpp
-    ../Common/UnixLike/AzCore/Module/DynamicModuleHandle_UnixLike.cpp
-    AzCore/NativeUI/NativeUISystemComponent_Mac.mm
+    # ../Common/Apple/AzCore/Module/DynamicModuleHandle_Apple.cpp
+    # ../Common/UnixLike/AzCore/Module/DynamicModuleHandle_UnixLike.cpp
+    #cjh AzCore/NativeUI/NativeUISystemComponent_Mac.mm
     ../Common/UnixLike/AzCore/PlatformIncl_UnixLike.h
     AzCore/Platform_Mac.cpp
     AzCore/PlatformIncl_Platform.h
-    ../Common/UnixLike/AzCore/Socket/AzSocket_fwd_UnixLike.h
-    ../Common/UnixLike/AzCore/Socket/AzSocket_UnixLike.cpp
-    ../Common/UnixLike/AzCore/Socket/AzSocket_UnixLike.h
-    AzCore/Socket/AzSocket_fwd_Platform.h
-    AzCore/Socket/AzSocket_Platform.h
+    #cjh ../Common/UnixLike/AzCore/Socket/AzSocket_fwd_UnixLike.h
+    # ../Common/UnixLike/AzCore/Socket/AzSocket_UnixLike.cpp
+    # ../Common/UnixLike/AzCore/Socket/AzSocket_UnixLike.h
+    # AzCore/Socket/AzSocket_fwd_Platform.h
+    # AzCore/Socket/AzSocket_Platform.h
     ../Common/Apple/AzCore/std/time_Apple.cpp
     AzCore/Utils/Utils_Mac.cpp
     ../Common/Apple/AzCore/Utils/Utils_Apple.cpp

@@ -16,51 +16,51 @@ namespace AZ
 {
     void ViewFrustumAttributes::Reflect(ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<SerializeContext*>(context))
-        {
-            serializeContext->Class<ViewFrustumAttributes>()
-                ->Version(1)
-                ->Field("WorldTransform", &ViewFrustumAttributes::m_worldTransform)
-                ->Field("AspectRatio", &ViewFrustumAttributes::m_aspectRatio)
-                ->Field("FovRadians", &ViewFrustumAttributes::m_verticalFovRadians)
-                ->Field("NearClip", &ViewFrustumAttributes::m_nearClip)
-                ->Field("FarClip", &ViewFrustumAttributes::m_farClip)
-                ;
-
-            if (EditContext* editContext = serializeContext->GetEditContext())
-            {
-                editContext->Class<ViewFrustumAttributes>("ViewFrustumAttributes", "")
-                    ->ClassElement(Edit::ClassElements::EditorData, "")
-                    ->DataElement(
-                        Edit::UIHandlers::Default, &ViewFrustumAttributes::m_worldTransform, "WorldTransform",
-                        "The world transform used to construct the frustum")
-                    ->DataElement(
-                        Edit::UIHandlers::Default, &ViewFrustumAttributes::m_aspectRatio, "AspectRatio",
-                        "The aspect ratio of the frustum")
-                    ->DataElement(
-                        Edit::UIHandlers::Default, &ViewFrustumAttributes::m_verticalFovRadians, "FovRadians",
-                        "The vertical field of view of the frustum in radians")
-                    ->DataElement(
-                        Edit::UIHandlers::Default, &ViewFrustumAttributes::m_nearClip, "NearClip",
-                        "Distance to the frustums near clip plane")
-                    ->DataElement(
-                        Edit::UIHandlers::Default, &ViewFrustumAttributes::m_farClip, "FarClip",
-                        "Distance to the frustums far clip plane")
-                    ;
-            }
-        }
+//cjh        if (auto serializeContext = azrtti_cast<SerializeContext*>(context))
+//        {
+//            serializeContext->Class<ViewFrustumAttributes>()
+//                ->Version(1)
+//                ->Field("WorldTransform", &ViewFrustumAttributes::m_worldTransform)
+//                ->Field("AspectRatio", &ViewFrustumAttributes::m_aspectRatio)
+//                ->Field("FovRadians", &ViewFrustumAttributes::m_verticalFovRadians)
+//                ->Field("NearClip", &ViewFrustumAttributes::m_nearClip)
+//                ->Field("FarClip", &ViewFrustumAttributes::m_farClip)
+//                ;
+//
+//            if (EditContext* editContext = serializeContext->GetEditContext())
+//            {
+//                editContext->Class<ViewFrustumAttributes>("ViewFrustumAttributes", "")
+//                    ->ClassElement(Edit::ClassElements::EditorData, "")
+//                    ->DataElement(
+//                        Edit::UIHandlers::Default, &ViewFrustumAttributes::m_worldTransform, "WorldTransform",
+//                        "The world transform used to construct the frustum")
+//                    ->DataElement(
+//                        Edit::UIHandlers::Default, &ViewFrustumAttributes::m_aspectRatio, "AspectRatio",
+//                        "The aspect ratio of the frustum")
+//                    ->DataElement(
+//                        Edit::UIHandlers::Default, &ViewFrustumAttributes::m_verticalFovRadians, "FovRadians",
+//                        "The vertical field of view of the frustum in radians")
+//                    ->DataElement(
+//                        Edit::UIHandlers::Default, &ViewFrustumAttributes::m_nearClip, "NearClip",
+//                        "Distance to the frustums near clip plane")
+//                    ->DataElement(
+//                        Edit::UIHandlers::Default, &ViewFrustumAttributes::m_farClip, "FarClip",
+//                        "Distance to the frustums far clip plane")
+//                    ;
+//            }
+//        }
     }
 
 
     void Frustum::Reflect(ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<SerializeContext*>(context))
-        {
-            serializeContext->Class<Frustum>()
-                ->Version(2)
-                ->Field("Planes", &Frustum::m_serializedPlanes)
-                ;
-        }
+//cjh        if (auto serializeContext = azrtti_cast<SerializeContext*>(context))
+//        {
+//            serializeContext->Class<Frustum>()
+//                ->Version(2)
+//                ->Field("Planes", &Frustum::m_serializedPlanes)
+//                ;
+//        }
     }
 
 

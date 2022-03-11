@@ -7,27 +7,27 @@
  */
 
 #include <AzCore/IO/Streamer/StreamerConfiguration.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 
 namespace AZ::IO
 {
     void IStreamerStackConfig::Reflect(AZ::ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
-        {
-            serializeContext->Class<IStreamerStackConfig>()
-                ->Version(1)
-                ->SerializeWithNoData();
-        }
+//cjh        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
+//        {
+//            serializeContext->Class<IStreamerStackConfig>()
+//                ->Version(1)
+//                ->SerializeWithNoData();
+//        }
     }
 
     void StreamerConfig::Reflect(AZ::ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
-        {
-            serializeContext->Class<StreamerConfig>()
-                ->Version(1)
-                ->Field("Stack", &StreamerConfig::m_stackConfig);
-        }
+//cjh        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
+//        {
+//            serializeContext->Class<StreamerConfig>()
+//                ->Version(1)
+//                ->Field("Stack", &StreamerConfig::m_stackConfig);
+//        }
     }
 } // namespace AZ::IO

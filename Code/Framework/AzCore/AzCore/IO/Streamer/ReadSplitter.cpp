@@ -11,7 +11,7 @@
 #include <AzCore/IO/Streamer/FileRequest.h>
 #include <AzCore/IO/Streamer/ReadSplitter.h>
 #include <AzCore/IO/Streamer/StreamerContext.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 #include <AzCore/std/smart_ptr/make_shared.h>
 
 namespace AZ::IO
@@ -52,24 +52,24 @@ namespace AZ::IO
 
     void ReadSplitterConfig::Reflect(AZ::ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
-        {
-            serializeContext->Enum<SplitSize>()
-                ->Version(1)
-                ->Value("MaxTransfer", SplitSize::MaxTransfer)
-                ->Value("MemoryAlignment", SplitSize::MemoryAlignment);
-
-            serializeContext->Class<ReadSplitterConfig, IStreamerStackConfig>()
-                ->Version(1)
-                ->Field("BufferSizeMib", &ReadSplitterConfig::m_bufferSizeMib)
-                ->Field("SplitSize", &ReadSplitterConfig::m_splitSize)
-                ->Field("AdjustOffset", &ReadSplitterConfig::m_adjustOffset)
-                ->Field("SplitAlignedRequests", &ReadSplitterConfig::m_splitAlignedRequests);
-        }
+//cjh        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
+//        {
+//            serializeContext->Enum<SplitSize>()
+//                ->Version(1)
+//                ->Value("MaxTransfer", SplitSize::MaxTransfer)
+//                ->Value("MemoryAlignment", SplitSize::MemoryAlignment);
+//
+//            serializeContext->Class<ReadSplitterConfig, IStreamerStackConfig>()
+//                ->Version(1)
+//                ->Field("BufferSizeMib", &ReadSplitterConfig::m_bufferSizeMib)
+//                ->Field("SplitSize", &ReadSplitterConfig::m_splitSize)
+//                ->Field("AdjustOffset", &ReadSplitterConfig::m_adjustOffset)
+//                ->Field("SplitAlignedRequests", &ReadSplitterConfig::m_splitAlignedRequests);
+//        }
     }
 
-    static constexpr char AvgNumSubReadsName[] = "Avg. num sub reads";
-    static constexpr char AlignedReadsName[] = "Aligned reads";
+//cjh    static constexpr char AvgNumSubReadsName[] = "Avg. num sub reads";
+//    static constexpr char AlignedReadsName[] = "Aligned reads";
     static constexpr char NumAvailableBufferSlotsName[] = "Num available buffer slots";
     static constexpr char NumPendingReadsName[] = "Num pending reads";
 
@@ -125,8 +125,8 @@ namespace AZ::IO
             return;
         }
 
-        m_averageNumSubReadsStat.PushSample(aznumeric_cast<double>((data->m_size / m_maxReadSize) + 1));
-        Statistic::PlotImmediate(m_name, AvgNumSubReadsName, m_averageNumSubReadsStat.GetMostRecentSample());
+//cjh        m_averageNumSubReadsStat.PushSample(aznumeric_cast<double>((data->m_size / m_maxReadSize) + 1));
+//        Statistic::PlotImmediate(m_name, AvgNumSubReadsName, m_averageNumSubReadsStat.GetMostRecentSample());
 
         bool isAligned = IStreamerTypes::IsAlignedTo(data->m_output, m_memoryAlignment);
         if (m_adjustOffset)
@@ -136,7 +136,7 @@ namespace AZ::IO
 
         if (isAligned || m_bufferSize == 0)
         {
-            m_alignedReadsStat.PushSample(isAligned ? 1.0 : 0.0);
+//cjh            m_alignedReadsStat.PushSample(isAligned ? 1.0 : 0.0);
             if (!m_splitAlignedRequests)
             {
                 StreamStackEntry::QueueRequest(request);
@@ -148,7 +148,7 @@ namespace AZ::IO
         }
         else
         {
-            m_alignedReadsStat.PushSample(0.0);
+//cjh            m_alignedReadsStat.PushSample(0.0);
             InitializeBuffer();
             QueueBufferedRead(request);
         }
@@ -361,8 +361,8 @@ namespace AZ::IO
 
     void ReadSplitter::CollectStatistics(AZStd::vector<Statistic>& statistics) const
     {
-        statistics.push_back(Statistic::CreateFloat(m_name, AvgNumSubReadsName, m_averageNumSubReadsStat.GetAverage()));
-        statistics.push_back(Statistic::CreatePercentage(m_name, AlignedReadsName, m_alignedReadsStat.GetAverage()));
+//cjh        statistics.push_back(Statistic::CreateFloat(m_name, AvgNumSubReadsName, m_averageNumSubReadsStat.GetAverage()));
+//        statistics.push_back(Statistic::CreatePercentage(m_name, AlignedReadsName, m_alignedReadsStat.GetAverage()));
         statistics.push_back(Statistic::CreateInteger(m_name, NumAvailableBufferSlotsName, aznumeric_caster(m_availableBufferSlots.size())));
         statistics.push_back(Statistic::CreateInteger(m_name, NumPendingReadsName, aznumeric_caster(m_pendingReads.size())));
         StreamStackEntry::CollectStatistics(statistics);

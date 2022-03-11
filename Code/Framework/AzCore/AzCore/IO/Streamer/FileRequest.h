@@ -11,6 +11,7 @@
 #include <AzCore/IO/CompressionBus.h>
 #include <AzCore/IO/IStreamerTypes.h>
 #include <AzCore/IO/Streamer/FileRange.h>
+#include <AzCore/IO/Streamer/RequestPath.h>
 #include <AzCore/Memory/Memory.h>
 #include <AzCore/std/any.h>
 #include <AzCore/std/functional.h>

@@ -9,11 +9,12 @@
 #pragma once
 
 #include <AzCore/Interface/Interface.h>
-#include <AzCore/EBus/EBus.h>
+//cjh #include <AzCore/EBus/EBus.h>
 #include <AzCore/RTTI/RTTI.h>
 #include <AzCore/RTTI/TypeSafeIntegral.h>
 #include <AzCore/std/chrono/chrono.h>
 #include <AzCore/std/time.h>
+#include <AzCore/Casting/numeric_cast.h>
 
 namespace AZ
 {
@@ -116,14 +117,14 @@ namespace AZ
     };
 
     // EBus wrapper for ScriptCanvas
-    class ITimeRequests
-        : public AZ::EBusTraits
-    {
-    public:
-        static const AZ::EBusHandlerPolicy HandlerPolicy = AZ::EBusHandlerPolicy::Single;
-        static const AZ::EBusAddressPolicy AddressPolicy = AZ::EBusAddressPolicy::Single;
-    };
-    using ITimeRequestBus = AZ::EBus<ITime, ITimeRequests>;
+//cjh    class ITimeRequests
+//        : public AZ::EBusTraits
+//    {
+//    public:
+//        static const AZ::EBusHandlerPolicy HandlerPolicy = AZ::EBusHandlerPolicy::Single;
+//        static const AZ::EBusAddressPolicy AddressPolicy = AZ::EBusAddressPolicy::Single;
+//    };
+//    using ITimeRequestBus = AZ::EBus<ITime, ITimeRequests>;
 
     //! This is a simple convenience wrapper
     inline TimeMs GetElapsedTimeMs()

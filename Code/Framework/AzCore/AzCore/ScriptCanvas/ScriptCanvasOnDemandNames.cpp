@@ -8,7 +8,7 @@
 
 #include <AzCore/ScriptCanvas/ScriptCanvasOnDemandNames.h>
 
-#include <AzCore/Component/EntityId.h>
+//cjh #include <AzCore/Component/EntityId.h>
 #include <AzCore/Math/Aabb.h>
 #include <AzCore/Math/Color.h>
 #include <AzCore/Math/Crc.h>
@@ -52,10 +52,10 @@ namespace AZ::ScriptCanvasOnDemandReflection
         {
             return "CRC";
         }
-        else if (typeId == azrtti_typeid<EntityId>())
-        {
-            return "EntityId";
-        }
+//cjh        else if (typeId == azrtti_typeid<EntityId>())
+//        {
+//            return "EntityId";
+//        }
         else if (typeId == azrtti_typeid<Matrix3x3>())
         {
             return "Matrix3x3";

@@ -15,7 +15,7 @@
 #include <AzCore/std/string/tokenize.h>
 
 #include <AzCore/RTTI/AzStdOnDemandReflection.inl>
-#include <AzCore/RTTI/AzStdOnDemandReflectionLuaFunctions.inl>
+//cjh #include <AzCore/RTTI/AzStdOnDemandReflectionLuaFunctions.inl>
 namespace AZ::CommonOnDemandReflections
 {
     void ReflectCommonString(ReflectContext* context)
@@ -29,8 +29,8 @@ namespace AZ::CommonOnDemandReflections
                 ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Attribute(AZ::Script::Attributes::Storage, AZ::Script::Attributes::StorageType::Value)
                 ->template Constructor<typename ContainerType::value_type*>()
-                        ->Attribute(AZ::Script::Attributes::ConstructorOverride, &OnDemandLuaFunctions::ConstructBasicString<ContainerType::value_type, ContainerType::traits_type, ContainerType::allocator_type>)
-                    ->Attribute(AZ::Script::Attributes::ReaderWriterOverride, ScriptContext::CustomReaderWriter(&OnDemandLuaFunctions::StringTypeToLua<ContainerType>, &OnDemandLuaFunctions::StringTypeFromLua<ContainerType>))
+//cjh                        ->Attribute(AZ::Script::Attributes::ConstructorOverride, &OnDemandLuaFunctions::ConstructBasicString<ContainerType::value_type, ContainerType::traits_type, ContainerType::allocator_type>)
+//                    ->Attribute(AZ::Script::Attributes::ReaderWriterOverride, ScriptContext::CustomReaderWriter(&OnDemandLuaFunctions::StringTypeToLua<ContainerType>, &OnDemandLuaFunctions::StringTypeFromLua<ContainerType>))
                 ->template WrappingMember<const char*>(&ContainerType::c_str)
                 ->Method("c_str", &ContainerType::c_str)
                 ->Method("Length", [](ContainerType* thisPtr) { return aznumeric_cast<int>(thisPtr->length()); })
@@ -134,8 +134,8 @@ namespace AZ::CommonOnDemandReflections
                 ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Attribute(AZ::Script::Attributes::Storage, AZ::Script::Attributes::StorageType::Value)
                 ->template Constructor<typename ContainerType::value_type*>()
-                ->Attribute(AZ::Script::Attributes::ConstructorOverride, &OnDemandLuaFunctions::ConstructStringView<ContainerType::value_type, ContainerType::traits_type>)
-                ->Attribute(AZ::Script::Attributes::ReaderWriterOverride, ScriptContext::CustomReaderWriter(&OnDemandLuaFunctions::StringTypeToLua<ContainerType>, &OnDemandLuaFunctions::StringTypeFromLua<ContainerType>))
+//cjh                ->Attribute(AZ::Script::Attributes::ConstructorOverride, &OnDemandLuaFunctions::ConstructStringView<ContainerType::value_type, ContainerType::traits_type>)
+//cjh                ->Attribute(AZ::Script::Attributes::ReaderWriterOverride, ScriptContext::CustomReaderWriter(&OnDemandLuaFunctions::StringTypeToLua<ContainerType>, &OnDemandLuaFunctions::StringTypeFromLua<ContainerType>))
                 ->Method("ToString", [](const ContainerType& stringView) { return stringView.data(); }, { { { "Reference", "String view object being converted to string" } } })
                 ->Attribute(AZ::Script::Attributes::ToolTip, "Converts string_view to string")
                 ->Attribute(AZ::Script::Attributes::Operator, AZ::Script::Attributes::OperatorType::ToString)
@@ -198,10 +198,10 @@ namespace AZ::CommonOnDemandReflections
             behaviorContext->Class<AZStd::any>()
                 ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::All)
                 ->Attribute(
-                    Script::Attributes::Ignore, true) // Don't reflect any type to script (there should never be an any instance in script)
-                ->Attribute(
-                    Script::Attributes::ReaderWriterOverride,
-                    ScriptContext::CustomReaderWriter(&AZ::OnDemandLuaFunctions::AnyToLua, &OnDemandLuaFunctions::AnyFromLua));
+                            Script::Attributes::Ignore, true); // Don't reflect any type to script (there should never be an any instance in script)
+//cjh                ->Attribute(
+//                    Script::Attributes::ReaderWriterOverride,
+//                    ScriptContext::CustomReaderWriter(&AZ::OnDemandLuaFunctions::AnyToLua, &OnDemandLuaFunctions::AnyFromLua));
         }
     }
 

@@ -26,159 +26,159 @@ namespace AZ
 
     namespace Internal
     {
-        void Vector3ScriptConstructor(Vector3* thisPtr, ScriptDataContext& dc)
-        {
-            int numArgs = dc.GetNumArguments();
-            switch (numArgs)
-            {
-            case 0:
-            {
-                *thisPtr = Vector3::CreateZero();
-            } break;
-            case 1:
-            {
-                if (dc.IsNumber(0))
-                {
-                    float number = 0;
-                    dc.ReadArg(0, number);
-                    *thisPtr = Vector3(number);
-                }
-                else if (!(ConstructOnTypedArgument<Vector4>(*thisPtr, dc, 0)
-                    || ConstructOnTypedArgument<Vector2>(*thisPtr, dc, 0)
-                    || ConstructOnTypedArgument<Vector3>(*thisPtr, dc, 0)
-                    || ConstructOnTypedArgument<Color>(*thisPtr, dc, 0)))
-                {
-                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When only providing 1 argument to Vector3(), it must be a number, Vector2,3,4 or Color");
-                }
-            } break;
-            case 3:
-            {
-                if (dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2))
-                {
-                    float x = 0;
-                    float y = 0;
-                    float z = 0;
-                    dc.ReadArg(0, x);
-                    dc.ReadArg(1, y);
-                    dc.ReadArg(2, z);
-                    *thisPtr = Vector3(x, y, z);
-                }
-                else
-                {
-                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When providing 3 arguments to Vector3(), all must be numbers!");
-                }
-            } break;
-            default:
-            {
-                dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "Vector3() accepts only 1 or 3 arguments, not %d!", numArgs);
-            } break;
-            }
-        }
+//cjh        void Vector3ScriptConstructor(Vector3* thisPtr, ScriptDataContext& dc)
+//        {
+//            int numArgs = dc.GetNumArguments();
+//            switch (numArgs)
+//            {
+//            case 0:
+//            {
+//                *thisPtr = Vector3::CreateZero();
+//            } break;
+//            case 1:
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float number = 0;
+//                    dc.ReadArg(0, number);
+//                    *thisPtr = Vector3(number);
+//                }
+//                else if (!(ConstructOnTypedArgument<Vector4>(*thisPtr, dc, 0)
+//                    || ConstructOnTypedArgument<Vector2>(*thisPtr, dc, 0)
+//                    || ConstructOnTypedArgument<Vector3>(*thisPtr, dc, 0)
+//                    || ConstructOnTypedArgument<Color>(*thisPtr, dc, 0)))
+//                {
+//                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When only providing 1 argument to Vector3(), it must be a number, Vector2,3,4 or Color");
+//                }
+//            } break;
+//            case 3:
+//            {
+//                if (dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2))
+//                {
+//                    float x = 0;
+//                    float y = 0;
+//                    float z = 0;
+//                    dc.ReadArg(0, x);
+//                    dc.ReadArg(1, y);
+//                    dc.ReadArg(2, z);
+//                    *thisPtr = Vector3(x, y, z);
+//                }
+//                else
+//                {
+//                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When providing 3 arguments to Vector3(), all must be numbers!");
+//                }
+//            } break;
+//            default:
+//            {
+//                dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "Vector3() accepts only 1 or 3 arguments, not %d!", numArgs);
+//            } break;
+//            }
+//        }
 
         void Vector3DefaultConstructor(Vector3* thisPtr)
         {
             new (thisPtr) Vector3(Vector3::CreateZero());
         }
 
-        void Vector3MultiplyGeneric(const Vector3* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() == 1)
-            {
-                if (dc.IsNumber(0))
-                {
-                    float scalar = 0;
-                    dc.ReadArg(0, scalar);
-                    Vector3 result = *thisPtr * scalar;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Vector3>(0))
-                {
-                    Vector3 vector3 = Vector3::CreateZero();
-                    dc.ReadArg(0, vector3);
-                    Vector3 result = *thisPtr * vector3;
-                    dc.PushResult(result);
-                }
-            }
-
-            if (!dc.GetNumResults())
-            {
-                AZ_Error("Script", false, "Vector3 multiply should have only 1 argument - Vector3, Float/Number, Matrix3x3, Matrix4x4, or Transform!");
-                dc.PushResult(Vector3::CreateZero());
-            }
-        }
-
-        void Vector3SetGeneric(Vector3* thisPtr, ScriptDataContext& dc)
-        {
-            bool valueWasSet = false;
-
-            if (dc.GetNumArguments() == 1 && dc.IsNumber(0))
-            {
-                float setValue = 0;
-                dc.ReadArg(0, setValue);
-                thisPtr->Set(setValue);
-                valueWasSet = true;
-            }
-            else if (dc.GetNumArguments() == 3 && dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2))
-            {
-                float x = 0;
-                float y = 0;
-                float z = 0;
-                dc.ReadArg(0, x);
-                dc.ReadArg(1, y);
-                dc.ReadArg(2, z);
-                thisPtr->Set(x, y, z);
-                valueWasSet = true;
-            }
-
-            if (!valueWasSet)
-            {
-                AZ_Error("Script", false, "Vector3.Set only supports Set(number,number,number), Set(number)");
-            }
-        }
-
-        void Vector3DivideGeneric(const Vector3* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() == 1)
-            {
-                if (dc.IsNumber(0))
-                {
-                    float scalar = 0;
-                    dc.ReadArg(0, scalar);
-                    Vector3 result = *thisPtr / scalar;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Vector3>(0))
-                {
-                    Vector3 vector3 = Vector3::CreateZero();
-                    dc.ReadArg(0, vector3);
-                    Vector3 result = *thisPtr / vector3;
-                    dc.PushResult(result);
-                }
-            }
-
-            if (!dc.GetNumResults())
-            {
-                AZ_Error("Script", false, "Vector3 divide should have only 1 argument - Vector3 or a Float/Number!");
-                dc.PushResult(Vector3::CreateZero());
-            }
-        }
-
-        void Vector3GetSinCosMultipleReturn(const Vector3* thisPtr, ScriptDataContext& dc)
-        {
-            Vector3 sin, cos;
-            thisPtr->GetSinCos(sin, cos);
-            dc.PushResult(sin);
-            dc.PushResult(cos);
-        }
-
-        /// Implements multiple return values for BuildTangetBasis in Lua
-        void Vector3BuildTangentBasis(const Vector3* thisPtr, ScriptDataContext& dc)
-        {
-            Vector3 v1, v2;
-            thisPtr->BuildTangentBasis(v1, v2);
-            dc.PushResult(v1);
-            dc.PushResult(v2);
-        }
+//cjh        void Vector3MultiplyGeneric(const Vector3* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() == 1)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float scalar = 0;
+//                    dc.ReadArg(0, scalar);
+//                    Vector3 result = *thisPtr * scalar;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Vector3>(0))
+//                {
+//                    Vector3 vector3 = Vector3::CreateZero();
+//                    dc.ReadArg(0, vector3);
+//                    Vector3 result = *thisPtr * vector3;
+//                    dc.PushResult(result);
+//                }
+//            }
+//
+//            if (!dc.GetNumResults())
+//            {
+//                AZ_Error("Script", false, "Vector3 multiply should have only 1 argument - Vector3, Float/Number, Matrix3x3, Matrix4x4, or Transform!");
+//                dc.PushResult(Vector3::CreateZero());
+//            }
+//        }
+//
+//        void Vector3SetGeneric(Vector3* thisPtr, ScriptDataContext& dc)
+//        {
+//            bool valueWasSet = false;
+//
+//            if (dc.GetNumArguments() == 1 && dc.IsNumber(0))
+//            {
+//                float setValue = 0;
+//                dc.ReadArg(0, setValue);
+//                thisPtr->Set(setValue);
+//                valueWasSet = true;
+//            }
+//            else if (dc.GetNumArguments() == 3 && dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2))
+//            {
+//                float x = 0;
+//                float y = 0;
+//                float z = 0;
+//                dc.ReadArg(0, x);
+//                dc.ReadArg(1, y);
+//                dc.ReadArg(2, z);
+//                thisPtr->Set(x, y, z);
+//                valueWasSet = true;
+//            }
+//
+//            if (!valueWasSet)
+//            {
+//                AZ_Error("Script", false, "Vector3.Set only supports Set(number,number,number), Set(number)");
+//            }
+//        }
+//
+//        void Vector3DivideGeneric(const Vector3* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() == 1)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float scalar = 0;
+//                    dc.ReadArg(0, scalar);
+//                    Vector3 result = *thisPtr / scalar;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Vector3>(0))
+//                {
+//                    Vector3 vector3 = Vector3::CreateZero();
+//                    dc.ReadArg(0, vector3);
+//                    Vector3 result = *thisPtr / vector3;
+//                    dc.PushResult(result);
+//                }
+//            }
+//
+//            if (!dc.GetNumResults())
+//            {
+//                AZ_Error("Script", false, "Vector3 divide should have only 1 argument - Vector3 or a Float/Number!");
+//                dc.PushResult(Vector3::CreateZero());
+//            }
+//        }
+//
+//        void Vector3GetSinCosMultipleReturn(const Vector3* thisPtr, ScriptDataContext& dc)
+//        {
+//            Vector3 sin, cos;
+//            thisPtr->GetSinCos(sin, cos);
+//            dc.PushResult(sin);
+//            dc.PushResult(cos);
+//        }
+//
+//        /// Implements multiple return values for BuildTangetBasis in Lua
+//        void Vector3BuildTangentBasis(const Vector3* thisPtr, ScriptDataContext& dc)
+//        {
+//            Vector3 v1, v2;
+//            thisPtr->BuildTangentBasis(v1, v2);
+//            dc.PushResult(v1);
+//            dc.PushResult(v2);
+//        }
     }
 
     Vector3::Vector3(const Vector2& source)
@@ -193,12 +193,12 @@ namespace AZ
 
     void Vector3::Reflect(ReflectContext* context)
     {
-        auto serializeContext = azrtti_cast<SerializeContext*>(context);
-        if (serializeContext)
-        {
-            serializeContext->Class<Vector3>()->
-                Serializer<FloatBasedContainerSerializer<Vector3, &Vector3::CreateFromFloat3, &Vector3::StoreToFloat3, &GetTransformEpsilon, 3> >();
-        }
+//cjh        auto serializeContext = azrtti_cast<SerializeContext*>(context);
+//        if (serializeContext)
+//        {
+//            serializeContext->Class<Vector3>()->
+//                Serializer<FloatBasedContainerSerializer<Vector3, &Vector3::CreateFromFloat3, &Vector3::StoreToFloat3, &GetTransformEpsilon, 3> >();
+//        }
 
         auto behaviorContext = azrtti_cast<BehaviorContext*>(context);
         if (behaviorContext)
@@ -210,7 +210,7 @@ namespace AZ
                 Constructor<float>()->
                 Constructor<float, float, float>()->
                 Attribute(Script::Attributes::Storage, Script::Attributes::StorageType::Value)->
-                Attribute(Script::Attributes::ConstructorOverride, &Internal::Vector3ScriptConstructor)->
+//cjh                Attribute(Script::Attributes::ConstructorOverride, &Internal::Vector3ScriptConstructor)->
                 Attribute(Script::Attributes::GenericConstructorOverride, &Internal::Vector3DefaultConstructor)->
                 Property("x", &Vector3::GetX, &Vector3::SetX)->
                 Property("y", &Vector3::GetY, &Vector3::SetY)->
@@ -220,12 +220,12 @@ namespace AZ
                 Method("ToString",&Vector3ToString)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::ToString)->
                 Method<Vector3(Vector3::*)(float) const>("MultiplyFloat",&Vector3::operator*)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector3MultiplyGeneric)->
+//cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector3MultiplyGeneric)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::Mul)->
                 Method<Vector3(Vector3::*)(const Vector3&) const>("MultiplyVector3",&Vector3::operator*)->
                     Attribute(Script::Attributes::Ignore,0)-> // ignore for script since we already got the generic multiply above
                 Method<Vector3(Vector3::*)(float) const>("DivideFloat",&Vector3::operator/)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector3DivideGeneric)->
+            //cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector3DivideGeneric)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::Div)->
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->
                 Method<Vector3(Vector3::*)(const Vector3&) const>("DivideVector3",&Vector3::operator/)->
@@ -246,7 +246,7 @@ namespace AZ
                 Method<Vector3(Vector3::*)(const Vector3&) const>("Subtract",&Vector3::operator-)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::Sub)->
                 Method<void (Vector3::*)(float, float, float)>("Set", &Vector3::Set)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector3SetGeneric)->
+            //cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector3SetGeneric)->
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->
                 Method("GetElement", &Vector3::GetElement)->
                 Method("SetElement", &Vector3::SetElement)->
@@ -309,13 +309,13 @@ namespace AZ
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->
                 Method("GetSinCos", &Vector3::GetSinCos)->
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector3GetSinCosMultipleReturn)->
+            //cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector3GetSinCosMultipleReturn)->
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->
                 Method("GetAngleMod", &Vector3::GetAngleMod)->
                 Method("GetAbs", &Vector3::GetAbs)->
                 Method("GetReciprocal", &Vector3::GetReciprocal)->
                 Method("BuildTangentBasis", &Vector3::BuildTangentBasis)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector3BuildTangentBasis)->
+            //cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector3BuildTangentBasis)->
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->
                 Method("GetMadd", &Vector3::GetMadd)->
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->

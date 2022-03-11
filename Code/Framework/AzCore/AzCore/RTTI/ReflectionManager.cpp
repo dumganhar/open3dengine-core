@@ -6,7 +6,7 @@
  *
  */
 #include <AzCore/RTTI/ReflectionManager.h>
-#include <AzCore/Component/Component.h>
+//cjh #include <AzCore/Component/Component.h>
 
 namespace AZ
 {

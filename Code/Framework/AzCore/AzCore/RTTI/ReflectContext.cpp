@@ -6,7 +6,7 @@
  *
  */
 #include <AzCore/RTTI/ReflectContext.h>
-#include <AzCore/Component/Component.h>
+//cjh #include <AzCore/Component/Component.h>
 
 #include <AzCore/std/functional.h>
 #include <AzCore/std/string/string.h>

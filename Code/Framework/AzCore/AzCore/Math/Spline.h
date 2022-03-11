@@ -221,7 +221,7 @@ namespace AZ
 
         VertexContainer<Vector3> m_vertexContainer; ///< Vertices representing the spline.
 
-        static void Reflect(SerializeContext& context);
+//cjh        static void Reflect(SerializeContext& context);
 
         /**
          * Notification that spline has changed
@@ -286,7 +286,7 @@ namespace AZ
         LinearSpline& operator=(const LinearSpline& spline) = default;
         LinearSpline& operator=(const Spline& spline);
 
-        static void Reflect(SerializeContext& context);
+//cjh        static void Reflect(SerializeContext& context);
 
     protected:
         u16 GetSegmentGranularity() const override { return 1; }
@@ -329,7 +329,7 @@ namespace AZ
         BezierSpline& operator=(const BezierSpline& spline);
         BezierSpline& operator=(const Spline& spline);
 
-        static void Reflect(SerializeContext& context);
+        //cjh static void Reflect(SerializeContext& context);
 
         /**
          * Internal Bezier spline data
@@ -339,7 +339,7 @@ namespace AZ
             AZ_TYPE_INFO(BezierData, "{6C34069E-AEA2-44A2-877F-BED9CE07DA6B}")
             AZ_CLASS_ALLOCATOR_DECL
 
-            static void Reflect(SerializeContext& context);
+            //cjh static void Reflect(SerializeContext& context);
 
             Vector3 m_back; ///< Control point before Vertex.
             Vector3 m_forward; ///< Control point after Vertex.
@@ -420,7 +420,7 @@ namespace AZ
          */
         void SetKnotParameterization(float knotParameterization) { m_knotParameterization = GetClamp(knotParameterization, 0.0f, 1.0f); }
 
-        static void Reflect(SerializeContext& context);
+        //cjh static void Reflect(SerializeContext& context);
 
     protected:
         u16 GetSegmentGranularity() const override { return m_granularity; }

@@ -8,7 +8,7 @@
 
 #include <AzCore/IO/Streamer/FileRequest.h>
 #include <AzCore/IO/Streamer/DedicatedCache.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 #include <AzCore/std/string/string.h>
 #include <AzCore/std/smart_ptr/make_shared.h>
 
@@ -50,14 +50,14 @@ namespace AZ::IO
 
     void DedicatedCacheConfig::Reflect(AZ::ReflectContext* context)
     {
-        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
-        {
-            serializeContext->Class<DedicatedCacheConfig, IStreamerStackConfig>()
-                ->Version(1)
-                ->Field("CacheSizeMib", &DedicatedCacheConfig::m_cacheSizeMib)
-                ->Field("BlockSize", &DedicatedCacheConfig::m_blockSize)
-                ->Field("WriteOnlyEpilog", &DedicatedCacheConfig::m_writeOnlyEpilog);
-        }
+//cjh        if (auto serializeContext = azrtti_cast<AZ::SerializeContext*>(context); serializeContext != nullptr)
+//        {
+//            serializeContext->Class<DedicatedCacheConfig, IStreamerStackConfig>()
+//                ->Version(1)
+//                ->Field("CacheSizeMib", &DedicatedCacheConfig::m_cacheSizeMib)
+//                ->Field("BlockSize", &DedicatedCacheConfig::m_blockSize)
+//                ->Field("WriteOnlyEpilog", &DedicatedCacheConfig::m_writeOnlyEpilog);
+//        }
     }
 
 
@@ -202,25 +202,25 @@ namespace AZ::IO
 
     void DedicatedCache::ReadFile(FileRequest* request, Requests::ReadData& data)
     {
-        size_t index = FindCache(data.m_path, data.m_offset);
-        if (index == s_fileNotFound)
-        {
-            m_usagePercentageStat.PushSample(0.0);
-            if (m_next)
-            {
-                m_next->QueueRequest(request);
-            }
-        }
-        else
-        {
-            m_usagePercentageStat.PushSample(1.0);
-            BlockCache& cache = *m_cachedFileCaches[index];
-            cache.QueueRequest(request);
-#if AZ_STREAMER_ADD_EXTRA_PROFILING_INFO
-            m_overallHitRateStat.PushSample(cache.CalculateHitRatePercentage());
-            m_overallCacheableRateStat.PushSample(cache.CalculateCacheableRatePercentage());
-#endif
-        }
+//cjh        size_t index = FindCache(data.m_path, data.m_offset);
+//        if (index == s_fileNotFound)
+//        {
+//            m_usagePercentageStat.PushSample(0.0);
+//            if (m_next)
+//            {
+//                m_next->QueueRequest(request);
+//            }
+//        }
+//        else
+//        {
+//            m_usagePercentageStat.PushSample(1.0);
+//            BlockCache& cache = *m_cachedFileCaches[index];
+//            cache.QueueRequest(request);
+//#if AZ_STREAMER_ADD_EXTRA_PROFILING_INFO
+//            m_overallHitRateStat.PushSample(cache.CalculateHitRatePercentage());
+//            m_overallCacheableRateStat.PushSample(cache.CalculateCacheableRatePercentage());
+//#endif
+//        }
     }
 
     void DedicatedCache::FlushCache(const RequestPath& filePath)
@@ -246,7 +246,7 @@ namespace AZ::IO
 
     void DedicatedCache::CollectStatistics(AZStd::vector<Statistic>& statistics) const
     {
-        statistics.push_back(Statistic::CreatePercentage(m_name, "Reads from dedicated cache", m_usagePercentageStat.GetAverage()));
+//cjh        statistics.push_back(Statistic::CreatePercentage(m_name, "Reads from dedicated cache", m_usagePercentageStat.GetAverage()));
 #if AZ_STREAMER_ADD_EXTRA_PROFILING_INFO
         statistics.push_back(Statistic::CreatePercentage(m_name, "Overall cacheable rate", m_overallCacheableRateStat.GetAverage()));
         statistics.push_back(Statistic::CreatePercentage(m_name, "Overall hit rate", m_overallHitRateStat.GetAverage()));

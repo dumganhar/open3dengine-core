@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include <AzCore/Serialization/EditContext.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/EditContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 #include <AzCore/RTTI/BehaviorContext.h>
 
 namespace AZ
@@ -40,7 +40,7 @@ namespace AZ
 
     template<typename Vertex>
     void VertexContainer<Vertex>::Reflect(ReflectContext* context)
-    {
+    {/*cjh
         if (auto serializeContext = azrtti_cast<SerializeContext*>(context))
         {
             serializeContext->Class<VertexContainer<Vertex> >()
@@ -64,6 +64,7 @@ namespace AZ
                         ;
             }
         }
+      */
 
         if (auto behaviorContext = azrtti_cast<BehaviorContext*>(context))
         {

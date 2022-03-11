@@ -22,192 +22,192 @@ namespace AZ
             return Vector4(xValue, yValue, zValue, wValue);
         }
 
-        void Vector4ScriptConstructor(Vector4* thisPtr, ScriptDataContext& dc)
-        {
-            int numArgs = dc.GetNumArguments();
-            switch (numArgs)
-            {
-            case 0:
-            {
-                *thisPtr = Vector4::CreateZero();
-            }break;
-            case 1:
-            {
-                if (dc.IsNumber(0))
-                {
-                    float number = 0;
-                    dc.ReadArg(0, number);
-                    *thisPtr = Vector4(number);
-                }
-                else if (!(ConstructOnTypedArgument<Vector4>(*thisPtr, dc, 0)
-                    || ConstructOnTypedArgument<Vector2>(*thisPtr, dc, 0)
-                    || ConstructOnTypedArgument<Vector3>(*thisPtr, dc, 0)))
-                {
-                    if (dc.IsClass<AZ::Color>(0))
-                    {
-                        AZ::Color argument;
-                        dc.ReadArg(0, argument);
-                        *thisPtr = argument.GetAsVector4();
-                    }
-                    else
-                    {
-                        dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When only providing 1 argument to Vector4(), it must be a number, Vector2,3,4, or Color");
-                    }
-                }
-            } break;
-            case 4:
-            {
-                if (dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3))
-                {
-                    float x = 0;
-                    float y = 0;
-                    float z = 0;
-                    float w = 0;
-                    dc.ReadArg(0, x);
-                    dc.ReadArg(1, y);
-                    dc.ReadArg(2, z);
-                    dc.ReadArg(3, w);
-                    *thisPtr = Vector4(x, y, z, w);
-                }
-                else
-                {
-                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When providing 4 arguments to Vector4(), all must be numbers!");
-                }
-            } break;
-            default:
-            {
-                dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "Vector4() accepts only 1 or 4 arguments, not %d!", numArgs);
-            } break;
-            }
-        }
+//cjh        void Vector4ScriptConstructor(Vector4* thisPtr, ScriptDataContext& dc)
+//        {
+//            int numArgs = dc.GetNumArguments();
+//            switch (numArgs)
+//            {
+//            case 0:
+//            {
+//                *thisPtr = Vector4::CreateZero();
+//            }break;
+//            case 1:
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float number = 0;
+//                    dc.ReadArg(0, number);
+//                    *thisPtr = Vector4(number);
+//                }
+//                else if (!(ConstructOnTypedArgument<Vector4>(*thisPtr, dc, 0)
+//                    || ConstructOnTypedArgument<Vector2>(*thisPtr, dc, 0)
+//                    || ConstructOnTypedArgument<Vector3>(*thisPtr, dc, 0)))
+//                {
+//                    if (dc.IsClass<AZ::Color>(0))
+//                    {
+//                        AZ::Color argument;
+//                        dc.ReadArg(0, argument);
+//                        *thisPtr = argument.GetAsVector4();
+//                    }
+//                    else
+//                    {
+//                        dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When only providing 1 argument to Vector4(), it must be a number, Vector2,3,4, or Color");
+//                    }
+//                }
+//            } break;
+//            case 4:
+//            {
+//                if (dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3))
+//                {
+//                    float x = 0;
+//                    float y = 0;
+//                    float z = 0;
+//                    float w = 0;
+//                    dc.ReadArg(0, x);
+//                    dc.ReadArg(1, y);
+//                    dc.ReadArg(2, z);
+//                    dc.ReadArg(3, w);
+//                    *thisPtr = Vector4(x, y, z, w);
+//                }
+//                else
+//                {
+//                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When providing 4 arguments to Vector4(), all must be numbers!");
+//                }
+//            } break;
+//            default:
+//            {
+//                dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "Vector4() accepts only 1 or 4 arguments, not %d!", numArgs);
+//            } break;
+//            }
+//        }
 
         void Vector4DefaultConstructor(Vector4* thisPtr)
         {
             new (thisPtr) Vector4(Vector4::CreateZero());
         }
 
-        void Vector4MultiplyGeneric(const Vector4* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() == 1)
-            {
-                if (dc.IsNumber(0))
-                {
-                    float scalar = 0;
-                    dc.ReadArg(0, scalar);
-                    Vector4 result = *thisPtr * scalar;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Vector4>(0))
-                {
-                    Vector4 vector4 = Vector4::CreateZero();
-                    dc.ReadArg(0, vector4);
-                    Vector4 result = *thisPtr * vector4;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Matrix4x4>(0))
-                {
-                    Matrix4x4 matrix4x4 = Matrix4x4::CreateZero();
-                    dc.ReadArg(0, matrix4x4);
-                    Vector4 result = *thisPtr * matrix4x4;
-                    dc.PushResult(result);
-                }
-            }
-
-            if (!dc.GetNumResults())
-            {
-                AZ_Error("Script", false, "Vector4 multiply should have only 1 argument - Vector4, Matrix4x4, Transform, or a Float/Number!");
-                dc.PushResult(Vector4::CreateZero());
-            }
-        }
-
-        void Vector4DivideGeneric(const Vector4* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() == 1)
-            {
-                if (dc.IsNumber(0))
-                {
-                    float scalar = 0;
-                    dc.ReadArg(0, scalar);
-                    Vector4 result = *thisPtr / scalar;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Vector4>(0))
-                {
-                    Vector4 vector4 = Vector4::CreateZero();
-                    dc.ReadArg(0, vector4);
-                    Vector4 result = *thisPtr / vector4;
-                    dc.PushResult(result);
-                }
-            }
-
-            if (!dc.GetNumResults())
-            {
-                AZ_Error("Script", false, "Vector4 divide should have only 1 argument - Vector4 or a Float/Number!");
-                dc.PushResult(Vector4::CreateZero());
-            }
-        }
-
-
-        void Vector4SetGeneric(Vector4* thisPtr, ScriptDataContext& dc)
-        {
-            bool valueWasSet = false;
-
-            if (dc.GetNumArguments() == 1)
-            {
-                if (dc.IsNumber(0))
-                {
-                    float setValue = 0;
-                    dc.ReadArg(0, setValue);
-                    thisPtr->Set(setValue);
-                    valueWasSet = true;
-                }
-                else if (dc.IsClass<Vector3>(0))
-                {
-                    Vector3 setValue = Vector3::CreateZero();
-                    dc.ReadArg(0, setValue);
-                    thisPtr->Set(setValue);
-                    valueWasSet = true;
-                }
-            }
-            else if (dc.GetNumArguments() == 2 && dc.IsClass<Vector3>(0) && dc.IsNumber(1))
-            {
-                Vector3 vector3 = Vector3::CreateZero();
-                float w = 0;
-                dc.ReadArg(0, vector3);
-                dc.ReadArg(1, w);
-                thisPtr->Set(vector3, w);
-                valueWasSet = true;
-            }
-            else if (dc.GetNumArguments() == 4 && dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3))
-            {
-                float x = 0;
-                float y = 0;
-                float z = 0;
-                float w = 0;
-                dc.ReadArg(0, x);
-                dc.ReadArg(1, y);
-                dc.ReadArg(2, z);
-                dc.ReadArg(3, w);
-                thisPtr->Set(x, y, z, w);
-                valueWasSet = true;
-            }
-
-            if (!valueWasSet)
-            {
-                AZ_Error("Script", false, "Vector4.Set only supports Set(number,number,number,number), Set(number), Set(Vector3), Set(Vector3,float)");
-            }
-        }
+//cjh        void Vector4MultiplyGeneric(const Vector4* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() == 1)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float scalar = 0;
+//                    dc.ReadArg(0, scalar);
+//                    Vector4 result = *thisPtr * scalar;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Vector4>(0))
+//                {
+//                    Vector4 vector4 = Vector4::CreateZero();
+//                    dc.ReadArg(0, vector4);
+//                    Vector4 result = *thisPtr * vector4;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Matrix4x4>(0))
+//                {
+//                    Matrix4x4 matrix4x4 = Matrix4x4::CreateZero();
+//                    dc.ReadArg(0, matrix4x4);
+//                    Vector4 result = *thisPtr * matrix4x4;
+//                    dc.PushResult(result);
+//                }
+//            }
+//
+//            if (!dc.GetNumResults())
+//            {
+//                AZ_Error("Script", false, "Vector4 multiply should have only 1 argument - Vector4, Matrix4x4, Transform, or a Float/Number!");
+//                dc.PushResult(Vector4::CreateZero());
+//            }
+//        }
+//
+//        void Vector4DivideGeneric(const Vector4* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() == 1)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float scalar = 0;
+//                    dc.ReadArg(0, scalar);
+//                    Vector4 result = *thisPtr / scalar;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Vector4>(0))
+//                {
+//                    Vector4 vector4 = Vector4::CreateZero();
+//                    dc.ReadArg(0, vector4);
+//                    Vector4 result = *thisPtr / vector4;
+//                    dc.PushResult(result);
+//                }
+//            }
+//
+//            if (!dc.GetNumResults())
+//            {
+//                AZ_Error("Script", false, "Vector4 divide should have only 1 argument - Vector4 or a Float/Number!");
+//                dc.PushResult(Vector4::CreateZero());
+//            }
+//        }
+//
+//
+//        void Vector4SetGeneric(Vector4* thisPtr, ScriptDataContext& dc)
+//        {
+//            bool valueWasSet = false;
+//
+//            if (dc.GetNumArguments() == 1)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float setValue = 0;
+//                    dc.ReadArg(0, setValue);
+//                    thisPtr->Set(setValue);
+//                    valueWasSet = true;
+//                }
+//                else if (dc.IsClass<Vector3>(0))
+//                {
+//                    Vector3 setValue = Vector3::CreateZero();
+//                    dc.ReadArg(0, setValue);
+//                    thisPtr->Set(setValue);
+//                    valueWasSet = true;
+//                }
+//            }
+//            else if (dc.GetNumArguments() == 2 && dc.IsClass<Vector3>(0) && dc.IsNumber(1))
+//            {
+//                Vector3 vector3 = Vector3::CreateZero();
+//                float w = 0;
+//                dc.ReadArg(0, vector3);
+//                dc.ReadArg(1, w);
+//                thisPtr->Set(vector3, w);
+//                valueWasSet = true;
+//            }
+//            else if (dc.GetNumArguments() == 4 && dc.IsNumber(0) && dc.IsNumber(1) && dc.IsNumber(2) && dc.IsNumber(3))
+//            {
+//                float x = 0;
+//                float y = 0;
+//                float z = 0;
+//                float w = 0;
+//                dc.ReadArg(0, x);
+//                dc.ReadArg(1, y);
+//                dc.ReadArg(2, z);
+//                dc.ReadArg(3, w);
+//                thisPtr->Set(x, y, z, w);
+//                valueWasSet = true;
+//            }
+//
+//            if (!valueWasSet)
+//            {
+//                AZ_Error("Script", false, "Vector4.Set only supports Set(number,number,number,number), Set(number), Set(Vector3), Set(Vector3,float)");
+//            }
+//        }
     }
 
 
     void Vector4::Reflect(ReflectContext* context)
     {
-        auto serializeContext = azrtti_cast<SerializeContext*>(context);
-        if (serializeContext)
-        {
-            serializeContext->Class<Vector4>()->
-                Serializer<FloatBasedContainerSerializer<Vector4, &Vector4::CreateFromFloat4, &Vector4::StoreToFloat4, &GetTransformEpsilon, 4> >();
-        }
+//cjh        auto serializeContext = azrtti_cast<SerializeContext*>(context);
+//        if (serializeContext)
+//        {
+//            serializeContext->Class<Vector4>()->
+//                Serializer<FloatBasedContainerSerializer<Vector4, &Vector4::CreateFromFloat4, &Vector4::StoreToFloat4, &GetTransformEpsilon, 4> >();
+//        }
 
         auto behaviorContext = azrtti_cast<BehaviorContext*>(context);
         if (behaviorContext)
@@ -219,7 +219,7 @@ namespace AZ
                 Constructor<float>()->
                 Constructor<float, float, float, float>()->
                 Attribute(Script::Attributes::Storage, Script::Attributes::StorageType::Value)->
-                Attribute(Script::Attributes::ConstructorOverride, &Internal::Vector4ScriptConstructor)->
+//cjh                Attribute(Script::Attributes::ConstructorOverride, &Internal::Vector4ScriptConstructor)->
                 Attribute(Script::Attributes::GenericConstructorOverride, &Internal::Vector4DefaultConstructor)->
                 Property("x", &Vector4::GetX, &Vector4::SetX)->
                 Property("y", &Vector4::GetY, &Vector4::SetY)->
@@ -230,12 +230,12 @@ namespace AZ
                 Method("ToString", &Vector4ToString)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::ToString)->
                 Method<Vector4(Vector4::*)(float) const>("MultiplyFloat", &Vector4::operator*)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector4MultiplyGeneric)->
+//cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector4MultiplyGeneric)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::Mul)->
                 Method<Vector4(Vector4::*)(const Vector4&) const>("MultiplyVector4", &Vector4::operator*)->
                     Attribute(Script::Attributes::Ignore, 0)-> // ignore for script since we already got the generic multiply above
                 Method<Vector4(Vector4::*)(float) const>("DivideFloat", &Vector4::operator/)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector4DivideGeneric)->
+//cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector4DivideGeneric)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::Div)->
                 Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->
                 Method<Vector4(Vector4::*)(const Vector4&) const>("DivideVector4", &Vector4::operator/)->
@@ -256,7 +256,7 @@ namespace AZ
                 Method<Vector4(Vector4::*)(const Vector4&) const>("Subtract", &Vector4::operator-)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::Sub)->
                 Method<void (Vector4::*)(float, float, float, float)>("Set", &Vector4::Set)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector4SetGeneric)->
+//cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector4SetGeneric)->
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->
                 Method("GetElement", &Vector4::GetElement)->
                 Method("SetElement", &Vector4::SetElement)->

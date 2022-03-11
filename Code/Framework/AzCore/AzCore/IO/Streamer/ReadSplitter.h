@@ -11,7 +11,7 @@
 #include <AzCore/IO/Streamer/Statistics.h>
 #include <AzCore/IO/Streamer/StreamStackEntry.h>
 #include <AzCore/Memory/SystemAllocator.h>
-#include <AzCore/Statistics/RunningStatistic.h>
+//cjh #include <AzCore/Statistics/RunningStatistic.h>
 #include <AzCore/std/containers/deque.h>
 #include <AzCore/std/containers/vector.h>
 #include <AzCore/std/limits.h>
@@ -97,8 +97,8 @@ namespace AZ
             void InitializeBuffer();
             u8* GetBufferSlot(size_t index);
 
-            AZ::Statistics::RunningStatistic m_averageNumSubReadsStat;
-            AZ::Statistics::RunningStatistic m_alignedReadsStat;
+//cjh            AZ::Statistics::RunningStatistic m_averageNumSubReadsStat;
+//            AZ::Statistics::RunningStatistic m_alignedReadsStat;
             AZStd::unique_ptr<BufferCopyInformation[]> m_bufferCopyInformation;
             AZStd::deque<PendingRead> m_pendingReads;
             AZStd::vector<u32> m_availableBufferSlots;

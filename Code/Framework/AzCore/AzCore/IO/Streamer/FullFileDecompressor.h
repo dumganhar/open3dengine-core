@@ -11,13 +11,13 @@
 #include <AzCore/IO/Streamer/Statistics.h>
 #include <AzCore/IO/Streamer/StreamerConfiguration.h>
 #include <AzCore/IO/Streamer/StreamStackEntry.h>
-#include <AzCore/Jobs/JobManager.h>
-#include <AzCore/Jobs/JobContext.h>
+//cjh #include <AzCore/Jobs/JobManager.h>
+//#include <AzCore/Jobs/JobContext.h>
 #include <AzCore/Memory/SystemAllocator.h>
 #include <AzCore/std/chrono/clocks.h>
 #include <AzCore/std/containers/deque.h>
 #include <AzCore/std/smart_ptr/unique_ptr.h>
-#include <AzCore/Statistics/RunningStatistic.h>
+//cjh #include <AzCore/Statistics/RunningStatistic.h>
 
 namespace AZ::IO
 {
@@ -124,8 +124,8 @@ namespace AZ::IO
         AZStd::unique_ptr<ReadBufferStatus[]> m_readBufferStatus;
 
         AZStd::unique_ptr<DecompressionInformation[]> m_processingJobs;
-        AZStd::unique_ptr<JobManager> m_decompressionJobManager;
-        AZStd::unique_ptr<JobContext> m_decompressionjobContext;
+//cjh        AZStd::unique_ptr<JobManager> m_decompressionJobManager;
+//        AZStd::unique_ptr<JobContext> m_decompressionjobContext;
 
         size_t m_memoryUsage{ 0 }; //!< Amount of memory used for buffers by the decompressor.
         u32 m_maxNumReads{ 2 };

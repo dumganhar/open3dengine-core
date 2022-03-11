@@ -14,7 +14,7 @@
 #include <AzCore/std/parallel/mutex.h>
 #include <AzCore/std/parallel/scoped_lock.h>
 
-#include <AzCore/Debug/StackTracer.h>
+//cjh #include <AzCore/Debug/StackTracer.h>
 
 namespace AZ::Debug
 {
@@ -175,41 +175,41 @@ namespace AZ::Debug
         // if we don't have a fileName,lineNum record the stack or if the user requested it.
         if ((fileName == nullptr && m_mode == RECORD_STACK_IF_NO_FILE_LINE) || m_mode == RECORD_FULL)
         {
-            ai.m_stackFrames = m_numStackLevels ? reinterpret_cast<AZ::Debug::StackFrame*>(m_records.get_allocator().allocate(
-                                                      sizeof(AZ::Debug::StackFrame) * m_numStackLevels, 1))
-                                                : nullptr;
-            if (ai.m_stackFrames)
-            {
-                Debug::StackRecorder::Record(ai.m_stackFrames, m_numStackLevels, stackSuppressCount + 1);
-
-                if (m_decodeImmediately)
-                {
-                    // OPTIONAL DEBUGGING CODE - enable in app descriptor m_allocationRecordsAttemptDecodeImmediately
-                    // This is optionally-enabled code for tracking down memory allocations
-                    // that fail to be decoded. DecodeFrames() typically runs at the end of
-                    // your application when leaks were found. Sometimes you have stack prints
-                    // full of "(module-name not available)" and "(function-name not available)"
-                    // that are not actionable. If you have those, enable this code. It'll slow
-                    // down your process significantly because for every allocation recorded
-                    // we get the stack trace on the spot. Put a breakpoint in DecodeFrames()
-                    // at the "(module-name not available)" and "(function-name not available)"
-                    // locations and now at the moment those allocations happen you'll have the
-                    // full stack trace available and the ability to debug what could be causing it
-                    {
-                        const unsigned char decodeStep = 40;
-                        Debug::SymbolStorage::StackLine lines[decodeStep];
-                        unsigned char iFrame = 0;
-                        unsigned char numStackLevels = m_numStackLevels;
-                        while (numStackLevels > 0)
-                        {
-                            unsigned char numToDecode = AZStd::GetMin(decodeStep, numStackLevels);
-                            Debug::SymbolStorage::DecodeFrames(&ai.m_stackFrames[iFrame], numToDecode, lines);
-                            numStackLevels -= numToDecode;
-                            iFrame += numToDecode;
-                        }
-                    }
-                }
-            }
+//cjh            ai.m_stackFrames = m_numStackLevels ? reinterpret_cast<AZ::Debug::StackFrame*>(m_records.get_allocator().allocate(
+//                                                      sizeof(AZ::Debug::StackFrame) * m_numStackLevels, 1))
+//                                                : nullptr;
+//            if (ai.m_stackFrames)
+//            {
+//                Debug::StackRecorder::Record(ai.m_stackFrames, m_numStackLevels, stackSuppressCount + 1);
+//
+//                if (m_decodeImmediately)
+//                {
+//                    // OPTIONAL DEBUGGING CODE - enable in app descriptor m_allocationRecordsAttemptDecodeImmediately
+//                    // This is optionally-enabled code for tracking down memory allocations
+//                    // that fail to be decoded. DecodeFrames() typically runs at the end of
+//                    // your application when leaks were found. Sometimes you have stack prints
+//                    // full of "(module-name not available)" and "(function-name not available)"
+//                    // that are not actionable. If you have those, enable this code. It'll slow
+//                    // down your process significantly because for every allocation recorded
+//                    // we get the stack trace on the spot. Put a breakpoint in DecodeFrames()
+//                    // at the "(module-name not available)" and "(function-name not available)"
+//                    // locations and now at the moment those allocations happen you'll have the
+//                    // full stack trace available and the ability to debug what could be causing it
+//                    {
+//                        const unsigned char decodeStep = 40;
+//                        Debug::SymbolStorage::StackLine lines[decodeStep];
+//                        unsigned char iFrame = 0;
+//                        unsigned char numStackLevels = m_numStackLevels;
+//                        while (numStackLevels > 0)
+//                        {
+//                            unsigned char numToDecode = AZStd::GetMin(decodeStep, numStackLevels);
+//                            Debug::SymbolStorage::DecodeFrames(&ai.m_stackFrames[iFrame], numToDecode, lines);
+//                            numStackLevels -= numToDecode;
+//                            iFrame += numToDecode;
+//                        }
+//                    }
+//                }
+//            }
         }
 
         AllocatorManager::Instance().DebugBreak(address, ai);
@@ -317,7 +317,7 @@ namespace AZ::Debug
         }
         if (allocationInfo.m_stackFrames)
         {
-            m_records.get_allocator().deallocate(allocationInfo.m_stackFrames, sizeof(AZ::Debug::StackFrame) * m_numStackLevels, 1);
+//cjh            m_records.get_allocator().deallocate(allocationInfo.m_stackFrames, sizeof(AZ::Debug::StackFrame) * m_numStackLevels, 1);
             allocationInfo.m_stackFrames = nullptr;
         }
 
@@ -505,23 +505,23 @@ namespace AZ::Debug
             else
             {
                 // Allocation callstack
-                const unsigned char decodeStep = 40;
-                Debug::SymbolStorage::StackLine lines[decodeStep];
-                unsigned char iFrame = 0;
-                while (numStackLevels > 0)
-                {
-                    unsigned char numToDecode = AZStd::GetMin(decodeStep, numStackLevels);
-                    Debug::SymbolStorage::DecodeFrames(&info.m_stackFrames[iFrame], numToDecode, lines);
-                    for (unsigned char i = 0; i < numToDecode; ++i)
-                    {
-                        if (info.m_stackFrames[iFrame + i].IsValid())
-                        {
-                            AZ_Printf("Memory", " %s\n", lines[i]);
-                        }
-                    }
-                    numStackLevels -= numToDecode;
-                    iFrame += numToDecode;
-                }
+//cjh                const unsigned char decodeStep = 40;
+//                Debug::SymbolStorage::StackLine lines[decodeStep];
+//                unsigned char iFrame = 0;
+//                while (numStackLevels > 0)
+//                {
+//                    unsigned char numToDecode = AZStd::GetMin(decodeStep, numStackLevels);
+//                    Debug::SymbolStorage::DecodeFrames(&info.m_stackFrames[iFrame], numToDecode, lines);
+//                    for (unsigned char i = 0; i < numToDecode; ++i)
+//                    {
+//                        if (info.m_stackFrames[iFrame + i].IsValid())
+//                        {
+//                            AZ_Printf("Memory", " %s\n", lines[i]);
+//                        }
+//                    }
+//                    numStackLevels -= numToDecode;
+//                    iFrame += numToDecode;
+//                }
             }
         }
         return true; // continue enumerating

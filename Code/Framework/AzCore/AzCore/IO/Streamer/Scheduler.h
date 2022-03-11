@@ -19,7 +19,7 @@
 #include <AzCore/std/parallel/mutex.h>
 #include <AzCore/std/parallel/thread.h>
 #include <AzCore/std/smart_ptr/shared_ptr.h>
-#include <AzCore/Statistics/RunningStatistic.h>
+//cjh #include <AzCore/Statistics/RunningStatistic.h>
 
 namespace AZ::IO
 {

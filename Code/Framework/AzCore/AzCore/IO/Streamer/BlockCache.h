@@ -12,7 +12,7 @@
 #include <AzCore/IO/Streamer/StreamerConfiguration.h>
 #include <AzCore/IO/Streamer/StreamStackEntry.h>
 #include <AzCore/Memory/SystemAllocator.h>
-#include <AzCore/Statistics/RunningStatistic.h>
+//cjh #include <AzCore/Statistics/RunningStatistic.h>
 #include <AzCore/std/limits.h>
 #include <AzCore/std/chrono/clocks.h>
 #include <AzCore/std/containers/unordered_map.h>
@@ -137,8 +137,8 @@ namespace AZ::IO
         //! List of file sections that were delayed because the cache was full.
         AZStd::deque<Section> m_delayedSections;
 
-        AZ::Statistics::RunningStatistic m_hitRateStat;
-        AZ::Statistics::RunningStatistic m_cacheableStat;
+//cjh        AZ::Statistics::RunningStatistic m_hitRateStat;
+//        AZ::Statistics::RunningStatistic m_cacheableStat;
 
         u8* m_cache;
         u64 m_cacheSize;

@@ -22,51 +22,51 @@ namespace AZ
         }
 
 
-        void Vector2ScriptConstructor(Vector2* thisPtr, ScriptDataContext& dc)
-        {
-            int numArgs = dc.GetNumArguments();
-            switch (numArgs)
-            {
-            case 0:
-            {
-                *thisPtr = Vector2::CreateZero();
-            } break;
-            case 1:
-            {
-                if (dc.IsNumber(0))
-                {
-                    float number = 0;
-                    dc.ReadArg(0, number);
-                    *thisPtr = Vector2(number);
-                }
-                else if (!(ConstructOnTypedArgument<Vector4>(*thisPtr, dc, 0)
-                    || ConstructOnTypedArgument<Vector2>(*thisPtr, dc, 0)
-                    || ConstructOnTypedArgument<Vector3>(*thisPtr, dc, 0)))
-                {
-                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When only providing 1 argument to Vector2(), it must be a number or a Vector2,3,4");
-                }
-            } break;
-            case 2:
-            {
-                if (dc.IsNumber(0) && dc.IsNumber(1))
-                {
-                    float x = 0;
-                    float y = 0;
-                    dc.ReadArg(0, x);
-                    dc.ReadArg(1, y);
-                    *thisPtr = Vector2(x, y);
-                }
-                else
-                {
-                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When providing 2 arguments to Vector2(), all must be numbers!");
-                }
-            } break;
-            default:
-            {
-                dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "Vector2() accepts only 1 or 2 arguments, not %d!", numArgs);
-            } break;
-            }
-        }
+//cjh        void Vector2ScriptConstructor(Vector2* thisPtr, ScriptDataContext& dc)
+//        {
+//            int numArgs = dc.GetNumArguments();
+//            switch (numArgs)
+//            {
+//            case 0:
+//            {
+//                *thisPtr = Vector2::CreateZero();
+//            } break;
+//            case 1:
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float number = 0;
+//                    dc.ReadArg(0, number);
+//                    *thisPtr = Vector2(number);
+//                }
+//                else if (!(ConstructOnTypedArgument<Vector4>(*thisPtr, dc, 0)
+//                    || ConstructOnTypedArgument<Vector2>(*thisPtr, dc, 0)
+//                    || ConstructOnTypedArgument<Vector3>(*thisPtr, dc, 0)))
+//                {
+//                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When only providing 1 argument to Vector2(), it must be a number or a Vector2,3,4");
+//                }
+//            } break;
+//            case 2:
+//            {
+//                if (dc.IsNumber(0) && dc.IsNumber(1))
+//                {
+//                    float x = 0;
+//                    float y = 0;
+//                    dc.ReadArg(0, x);
+//                    dc.ReadArg(1, y);
+//                    *thisPtr = Vector2(x, y);
+//                }
+//                else
+//                {
+//                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When providing 2 arguments to Vector2(), all must be numbers!");
+//                }
+//            } break;
+//            default:
+//            {
+//                dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "Vector2() accepts only 1 or 2 arguments, not %d!", numArgs);
+//            } break;
+//            }
+//        }
 
         void Vector2DefaultConstructor(Vector2* thisPtr)
         {
@@ -80,87 +80,87 @@ namespace AZ
         }
 
 
-        void Vector2MultiplyGeneric(const Vector2* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() == 1)
-            {
-                if (dc.IsNumber(0))
-                {
-                    float scalar = 0;
-                    dc.ReadArg(0, scalar);
-                    Vector2 result = *thisPtr * scalar;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Vector2>(0))
-                {
-                    Vector2 vector2 = Vector2::CreateZero();
-                    dc.ReadArg(0, vector2);
-                    Vector2 result = *thisPtr * vector2;
-                    dc.PushResult(result);
-                }
-            }
-
-            if (!dc.GetNumResults())
-            {
-                AZ_Error("Script", false, "Vector2 multiply should have only 1 argument - Vector2 or a Float/Number!");
-                dc.PushResult(Vector2::CreateZero());
-            }
-        }
-
-
-        void Vector2DivideGeneric(const Vector2* thisPtr, ScriptDataContext& dc)
-        {
-            if (dc.GetNumArguments() == 1)
-            {
-                if (dc.IsNumber(0))
-                {
-                    float scalar = 0;
-                    dc.ReadArg(0, scalar);
-                    Vector2 result = *thisPtr / scalar;
-                    dc.PushResult(result);
-                }
-                else if (dc.IsClass<Vector2>(0))
-                {
-                    Vector2 vector2 = Vector2::CreateZero();
-                    dc.ReadArg(0, vector2);
-                    Vector2 result = *thisPtr / vector2;
-                    dc.PushResult(result);
-                }
-            }
-
-            if (!dc.GetNumResults())
-            {
-                AZ_Error("Script", false, "Vector2 divide should have only 1 argument - Vector2 or a Float/Number!");
-                dc.PushResult(Vector2::CreateZero());
-            }
-        }
-
-
-        void Vector2SetGeneric(Vector2* thisPtr, ScriptDataContext& dc)
-        {
-            bool valueWasSet = false;
-            if (dc.GetNumArguments() == 1 && dc.IsNumber(0))
-            {
-                float setValue = 0;
-                dc.ReadArg(0, setValue);
-                thisPtr->Set(setValue);
-                valueWasSet = true;
-            }
-            else if (dc.GetNumArguments() == 2 && dc.IsNumber(0) && dc.IsNumber(1))
-            {
-                float x = 0;
-                float y = 0;
-                dc.ReadArg(0, x);
-                dc.ReadArg(1, y);
-                thisPtr->Set(x, y);
-                valueWasSet = true;
-            }
-
-            if (!valueWasSet)
-            {
-                AZ_Error("Script", false, "Vector2.Set only supports Set(number,number), Set(number)");
-            }
-        }
+//cjh        void Vector2MultiplyGeneric(const Vector2* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() == 1)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float scalar = 0;
+//                    dc.ReadArg(0, scalar);
+//                    Vector2 result = *thisPtr * scalar;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Vector2>(0))
+//                {
+//                    Vector2 vector2 = Vector2::CreateZero();
+//                    dc.ReadArg(0, vector2);
+//                    Vector2 result = *thisPtr * vector2;
+//                    dc.PushResult(result);
+//                }
+//            }
+//
+//            if (!dc.GetNumResults())
+//            {
+//                AZ_Error("Script", false, "Vector2 multiply should have only 1 argument - Vector2 or a Float/Number!");
+//                dc.PushResult(Vector2::CreateZero());
+//            }
+//        }
+//
+//
+//        void Vector2DivideGeneric(const Vector2* thisPtr, ScriptDataContext& dc)
+//        {
+//            if (dc.GetNumArguments() == 1)
+//            {
+//                if (dc.IsNumber(0))
+//                {
+//                    float scalar = 0;
+//                    dc.ReadArg(0, scalar);
+//                    Vector2 result = *thisPtr / scalar;
+//                    dc.PushResult(result);
+//                }
+//                else if (dc.IsClass<Vector2>(0))
+//                {
+//                    Vector2 vector2 = Vector2::CreateZero();
+//                    dc.ReadArg(0, vector2);
+//                    Vector2 result = *thisPtr / vector2;
+//                    dc.PushResult(result);
+//                }
+//            }
+//
+//            if (!dc.GetNumResults())
+//            {
+//                AZ_Error("Script", false, "Vector2 divide should have only 1 argument - Vector2 or a Float/Number!");
+//                dc.PushResult(Vector2::CreateZero());
+//            }
+//        }
+//
+//
+//        void Vector2SetGeneric(Vector2* thisPtr, ScriptDataContext& dc)
+//        {
+//            bool valueWasSet = false;
+//            if (dc.GetNumArguments() == 1 && dc.IsNumber(0))
+//            {
+//                float setValue = 0;
+//                dc.ReadArg(0, setValue);
+//                thisPtr->Set(setValue);
+//                valueWasSet = true;
+//            }
+//            else if (dc.GetNumArguments() == 2 && dc.IsNumber(0) && dc.IsNumber(1))
+//            {
+//                float x = 0;
+//                float y = 0;
+//                dc.ReadArg(0, x);
+//                dc.ReadArg(1, y);
+//                thisPtr->Set(x, y);
+//                valueWasSet = true;
+//            }
+//
+//            if (!valueWasSet)
+//            {
+//                AZ_Error("Script", false, "Vector2.Set only supports Set(number,number), Set(number)");
+//            }
+//        }
     }
 
     Vector2::Vector2(const Vector3& source)
@@ -178,12 +178,12 @@ namespace AZ
 
     void Vector2::Reflect(ReflectContext* context)
     {
-        auto serializeContext = azrtti_cast<SerializeContext*>(context);
-        if (serializeContext)
-        {
-            serializeContext->Class<Vector2>()->
-                Serializer<FloatBasedContainerSerializer<Vector2, &Vector2::CreateFromFloat2, &Vector2::StoreToFloat2, &GetTransformEpsilon, 2> >();
-        }
+//cjh        auto serializeContext = azrtti_cast<SerializeContext*>(context);
+//        if (serializeContext)
+//        {
+//            serializeContext->Class<Vector2>()->
+//                Serializer<FloatBasedContainerSerializer<Vector2, &Vector2::CreateFromFloat2, &Vector2::StoreToFloat2, &GetTransformEpsilon, 2> >();
+//        }
 
         auto behaviorContext = azrtti_cast<BehaviorContext*>(context);
         if (behaviorContext)
@@ -195,7 +195,7 @@ namespace AZ
                 Constructor<float>()->
                 Constructor<float, float>()->
                 Attribute(Script::Attributes::Storage, Script::Attributes::StorageType::Value)->
-                Attribute(Script::Attributes::ConstructorOverride, &Internal::Vector2ScriptConstructor)->
+//cjh                Attribute(Script::Attributes::ConstructorOverride, &Internal::Vector2ScriptConstructor)->
                 Attribute(Script::Attributes::GenericConstructorOverride, &Internal::Vector2DefaultConstructor)->
                 Property("x", &Vector2::GetX, &Vector2::SetX)->
                 Property("y", &Vector2::GetY, &Vector2::SetY)->
@@ -204,12 +204,12 @@ namespace AZ
                 Method("ToString",&Internal::Vector2ToString)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::ToString)->
                 Method<Vector2(Vector2::*)(float) const>("MultiplyFloat",&Vector2::operator*)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector2MultiplyGeneric)->
+//cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector2MultiplyGeneric)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::Mul)->
                 Method<Vector2(Vector2::*)(const Vector2&) const>("MultiplyVector2",&Vector2::operator*)->
                     Attribute(Script::Attributes::Ignore,0)-> // ignore for script since we already got the generic multiply above
                 Method<Vector2(Vector2::*)(float) const>("DivideFloat",&Vector2::operator/)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector2DivideGeneric)->
+//cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector2DivideGeneric)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::Div)->
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->
                 Method<Vector2(Vector2::*)(const Vector2&) const>("DivideVector2",&Vector2::operator/)->
@@ -228,7 +228,7 @@ namespace AZ
                 Method<Vector2(Vector2::*)(const Vector2&) const>("Subtract",&Vector2::operator-)->
                     Attribute(Script::Attributes::Operator, Script::Attributes::OperatorType::Sub)->
                 Method<void (Vector2::*)(float,float)>("Set", &Vector2::Set)->
-                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector2SetGeneric)->
+//cjh                    Attribute(Script::Attributes::MethodOverride, &Internal::Vector2SetGeneric)->
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->
                 Method("Clone", [](const Vector2& rhs) -> Vector2 { return rhs; }, {{{"Vector2",""}}})->
                     Attribute(Script::Attributes::ExcludeFrom, Script::Attributes::ExcludeFlags::All)->

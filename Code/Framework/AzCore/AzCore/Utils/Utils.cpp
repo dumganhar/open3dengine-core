@@ -12,8 +12,8 @@
 #include <AzCore/IO/GenericStreams.h>
 #include <AzCore/IO/SystemFile.h>
 #include <AzCore/IO/Path/Path.h>
-#include <AzCore/Settings/SettingsRegistry.h>
-#include <AzCore/Settings/SettingsRegistryMergeUtils.h>
+//cjh #include <AzCore/Settings/SettingsRegistry.h>
+//#include <AzCore/Settings/SettingsRegistryMergeUtils.h>
 #include <AzCore/StringFunc/StringFunc.h>
 
 namespace AZ::Utils
@@ -78,44 +78,44 @@ namespace AZ::Utils
 
     AZ::IO::FixedMaxPathString GetEnginePath()
     {
-        if (auto registry = AZ::SettingsRegistry::Get(); registry != nullptr)
-        {
-            AZ::SettingsRegistryInterface::FixedValueString settingsValue;
-            if (registry->Get(settingsValue, AZ::SettingsRegistryMergeUtils::FilePathKey_EngineRootFolder))
-            {
-                return AZ::IO::FixedMaxPathString{settingsValue};
-            }
-        }
+//cjh        if (auto registry = AZ::SettingsRegistry::Get(); registry != nullptr)
+//        {
+//            AZ::SettingsRegistryInterface::FixedValueString settingsValue;
+//            if (registry->Get(settingsValue, AZ::SettingsRegistryMergeUtils::FilePathKey_EngineRootFolder))
+//            {
+//                return AZ::IO::FixedMaxPathString{settingsValue};
+//            }
+//        }
         return {};
     }
 
     AZ::IO::FixedMaxPathString GetProjectPath()
     {
-        if (auto registry = AZ::SettingsRegistry::Get(); registry != nullptr)
-        {
-            AZ::SettingsRegistryInterface::FixedValueString settingsValue;
-            if (registry->Get(settingsValue, AZ::SettingsRegistryMergeUtils::FilePathKey_ProjectPath))
-            {
-                return AZ::IO::FixedMaxPathString{settingsValue};
-            }
-        }
+//cjh        if (auto registry = AZ::SettingsRegistry::Get(); registry != nullptr)
+//        {
+//            AZ::SettingsRegistryInterface::FixedValueString settingsValue;
+//            if (registry->Get(settingsValue, AZ::SettingsRegistryMergeUtils::FilePathKey_ProjectPath))
+//            {
+//                return AZ::IO::FixedMaxPathString{settingsValue};
+//            }
+//        }
         return {};
     }
 
-    AZ::SettingsRegistryInterface::FixedValueString GetProjectName()
-    {
-        if (auto registry = AZ::SettingsRegistry::Get(); registry != nullptr)
-        {
-            AZ::SettingsRegistryInterface::FixedValueString projectNameKey{ AZ::SettingsRegistryMergeUtils::ProjectSettingsRootKey };
-            projectNameKey += "/project_name";
-            AZ::SettingsRegistryInterface::FixedValueString settingsValue;
-            if (registry->Get(settingsValue, projectNameKey))
-            {
-                return settingsValue;
-            }
-        }
-        return {};
-    }
+//cjh    AZ::SettingsRegistryInterface::FixedValueString GetProjectName()
+//    {
+//        if (auto registry = AZ::SettingsRegistry::Get(); registry != nullptr)
+//        {
+//            AZ::SettingsRegistryInterface::FixedValueString projectNameKey{ AZ::SettingsRegistryMergeUtils::ProjectSettingsRootKey };
+//            projectNameKey += "/project_name";
+//            AZ::SettingsRegistryInterface::FixedValueString settingsValue;
+//            if (registry->Get(settingsValue, projectNameKey))
+//            {
+//                return settingsValue;
+//            }
+//        }
+//        return {};
+//    }
 
     AZ::Outcome<void, AZStd::string> WriteFile(AZStd::string_view content, AZStd::string_view filePath)
     {

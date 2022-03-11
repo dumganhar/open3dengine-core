@@ -7,6 +7,7 @@
  */
 
 #include <AzCore/std/algorithm.h>
+#include <AzCore/std/parallel/scoped_lock.h>
 #include <AzCore/Debug/Profiler.h>
 #include <AzCore/IO/Streamer/FileRequest.h>
 #include <AzCore/IO/Streamer/StreamerContext.h>

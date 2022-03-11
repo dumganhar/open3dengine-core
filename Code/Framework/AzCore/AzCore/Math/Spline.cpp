@@ -11,17 +11,17 @@
 #include <AzCore/Math/Quaternion.h>
 #include <AzCore/Memory/SystemAllocator.h>
 #include <AzCore/RTTI/BehaviorContext.h>
-#include <AzCore/Script/ScriptContext.h>
+//cjh #include <AzCore/Script/ScriptContext.h>
 #include <AzCore/Script/ScriptContextAttributes.h>
-#include <AzCore/Serialization/EditContext.h>
+//cjh #include <AzCore/Serialization/EditContext.h>
 
 namespace AZ
 {
     const float Spline::s_splineEpsilon = 0.00001f;
     const float SplineAddress::s_segmentFractionEpsilon = 0.001f;
     static const float s_projectRayLength = 1000.0f;
-    static const u16 s_minGranularity = 2;
-    static const u16 s_maxGranularity = 64;
+//cjh    static const u16 s_minGranularity = 2;
+//    static const u16 s_maxGranularity = 64;
 
     namespace Internal
     {
@@ -36,64 +36,64 @@ namespace AZ
         /**
          * Script Wrapper for SplineAddress constructor overloads.
          */
-        void SplineAddressScriptConstructor(SplineAddress* thisPtr, ScriptDataContext& dc)
-        {
-            const int numArgs = dc.GetNumArguments();
-            switch (numArgs)
-            {
-            case 1:
-                if (dc.IsNumber(0))
-                {
-                    u64 index = 0;
-                    dc.ReadArg(0, index);
-                    *thisPtr = SplineAddress(index);
-                }
-                else
-                {
-                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When providing 1 argument to SplineAddress(), it must be a number (index)");
-                }
-                break;
-            case 2:
-                if (dc.IsNumber(0) && dc.IsNumber(1))
-                {
-                    u64 index = 0;
-                    float fraction = 0.0f;
-                    dc.ReadArg(0, index);
-                    dc.ReadArg(1, fraction);
-                    *thisPtr = SplineAddress(index, fraction);
-                }
-                else
-                {
-                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When providing 2 arguments to SplineAddress(), both must be a number (index, fraction)");
-                }
-                break;
-            default:
-                dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "SplineAddress() accepts only 1 or 2 arguments, not %d!", numArgs);
-                break;
-            }
-        }
+//cjh        void SplineAddressScriptConstructor(SplineAddress* thisPtr, ScriptDataContext& dc)
+//        {
+//            const int numArgs = dc.GetNumArguments();
+//            switch (numArgs)
+//            {
+//            case 1:
+//                if (dc.IsNumber(0))
+//                {
+//                    u64 index = 0;
+//                    dc.ReadArg(0, index);
+//                    *thisPtr = SplineAddress(index);
+//                }
+//                else
+//                {
+//                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When providing 1 argument to SplineAddress(), it must be a number (index)");
+//                }
+//                break;
+//            case 2:
+//                if (dc.IsNumber(0) && dc.IsNumber(1))
+//                {
+//                    u64 index = 0;
+//                    float fraction = 0.0f;
+//                    dc.ReadArg(0, index);
+//                    dc.ReadArg(1, fraction);
+//                    *thisPtr = SplineAddress(index, fraction);
+//                }
+//                else
+//                {
+//                    dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "When providing 2 arguments to SplineAddress(), both must be a number (index, fraction)");
+//                }
+//                break;
+//            default:
+//                dc.GetScriptContext()->Error(AZ::ScriptContext::ErrorType::Error, true, "SplineAddress() accepts only 1 or 2 arguments, not %d!", numArgs);
+//                break;
+//            }
+//        }
     }
 
     void SplineReflect(ReflectContext* context)
     {
-        if (SerializeContext* serializeContext = azrtti_cast<SerializeContext*>(context))
-        {
-            Spline::Reflect(*serializeContext);
-            LinearSpline::Reflect(*serializeContext);
-            BezierSpline::Reflect(*serializeContext);
-            CatmullRomSpline::Reflect(*serializeContext);
-
-            serializeContext->Class<SplineAddress>()->
-                Field("SegmentIndex", &SplineAddress::m_segmentIndex)->
-                Field("SegmentFraction", &SplineAddress::m_segmentFraction);
-
-            serializeContext->Class<PositionSplineQueryResult>()->
-                Field("SplineAddress", &PositionSplineQueryResult::m_splineAddress)->
-                Field("DistanceSq", &PositionSplineQueryResult::m_distanceSq);
-
-            serializeContext->Class<RaySplineQueryResult, PositionSplineQueryResult>()->
-                Field("RayDistance", &RaySplineQueryResult::m_rayDistance);
-        }
+//cjh        if (SerializeContext* serializeContext = azrtti_cast<SerializeContext*>(context))
+//        {
+//            Spline::Reflect(*serializeContext);
+//            LinearSpline::Reflect(*serializeContext);
+//            BezierSpline::Reflect(*serializeContext);
+//            CatmullRomSpline::Reflect(*serializeContext);
+//
+//            serializeContext->Class<SplineAddress>()->
+//                Field("SegmentIndex", &SplineAddress::m_segmentIndex)->
+//                Field("SegmentFraction", &SplineAddress::m_segmentFraction);
+//
+//            serializeContext->Class<PositionSplineQueryResult>()->
+//                Field("SplineAddress", &PositionSplineQueryResult::m_splineAddress)->
+//                Field("DistanceSq", &PositionSplineQueryResult::m_distanceSq);
+//
+//            serializeContext->Class<RaySplineQueryResult, PositionSplineQueryResult>()->
+//                Field("RayDistance", &RaySplineQueryResult::m_rayDistance);
+//        }
 
         if (BehaviorContext* behaviorContext = azrtti_cast<BehaviorContext*>(context))
         {
@@ -101,7 +101,7 @@ namespace AZ
                 Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::ListOnly)->
                 Constructor<u64, float>()->
                 Attribute(Script::Attributes::Storage, Script::Attributes::StorageType::Value)->
-                Attribute(Script::Attributes::ConstructorOverride, &Internal::SplineAddressScriptConstructor)->
+//cjh                Attribute(Script::Attributes::ConstructorOverride, &Internal::SplineAddressScriptConstructor)->
                 Attribute(Script::Attributes::GenericConstructorOverride, &Internal::SplineAddressDefaultConstructor)->
                 Property("segmentIndex", BehaviorValueProperty(&SplineAddress::m_segmentIndex))->
                 Property("segmentFraction", BehaviorValueProperty(&SplineAddress::m_segmentFraction));
@@ -537,27 +537,27 @@ namespace AZ
         }
     }
 
-    void Spline::Reflect(SerializeContext& context)
-    {
-        context.Class<Spline>()
-            ->Field("Vertices", &Spline::m_vertexContainer)
-            ->Field("Closed", &Spline::m_closed)
-            ;
-
-        if (EditContext* editContext = context.GetEditContext())
-        {
-            editContext->Class<Spline>("Spline", "Spline Data")
-                ->ClassElement(Edit::ClassElements::EditorData, "")
-                    //->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::ShowChildrenOnly) // disabled - prevents ChangeNotify attribute firing correctly
-                    ->Attribute(Edit::Attributes::AutoExpand, true)
-                    ->Attribute(Edit::Attributes::ContainerCanBeModified, false)
-                ->DataElement(Edit::UIHandlers::Default, &Spline::m_vertexContainer, "Vertices", "Data representing the spline, in the entity's local coordinate space")
-                    ->Attribute(Edit::Attributes::AutoExpand, true)
-                ->DataElement(Edit::UIHandlers::CheckBox, &Spline::m_closed, "Closed", "Determine whether a spline is self closing (looping) or not")
-                    ->Attribute(Edit::Attributes::ChangeNotify, &Spline::OnOpenCloseChanged)
-                ;
-        }
-    }
+//cjh    void Spline::Reflect(SerializeContext& context)
+//    {
+//        context.Class<Spline>()
+//            ->Field("Vertices", &Spline::m_vertexContainer)
+//            ->Field("Closed", &Spline::m_closed)
+//            ;
+//
+//        if (EditContext* editContext = context.GetEditContext())
+//        {
+//            editContext->Class<Spline>("Spline", "Spline Data")
+//                ->ClassElement(Edit::ClassElements::EditorData, "")
+//                    //->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::ShowChildrenOnly) // disabled - prevents ChangeNotify attribute firing correctly
+//                    ->Attribute(Edit::Attributes::AutoExpand, true)
+//                    ->Attribute(Edit::Attributes::ContainerCanBeModified, false)
+//                ->DataElement(Edit::UIHandlers::Default, &Spline::m_vertexContainer, "Vertices", "Data representing the spline, in the entity's local coordinate space")
+//                    ->Attribute(Edit::Attributes::AutoExpand, true)
+//                ->DataElement(Edit::UIHandlers::CheckBox, &Spline::m_closed, "Closed", "Determine whether a spline is self closing (looping) or not")
+//                    ->Attribute(Edit::Attributes::ChangeNotify, &Spline::OnOpenCloseChanged)
+//                ;
+//        }
+//    }
 
     Spline::Spline()
         : m_vertexContainer(
@@ -790,19 +790,19 @@ namespace AZ
         return *this;
     }
 
-    void LinearSpline::Reflect(SerializeContext& context)
-    {
-        context.Class<LinearSpline, Spline>();
-
-        if (EditContext* editContext = context.GetEditContext())
-        {
-            editContext->Class<LinearSpline>("Linear Spline", "Spline data")
-                ->ClassElement(Edit::ClassElements::EditorData, "")
-                ->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::ShowChildrenOnly)
-                ->Attribute(Edit::Attributes::AutoExpand, true)
-                ->Attribute(Edit::Attributes::ContainerCanBeModified, false);
-        }
-    }
+//cjh    void LinearSpline::Reflect(SerializeContext& context)
+//    {
+//        context.Class<LinearSpline, Spline>();
+//
+//        if (EditContext* editContext = context.GetEditContext())
+//        {
+//            editContext->Class<LinearSpline>("Linear Spline", "Spline data")
+//                ->ClassElement(Edit::ClassElements::EditorData, "")
+//                ->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::ShowChildrenOnly)
+//                ->Attribute(Edit::Attributes::AutoExpand, true)
+//                ->Attribute(Edit::Attributes::ContainerCanBeModified, false);
+//        }
+//    }
 
     BezierSpline::BezierSpline(const Spline& spline)
         : Spline(spline)
@@ -1265,37 +1265,37 @@ namespace AZ
         m_bezierData.insert(m_bezierData.data() + index, bezierData);
     }
 
-    void BezierSpline::BezierData::Reflect(SerializeContext& context)
-    {
-        context.Class<BezierSpline::BezierData>()
-            ->Field("Forward", &BezierSpline::BezierData::m_forward)
-            ->Field("Back", &BezierSpline::BezierData::m_back)
-            ->Field("Angle", &BezierSpline::BezierData::m_angle);
-    }
-
-    void BezierSpline::Reflect(SerializeContext& context)
-    {
-        BezierData::Reflect(context);
-
-        context.Class<BezierSpline, Spline>()
-            ->Field("Bezier Data", &BezierSpline::m_bezierData)
-            ->Field("Granularity", &BezierSpline::m_granularity);
-
-        if (EditContext* editContext = context.GetEditContext())
-        {
-            editContext->Class<BezierSpline>("Bezier Spline", "Spline data")
-                ->ClassElement(Edit::ClassElements::EditorData, "")
-                    //->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::ShowChildrenOnly) // disabled - prevents ChangeNotify attribute firing correctly
-                    ->Attribute(Edit::Attributes::AutoExpand, true)
-                    ->Attribute(Edit::Attributes::ContainerCanBeModified, false)
-                ->DataElement(Edit::UIHandlers::Default, &BezierSpline::m_bezierData, "Bezier Data", "Data defining the bezier curve")
-                    ->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::Hide)
-                ->DataElement(Edit::UIHandlers::Slider, &BezierSpline::m_granularity, "Granularity", "Parameter specifying the granularity of each segment in the spline")
-                    ->Attribute(Edit::Attributes::Min, s_minGranularity)
-                    ->Attribute(Edit::Attributes::Max, s_maxGranularity)
-                    ;
-        }
-    }
+//cjh    void BezierSpline::BezierData::Reflect(SerializeContext& context)
+//    {
+//        context.Class<BezierSpline::BezierData>()
+//            ->Field("Forward", &BezierSpline::BezierData::m_forward)
+//            ->Field("Back", &BezierSpline::BezierData::m_back)
+//            ->Field("Angle", &BezierSpline::BezierData::m_angle);
+//    }
+//
+//    void BezierSpline::Reflect(SerializeContext& context)
+//    {
+//        BezierData::Reflect(context);
+//
+//        context.Class<BezierSpline, Spline>()
+//            ->Field("Bezier Data", &BezierSpline::m_bezierData)
+//            ->Field("Granularity", &BezierSpline::m_granularity);
+//
+//        if (EditContext* editContext = context.GetEditContext())
+//        {
+//            editContext->Class<BezierSpline>("Bezier Spline", "Spline data")
+//                ->ClassElement(Edit::ClassElements::EditorData, "")
+//                    //->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::ShowChildrenOnly) // disabled - prevents ChangeNotify attribute firing correctly
+//                    ->Attribute(Edit::Attributes::AutoExpand, true)
+//                    ->Attribute(Edit::Attributes::ContainerCanBeModified, false)
+//                ->DataElement(Edit::UIHandlers::Default, &BezierSpline::m_bezierData, "Bezier Data", "Data defining the bezier curve")
+//                    ->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::Hide)
+//                ->DataElement(Edit::UIHandlers::Slider, &BezierSpline::m_granularity, "Granularity", "Parameter specifying the granularity of each segment in the spline")
+//                    ->Attribute(Edit::Attributes::Min, s_minGranularity)
+//                    ->Attribute(Edit::Attributes::Max, s_maxGranularity)
+//                    ;
+//        }
+//    }
 
     CatmullRomSpline::CatmullRomSpline(const Spline& spline)
         : Spline(spline)
@@ -1531,28 +1531,28 @@ namespace AZ
         return *this;
     }
 
-    void CatmullRomSpline::Reflect(SerializeContext& context)
-    {
-        context.Class<CatmullRomSpline, Spline>()
-            ->Field("KnotParameterization", &CatmullRomSpline::m_knotParameterization)
-            ->Field("Granularity", &CatmullRomSpline::m_granularity);
-
-        if (EditContext* editContext = context.GetEditContext())
-        {
-            editContext->Class<CatmullRomSpline>("Catmull Rom Spline", "Spline data")
-                ->ClassElement(Edit::ClassElements::EditorData, "")
-                    //->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::ShowChildrenOnly) // disabled - prevents ChangeNotify attribute firing correctly
-                    ->Attribute(Edit::Attributes::AutoExpand, true)
-                    ->Attribute(Edit::Attributes::ContainerCanBeModified, false)
-                ->DataElement(Edit::UIHandlers::Slider, &CatmullRomSpline::m_knotParameterization, "Knot Parameterization", "Parameter specifying interpolation of the spline")
-                    ->Attribute(Edit::Attributes::Min, 0.0f)
-                    ->Attribute(Edit::Attributes::Max, 1.0f)
-                ->DataElement(Edit::UIHandlers::Slider, &CatmullRomSpline::m_granularity, "Granularity", "Parameter specifying the granularity of each segment in the spline")
-                    ->Attribute(Edit::Attributes::Min, s_minGranularity)
-                    ->Attribute(Edit::Attributes::Max, s_maxGranularity)
-                    ;
-        }
-    }
+//cjh    void CatmullRomSpline::Reflect(SerializeContext& context)
+//    {
+//        context.Class<CatmullRomSpline, Spline>()
+//            ->Field("KnotParameterization", &CatmullRomSpline::m_knotParameterization)
+//            ->Field("Granularity", &CatmullRomSpline::m_granularity);
+//
+//        if (EditContext* editContext = context.GetEditContext())
+//        {
+//            editContext->Class<CatmullRomSpline>("Catmull Rom Spline", "Spline data")
+//                ->ClassElement(Edit::ClassElements::EditorData, "")
+//                    //->Attribute(Edit::Attributes::Visibility, Edit::PropertyVisibility::ShowChildrenOnly) // disabled - prevents ChangeNotify attribute firing correctly
+//                    ->Attribute(Edit::Attributes::AutoExpand, true)
+//                    ->Attribute(Edit::Attributes::ContainerCanBeModified, false)
+//                ->DataElement(Edit::UIHandlers::Slider, &CatmullRomSpline::m_knotParameterization, "Knot Parameterization", "Parameter specifying interpolation of the spline")
+//                    ->Attribute(Edit::Attributes::Min, 0.0f)
+//                    ->Attribute(Edit::Attributes::Max, 1.0f)
+//                ->DataElement(Edit::UIHandlers::Slider, &CatmullRomSpline::m_granularity, "Granularity", "Parameter specifying the granularity of each segment in the spline")
+//                    ->Attribute(Edit::Attributes::Min, s_minGranularity)
+//                    ->Attribute(Edit::Attributes::Max, s_maxGranularity)
+//                    ;
+//        }
+//    }
 
     AZ_CLASS_ALLOCATOR_IMPL(Spline, SystemAllocator, 0)
     AZ_CLASS_ALLOCATOR_IMPL(LinearSpline, SystemAllocator, 0)

@@ -7,7 +7,7 @@
  */
 
 #include <AzCore/Math/Crc.h>
-#include <AzCore/Serialization/SerializeContext.h>
+//cjh #include <AzCore/Serialization/SerializeContext.h>
 
 #include <string.h>
 
@@ -39,9 +39,9 @@ namespace AZ
     //=========================================================================
     // Crc32 - Reflect
     //=========================================================================
-    void Crc32::Reflect(AZ::SerializeContext& context)
-    {
-        context.Class<Crc32>()
-            ->Field("Value", &Crc32::m_value);
-    }
+//    void Crc32::Reflect(AZ::SerializeContext& context)
+//    {
+//cjh        context.Class<Crc32>()
+//            ->Field("Value", &Crc32::m_value);
+//    }
 }

@@ -46,7 +46,7 @@ ly_add_target(
 )
 ly_add_source_properties(
     SOURCES
-        AzCore/Script/ScriptSystemComponent.cpp
+        # AzCore/Script/ScriptSystemComponent.cpp
         AzCore/PlatformId/PlatformId.cpp
     PROPERTY COMPILE_DEFINITIONS
     VALUES ${LY_PAL_TOOLS_DEFINES}
