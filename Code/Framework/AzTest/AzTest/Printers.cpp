@@ -6,7 +6,7 @@
  *
  */
 
-#include <AzCore/Component/EntityId.h>
+//cjh #include <AzCore/Component/EntityId.h>
 #include <AzCore/IO/Path/Path.h>
 
 #include <ostream>
@@ -31,8 +31,8 @@ namespace AZ::IO
 
 namespace AZ
 {
-    void PrintTo(const AZ::EntityId entityId, ::std::ostream* os)
-    {
-        *os << entityId.ToString().c_str();
-    }
+//cjh    void PrintTo(const AZ::EntityId entityId, ::std::ostream* os)
+//    {
+//        *os << entityId.ToString().c_str();
+//    }
 } // namespace AZ
