@@ -213,7 +213,7 @@
 // AZ_ENABLE_DEBUG_TOOLS - turns on and off interaction with the debugger.
 // Things like being able to check whether the current process is being debugged, to issue a "debug break" command, etc.
 #if defined(AZ_DEBUG_BUILD) && !defined(AZ_ENABLE_DEBUG_TOOLS)
-#   define AZ_ENABLE_DEBUG_TOOLS
+//cjh #   define AZ_ENABLE_DEBUG_TOOLS
 #endif
 
 // AZ_ENABLE_TRACE_ASSERTS - toggles display of native UI assert dialogs with ignore/break options

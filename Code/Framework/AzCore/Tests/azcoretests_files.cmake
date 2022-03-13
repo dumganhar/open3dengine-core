@@ -17,21 +17,21 @@ set(FILES
     # Asset/MockLoadAssetCatalogAndHandler.h
     # Asset/TestAssetTypes.h
     # AssetJsonSerializerTests.cpp
-    # EBus/ScheduledEventTests.cpp
+    EBus/ScheduledEventTests.cpp
     # AssetManager.cpp
     # TestCatalog.h
     # TestCatalog.cpp
     # AssetSerializerTests.cpp
     BehaviorContext.cpp
-    BehaviorContextFixture.h
-    # Components.cpp
+    # BehaviorContextFixture.h
+    Components.cpp
     # Console/LoggerSystemComponentTests.cpp
     # Console/ConsoleTests.cpp
     # Debug.cpp
     # DLL.cpp
-    # EBus.cpp
-    # EntityIdTests.cpp
-    # EntityTests.cpp
+    EBus.cpp
+    EntityIdTests.cpp
+    EntityTests.cpp
     # EnumTests.cpp
     # EventTests.cpp
     # FileIOBaseTestTypes.h
@@ -57,7 +57,7 @@ set(FILES
     # Script.cpp
     # ScriptMath.cpp
     # Serialization.cpp
-    # SerializeContextFixture.h
+    SerializeContextFixture.h
     # Slice.cpp
     # State.cpp
     # Statistics.cpp
@@ -179,48 +179,49 @@ set(FILES
     # Memory/HphaSchemaErrorDetection.cpp
     # Memory/LeakDetection.cpp
     # Memory/MallocSchema.cpp
-    # AZStd/Algorithms.cpp
-    # AZStd/Allocators.cpp
-    # AZStd/Atomics.cpp
-    # AZStd/Any.cpp
-    # AZStd/Bitset.cpp
-    # AZStd/ConceptsTests.cpp
-    # AZStd/CreateDestroy.cpp
-    # AZStd/ConcurrentAllocators.cpp
-    # AZStd/ConcurrentContainers.cpp
-    # AZStd/ChronoTests.cpp
-    # AZStd/DequeAndSimilar.cpp
-    # AZStd/Examples.cpp
-    # AZStd/FunctionalBasic.cpp
-    # AZStd/FunctorsBind.cpp
-    # AZStd/Hashed.cpp
-    # AZStd/Invoke.cpp
-    # AZStd/Iterators.cpp
-    # AZStd/Lists.cpp
-    # AZStd/ListsFixed.cpp
-    # AZStd/ListsIntrusive.cpp
-    # AZStd/LockFreeQueues.cpp
-    # AZStd/LockFreeStacks.cpp
-    # AZStd/LockTests.cpp
-    # AZStd/Math.cpp
-    # AZStd/Numeric.cpp
-    # AZStd/Ordered.cpp
-    # AZStd/Optional.cpp
-    # AZStd/Pair.cpp
-    # AZStd/Parallel.cpp
-    # AZStd/RangesAlgorithmTests.cpp
-    # AZStd/RangesTests.cpp
-    # AZStd/RangesViewTests.cpp
-    # AZStd/ScopedLockTests.cpp
-    # AZStd/SetsIntrusive.cpp
-    # AZStd/SmartPtr.cpp
-    # AZStd/SpanTests.cpp
-    # AZStd/String.cpp
-    # AZStd/TypeTraits.cpp
-    # AZStd/Tuple.cpp
-    # AZStd/UserTypes.h
-    # AZStd/Variant.cpp
-    # AZStd/VectorAndArray.cpp
+
+    AZStd/Algorithms.cpp
+    AZStd/Allocators.cpp
+    AZStd/Atomics.cpp
+    AZStd/Any.cpp
+    AZStd/Bitset.cpp
+    AZStd/ConceptsTests.cpp
+    AZStd/CreateDestroy.cpp
+    AZStd/ConcurrentAllocators.cpp
+    AZStd/ConcurrentContainers.cpp
+    AZStd/ChronoTests.cpp
+    AZStd/DequeAndSimilar.cpp
+    AZStd/Examples.cpp
+    AZStd/FunctionalBasic.cpp
+    AZStd/FunctorsBind.cpp
+    AZStd/Hashed.cpp
+    AZStd/Invoke.cpp
+    AZStd/Iterators.cpp
+    AZStd/Lists.cpp
+    AZStd/ListsFixed.cpp
+    AZStd/ListsIntrusive.cpp
+    AZStd/LockFreeQueues.cpp
+    AZStd/LockFreeStacks.cpp
+    AZStd/LockTests.cpp
+    AZStd/Math.cpp
+    AZStd/Numeric.cpp
+    AZStd/Ordered.cpp
+    AZStd/Optional.cpp
+    AZStd/Pair.cpp
+    AZStd/Parallel.cpp
+    AZStd/RangesAlgorithmTests.cpp
+    AZStd/RangesTests.cpp
+    AZStd/RangesViewTests.cpp
+    AZStd/ScopedLockTests.cpp
+    AZStd/SetsIntrusive.cpp
+    AZStd/SmartPtr.cpp
+    AZStd/SpanTests.cpp
+    AZStd/String.cpp
+    AZStd/TypeTraits.cpp
+    AZStd/Tuple.cpp
+    AZStd/UserTypes.h
+    AZStd/Variant.cpp
+    AZStd/VectorAndArray.cpp
 
     # AZStd/VariantSerialization.cpp
     # DOM/DomFixtures.cpp

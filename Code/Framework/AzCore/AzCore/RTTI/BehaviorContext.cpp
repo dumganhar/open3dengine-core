@@ -8,101 +8,101 @@
 
 #include <AzCore/RTTI/BehaviorContext.h>
 #include <AzCore/RTTI/AttributeReader.h>
-//cjh #include <AzCore/Component/EntityBus.h>
+#include <AzCore/Component/EntityBus.h>
 
 namespace AZ
 {
-//cjh    bool MethodReturnsAzEventByReferenceOrPointer(const AZ::BehaviorMethod& method)
-//    {
-//        const AZ::BehaviorParameter* resultParameter = method.GetResult();
-//        if (resultParameter == nullptr)
-//        {
-//            return false;
-//        }
-//
-//        // The return parameter must have AZ Rtti to in order for it be an AZ::Event parameter
-//        AZ::IRttiHelper* rttiHelper = resultParameter->m_azRtti;
-//        if (!rttiHelper || rttiHelper->GetGenericTypeId() != azrtti_typeid<AZ::Event>())
-//        {
-//            return false;
-//        }
-//
-//        constexpr auto PointerValueTrait = AZ::BehaviorParameter::Traits::TR_REFERENCE | AZ::BehaviorParameter::Traits::TR_POINTER;
-//        return (resultParameter->m_traits & PointerValueTrait) != AZ::BehaviorParameter::Traits::TR_NONE;
-//    }
-//
-//    bool ValidateAzEventDescription(const BehaviorContext& context, const AZ::BehaviorMethod& method)
-//    {
-//        const AZ::BehaviorParameter* resultParameter = method.GetResult();
-//        if (resultParameter == nullptr)
-//        {
-//            return false;
-//        }
-//
-//        // The return parameter must have AZ Rtti to in order for it be an AZ::Event& or AZ::Event* parameter
-//        AZ::IRttiHelper* rttiHelper = resultParameter->m_azRtti;
-//        if (!rttiHelper || rttiHelper->GetGenericTypeId() != azrtti_typeid<AZ::Event>())
-//        {
-//            return false;
-//        }
-//        constexpr auto PointerValueTrait = AZ::BehaviorParameter::Traits::TR_REFERENCE | AZ::BehaviorParameter::Traits::TR_POINTER;
-//        const auto parameterTraits = static_cast<AZ::BehaviorParameter::Traits>(resultParameter->m_traits) & PointerValueTrait;
-//        if (parameterTraits == AZ::BehaviorParameter::Traits::TR_NONE)
-//        {
-//            return false;
-//        }
-//
-//        bool azEventDescValid = true;
-//        AZ::Attribute* azEventDescAttribute = AZ::FindAttribute(AZ::Script::Attributes::AzEventDescription, method.m_attributes);
-//        AZ::AttributeReader azEventDescAttributeReader(nullptr, azEventDescAttribute);
-//        AZ::BehaviorAzEventDescription behaviorAzEventDesc;
-//        if (!azEventDescAttributeReader.Read<decltype(behaviorAzEventDesc)>(behaviorAzEventDesc))
-//        {
-//            AZ_Error("BehaviorContext", false, "Unable to read AzEventDescription attribute of method %s"
-//                " that returns an AZ::Event", method.m_name.c_str());
-//            return false;
-//        }
-//
-//        if (behaviorAzEventDesc.m_eventName.empty())
-//        {
-//            AZ_Error("BehaviorContext", false, "AzEventDescription attribute on method %s"
-//                " has an empty event name", method.m_name.c_str());
-//            azEventDescValid = false;
-//        }
-//
-//        auto azEventClassIter = context.m_typeToClassMap.find(rttiHelper->GetTypeId());
-//        if (azEventClassIter != context.m_typeToClassMap.end() && azEventClassIter->second != nullptr)
-//        {
-//            AZ::BehaviorClass* azEventClass = azEventClassIter->second;
-//            AZ::Attribute* eventParameterTypesAttribute = AZ::FindAttribute(AZ::Script::Attributes::EventParameterTypes,
-//                azEventClass->m_attributes);
-//            AZStd::vector<AZ::BehaviorParameter> eventParameterTypes;
-//            if (AZ::AttributeReader(nullptr, eventParameterTypesAttribute).Read<decltype(eventParameterTypes)>(eventParameterTypes))
-//            {
-//                if (eventParameterTypes.size() != behaviorAzEventDesc.m_parameterNames.size())
-//                {
-//                    AZ_Error("BehaviorContext", false, "AzEventDescription only contains names for %zu parameters,"
-//                        " while the AZ::Event(%s) accepts %zu parameters", behaviorAzEventDesc.m_parameterNames.size(),
-//                        behaviorAzEventDesc.m_eventName.c_str(), eventParameterTypes.size());
-//                    azEventDescValid = false;
-//                }
-//
-//                size_t parameterIndex = 0;
-//                for (AZStd::string_view parameterName : behaviorAzEventDesc.m_parameterNames)
-//                {
-//                    if (parameterName.empty())
-//                    {
-//                        AZ_Error("BehaviorContext", false, "AzEventDescription parameter %zu contains an empty name parameter"
-//                            " for AZ::Event(%s)", parameterIndex, behaviorAzEventDesc.m_eventName.c_str());
-//                        azEventDescValid = false;
-//                    }
-//                    ++parameterIndex;
-//                }
-//            }
-//        }
-//
-//        return azEventDescValid;
-//    }
+    bool MethodReturnsAzEventByReferenceOrPointer(const AZ::BehaviorMethod& method)
+    {
+        const AZ::BehaviorParameter* resultParameter = method.GetResult();
+        if (resultParameter == nullptr)
+        {
+            return false;
+        }
+
+        // The return parameter must have AZ Rtti to in order for it be an AZ::Event parameter
+        AZ::IRttiHelper* rttiHelper = resultParameter->m_azRtti;
+        if (!rttiHelper || rttiHelper->GetGenericTypeId() != azrtti_typeid<AZ::Event>())
+        {
+            return false;
+        }
+
+        constexpr auto PointerValueTrait = AZ::BehaviorParameter::Traits::TR_REFERENCE | AZ::BehaviorParameter::Traits::TR_POINTER;
+        return (resultParameter->m_traits & PointerValueTrait) != AZ::BehaviorParameter::Traits::TR_NONE;
+    }
+
+    bool ValidateAzEventDescription(const BehaviorContext& context, const AZ::BehaviorMethod& method)
+    {
+        const AZ::BehaviorParameter* resultParameter = method.GetResult();
+        if (resultParameter == nullptr)
+        {
+            return false;
+        }
+
+        // The return parameter must have AZ Rtti to in order for it be an AZ::Event& or AZ::Event* parameter
+        AZ::IRttiHelper* rttiHelper = resultParameter->m_azRtti;
+        if (!rttiHelper || rttiHelper->GetGenericTypeId() != azrtti_typeid<AZ::Event>())
+        {
+            return false;
+        }
+        constexpr auto PointerValueTrait = AZ::BehaviorParameter::Traits::TR_REFERENCE | AZ::BehaviorParameter::Traits::TR_POINTER;
+        const auto parameterTraits = static_cast<AZ::BehaviorParameter::Traits>(resultParameter->m_traits) & PointerValueTrait;
+        if (parameterTraits == AZ::BehaviorParameter::Traits::TR_NONE)
+        {
+            return false;
+        }
+
+        bool azEventDescValid = true;
+        AZ::Attribute* azEventDescAttribute = AZ::FindAttribute(AZ::Script::Attributes::AzEventDescription, method.m_attributes);
+        AZ::AttributeReader azEventDescAttributeReader(nullptr, azEventDescAttribute);
+        AZ::BehaviorAzEventDescription behaviorAzEventDesc;
+        if (!azEventDescAttributeReader.Read<decltype(behaviorAzEventDesc)>(behaviorAzEventDesc))
+        {
+            AZ_Error("BehaviorContext", false, "Unable to read AzEventDescription attribute of method %s"
+                " that returns an AZ::Event", method.m_name.c_str());
+            return false;
+        }
+
+        if (behaviorAzEventDesc.m_eventName.empty())
+        {
+            AZ_Error("BehaviorContext", false, "AzEventDescription attribute on method %s"
+                " has an empty event name", method.m_name.c_str());
+            azEventDescValid = false;
+        }
+
+        auto azEventClassIter = context.m_typeToClassMap.find(rttiHelper->GetTypeId());
+        if (azEventClassIter != context.m_typeToClassMap.end() && azEventClassIter->second != nullptr)
+        {
+            AZ::BehaviorClass* azEventClass = azEventClassIter->second;
+            AZ::Attribute* eventParameterTypesAttribute = AZ::FindAttribute(AZ::Script::Attributes::EventParameterTypes,
+                azEventClass->m_attributes);
+            AZStd::vector<AZ::BehaviorParameter> eventParameterTypes;
+            if (AZ::AttributeReader(nullptr, eventParameterTypesAttribute).Read<decltype(eventParameterTypes)>(eventParameterTypes))
+            {
+                if (eventParameterTypes.size() != behaviorAzEventDesc.m_parameterNames.size())
+                {
+                    AZ_Error("BehaviorContext", false, "AzEventDescription only contains names for %zu parameters,"
+                        " while the AZ::Event(%s) accepts %zu parameters", behaviorAzEventDesc.m_parameterNames.size(),
+                        behaviorAzEventDesc.m_eventName.c_str(), eventParameterTypes.size());
+                    azEventDescValid = false;
+                }
+
+                size_t parameterIndex = 0;
+                for (AZStd::string_view parameterName : behaviorAzEventDesc.m_parameterNames)
+                {
+                    if (parameterName.empty())
+                    {
+                        AZ_Error("BehaviorContext", false, "AzEventDescription parameter %zu contains an empty name parameter"
+                            " for AZ::Event(%s)", parameterIndex, behaviorAzEventDesc.m_eventName.c_str());
+                        azEventDescValid = false;
+                    }
+                    ++parameterIndex;
+                }
+            }
+        }
+
+        return azEventDescValid;
+    }
 
     //=========================================================================
     // BehaviorMethod
@@ -250,52 +250,52 @@ namespace AZ
     //=========================================================================
     // BehaviorEBus
     //=========================================================================
-//cjh    BehaviorEBus::BehaviorEBus()
-//        : m_createHandler(nullptr)
-//        , m_destroyHandler(nullptr)
-//        , m_queueFunction(nullptr)
-//        , m_getCurrentId(nullptr)
-//    {
-//        m_idParam.m_name = "BusIdType";
-//        m_idParam.m_typeId = AZ::Uuid::CreateNull();
-//        m_idParam.m_traits = BehaviorParameter::TR_REFERENCE;
-//        m_idParam.m_azRtti = nullptr;
-//    }
-//
-//    //=========================================================================
-//    // ~BehaviorEBus
-//    //=========================================================================
-//    BehaviorEBus::~BehaviorEBus()
-//    {
-//        // Clear all lists of things now to prevent double deleting
-//        // (if they're found in the lists later, they'll be deleted again)
-//        auto events = AZStd::move(m_events);
-//        auto attributes = AZStd::move(m_attributes);
-//
-//        // Actually delete everything
-//        for (const auto &propertyIt : events)
-//        {
-//            delete propertyIt.second.m_broadcast;
-//            delete propertyIt.second.m_event;
-//            delete propertyIt.second.m_queueBroadcast;
-//            delete propertyIt.second.m_queueEvent;
-//            for (auto attrIt : propertyIt.second.m_attributes)
-//            {
-//                delete attrIt.second;
-//            }
-//        }
-//
-//        for (auto attrIt : attributes)
-//        {
-//            delete attrIt.second;
-//        }
-//
-//        delete m_createHandler;
-//        delete m_destroyHandler;
-//
-//        delete m_queueFunction;
-//        delete m_getCurrentId;
-//    }
+    BehaviorEBus::BehaviorEBus()
+        : m_createHandler(nullptr)
+        , m_destroyHandler(nullptr)
+        , m_queueFunction(nullptr)
+        , m_getCurrentId(nullptr)
+    {
+        m_idParam.m_name = "BusIdType";
+        m_idParam.m_typeId = AZ::Uuid::CreateNull();
+        m_idParam.m_traits = BehaviorParameter::TR_REFERENCE;
+        m_idParam.m_azRtti = nullptr;
+    }
+
+    //=========================================================================
+    // ~BehaviorEBus
+    //=========================================================================
+    BehaviorEBus::~BehaviorEBus()
+    {
+        // Clear all lists of things now to prevent double deleting
+        // (if they're found in the lists later, they'll be deleted again)
+        auto events = AZStd::move(m_events);
+        auto attributes = AZStd::move(m_attributes);
+
+        // Actually delete everything
+        for (const auto &propertyIt : events)
+        {
+            delete propertyIt.second.m_broadcast;
+            delete propertyIt.second.m_event;
+            delete propertyIt.second.m_queueBroadcast;
+            delete propertyIt.second.m_queueEvent;
+            for (auto attrIt : propertyIt.second.m_attributes)
+            {
+                delete attrIt.second;
+            }
+        }
+
+        for (auto attrIt : attributes)
+        {
+            delete attrIt.second;
+        }
+
+        delete m_createHandler;
+        delete m_destroyHandler;
+
+        delete m_queueFunction;
+        delete m_getCurrentId;
+    }
 
     //=========================================================================
     // BehaviorContext::GlobalMethodBuilder
@@ -321,11 +321,11 @@ namespace AZ
 
         if (m_method)
         {
-//cjh            if (MethodReturnsAzEventByReferenceOrPointer(*m_method))
-//            {
-//                ValidateAzEventDescription(*Base::m_context, *m_method);
-//            }
-//            BehaviorContextBus::Event(m_context, &BehaviorContextBus::Events::OnAddGlobalMethod, m_name, m_method);
+            if (MethodReturnsAzEventByReferenceOrPointer(*m_method))
+            {
+                ValidateAzEventDescription(*Base::m_context, *m_method);
+            }
+            BehaviorContextBus::Event(m_context, &BehaviorContextBus::Events::OnAddGlobalMethod, m_name, m_method);
         }
     }
 
@@ -362,11 +362,11 @@ namespace AZ
         {
             // Only the property getter needs to be validated to determine if it returns an AZ::Event
             // and have the AzEventDescription attribute attached to that event
-//cjh            if (m_prop->m_getter && MethodReturnsAzEventByReferenceOrPointer(*m_prop->m_getter))
-//            {
-//                ValidateAzEventDescription(*Base::m_context, *m_prop->m_getter);
-//            }
-//            BehaviorContextBus::Event(m_context, &BehaviorContextBus::Events::OnAddGlobalProperty, m_prop->m_name.c_str(), m_prop);
+            if (m_prop->m_getter && MethodReturnsAzEventByReferenceOrPointer(*m_prop->m_getter))
+            {
+                ValidateAzEventDescription(*Base::m_context, *m_prop->m_getter);
+            }
+            BehaviorContextBus::Event(m_context, &BehaviorContextBus::Events::OnAddGlobalProperty, m_prop->m_name.c_str(), m_prop);
         }
     }
 
@@ -393,7 +393,7 @@ namespace AZ
         auto methods = AZStd::move(m_methods);
         auto properties = AZStd::move(m_properties);
         auto classes = AZStd::move(m_classes);
-//cjh        auto ebuses = AZStd::move(m_ebuses);
+        auto ebuses = AZStd::move(m_ebuses);
 
         m_typeToClassMap.clear();
 
@@ -413,10 +413,10 @@ namespace AZ
             delete classIt.second;
         }
 
-//cjh        for (auto ebusIt : ebuses)
-//        {
-//            delete ebusIt.second;
-//        }
+        for (auto ebusIt : ebuses)
+        {
+            delete ebusIt.second;
+        }
     }
 
     bool BehaviorContext::IsTypeReflected(AZ::Uuid typeId) const

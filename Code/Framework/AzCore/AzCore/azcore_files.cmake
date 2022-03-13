@@ -37,46 +37,49 @@ set(FILES
     Casting/lossy_cast.h
     Casting/numeric_cast.h
     Casting/numeric_cast_internal.h
-    # Component/Component.cpp
-    # Component/Component.h
-    # Component/ComponentApplication.cpp
-    # Component/ComponentApplication.h
-    # Component/ComponentApplicationBus.h
+
+    Component/Component.cpp
+    Component/Component.h
+    Component/ComponentApplication.cpp
+    Component/ComponentApplication.h
+    Component/ComponentApplicationBus.h
     # Component/ComponentApplicationLifecycle.cpp
     # Component/ComponentApplicationLifecycle.h
-    # Component/ComponentBus.cpp
-    # Component/ComponentBus.h
+    Component/ComponentBus.cpp
+    Component/ComponentBus.h
     # Component/ComponentExport.h
-    # Component/Entity.cpp
-    # Component/Entity.h
-    # Component/EntityBus.h
-    # Component/EntityId.h
+    Component/Entity.cpp
+    Component/Entity.h
+    Component/EntityBus.h
+    Component/EntityId.h
     # Component/EntityIdSerializer.cpp
     # Component/EntityIdSerializer.h
     # Component/EntitySerializer.cpp
     # Component/EntitySerializer.h
-    # Component/EntityUtils.cpp
-    # Component/EntityUtils.h
-    # Component/NamedEntityId.cpp
-    # Component/NamedEntityId.h
+    Component/EntityUtils.cpp
+    Component/EntityUtils.h
+    Component/NamedEntityId.cpp
+    Component/NamedEntityId.h
     # Component/NonUniformScaleBus.cpp
     # Component/NonUniformScaleBus.h
-    # Component/TickBus.h
+    Component/TickBus.h
     # Component/TransformBus.h
-    # Console/Console.cpp
-    # Console/Console.h
-    # Console/ConsoleDataWrapper.h
-    # Console/ConsoleDataWrapper.inl
-    # Console/ConsoleFunctor.cpp
-    # Console/ConsoleFunctor.h
-    # Console/ConsoleFunctor.inl
-    # Console/ConsoleTypeHelpers.h
-    # Console/ConsoleTypeHelpers.inl
-    # Console/IConsole.h
-    # Console/IConsoleTypes.h
-    # Console/ILogger.h
-    # Console/LoggerSystemComponent.cpp
-    # Console/LoggerSystemComponent.h
+
+    Console/Console.cpp
+    Console/Console.h
+    Console/ConsoleDataWrapper.h
+    Console/ConsoleDataWrapper.inl
+    Console/ConsoleFunctor.cpp
+    Console/ConsoleFunctor.h
+    Console/ConsoleFunctor.inl
+    Console/ConsoleTypeHelpers.h
+    Console/ConsoleTypeHelpers.inl
+    Console/IConsole.h
+    Console/IConsoleTypes.h
+    Console/ILogger.h
+    Console/LoggerSystemComponent.cpp
+    Console/LoggerSystemComponent.h
+
     # Slice/SliceAsset.cpp
     # Slice/SliceAsset.h
     # Slice/SliceAssetHandler.cpp
@@ -135,28 +138,30 @@ set(FILES
     # DOM/Backends/JSON/JsonBackend.h
     # DOM/Backends/JSON/JsonSerializationUtils.cpp
     # DOM/Backends/JSON/JsonSerializationUtils.h
-    # EBus/BusImpl.h
-    # EBus/EBus.h
-    # EBus/EBusEnvironment.cpp
-    # EBus/Environment.h
-    # EBus/Event.h
-    # EBus/Event.inl
-    # EBus/EventSchedulerSystemComponent.cpp
-    # EBus/EventSchedulerSystemComponent.h
-    # EBus/IEventScheduler.h
-    # EBus/OrderedEvent.h
-    # EBus/OrderedEvent.inl
-    # EBus/Policies.h
-    # EBus/Results.h
-    # EBus/ScheduledEvent.cpp
-    # EBus/ScheduledEvent.h
-    # EBus/ScheduledEventHandle.cpp
-    # EBus/ScheduledEventHandle.h
-    # EBus/Internal/BusContainer.h
-    # EBus/Internal/CallstackEntry.h
-    # EBus/Internal/Debug.h
-    # EBus/Internal/Handlers.h
-    # EBus/Internal/StoragePolicies.h
+
+    EBus/BusImpl.h
+    EBus/EBus.h
+    EBus/EBusEnvironment.cpp
+    EBus/Environment.h
+    EBus/Event.h
+    EBus/Event.inl
+    EBus/EventSchedulerSystemComponent.cpp
+    EBus/EventSchedulerSystemComponent.h
+    EBus/IEventScheduler.h
+    EBus/OrderedEvent.h
+    EBus/OrderedEvent.inl
+    EBus/Policies.h
+    EBus/Results.h
+    EBus/ScheduledEvent.cpp
+    EBus/ScheduledEvent.h
+    EBus/ScheduledEventHandle.cpp
+    EBus/ScheduledEventHandle.h
+    EBus/Internal/BusContainer.h
+    EBus/Internal/CallstackEntry.h
+    EBus/Internal/Debug.h
+    EBus/Internal/Handlers.h
+    EBus/Internal/StoragePolicies.h
+
     Interface/Interface.h
 
     # IO/ByteContainerStream.h
@@ -451,7 +456,7 @@ set(FILES
     RTTI/BehaviorContextUtilities.h
     RTTI/BehaviorContextUtilities.cpp
     RTTI/BehaviorInterfaceProxy.h
-    # RTTI/BehaviorObjectSignals.h
+    RTTI/BehaviorObjectSignals.h
     RTTI/TypeSafeIntegral.h
     # Script/ScriptAsset.cpp
     # Script/ScriptAsset.h
@@ -464,7 +469,7 @@ set(FILES
     # Script/ScriptSystemComponent.cpp
     # Script/ScriptSystemComponent.h
     # Script/ScriptTimePoint.cpp
-    # Script/ScriptTimePoint.h
+    Script/ScriptTimePoint.h
     # Script/ScriptProperty.h
     # Script/ScriptProperty.cpp
     # Script/ScriptPropertySerializer.h
@@ -644,15 +649,17 @@ set(FILES
     # Task/TaskGraph.inl
     # Task/TaskGraphSystemComponent.h
     # Task/TaskGraphSystemComponent.cpp
-    # Threading/ThreadSafeDeque.h
-    # Threading/ThreadSafeDeque.inl
-    # Threading/ThreadSafeObject.h
-    # Threading/ThreadSafeObject.inl
-    # Threading/ThreadUtils.h
-    # Threading/ThreadUtils.cpp
-    # Time/ITime.h
-    # Time/TimeSystem.cpp
-    # Time/TimeSystem.h
+
+    Threading/ThreadSafeDeque.h
+    Threading/ThreadSafeDeque.inl
+    Threading/ThreadSafeObject.h
+    Threading/ThreadSafeObject.inl
+    Threading/ThreadUtils.h
+    Threading/ThreadUtils.cpp
+    
+    Time/ITime.h
+    Time/TimeSystem.cpp
+    Time/TimeSystem.h
 )
 
 # Prevent the following files from being grouped in UNITY builds

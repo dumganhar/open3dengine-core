@@ -7,9 +7,9 @@
  */
 #pragma once
 
-#include <AzCore/IO/FileIO.h>
+//cjh #include <AzCore/IO/FileIO.h>
 #include <AzCore/IO/Path/Path.h>
-#include <AzCore/IO/SystemFile.h>
+//cjh #include <AzCore/IO/SystemFile.h>
 #include <AzCore/Casting/numeric_cast.h>
 #include <AzCore/std/containers/map.h>
 #include <AzCore/Memory/OSAllocator.h>
