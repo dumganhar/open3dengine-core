@@ -23,7 +23,7 @@
 
 // Used to keep a set of ignored asserts for CRC checking
 #include <AzCore/std/containers/unordered_set.h>
-#include <AzCore/Module/Environment.h>
+//cjh #include <AzCore/Module/Environment.h>
 //cjh #include <AzCore/Console/IConsole.h>
 #include <AzCore/std/chrono/chrono.h>
 
@@ -66,11 +66,11 @@ namespace AZ::Debug
 //    static const int assertLevel_nativeUI = 2;
 //    static const int assertLevel_crash = 3;
 //    static const int logLevel_full = 2;
-    static AZ::EnvironmentVariable<AZStd::unordered_set<size_t>> g_ignoredAsserts;
-    static AZ::EnvironmentVariable<int> g_assertVerbosityLevel;
-    static AZ::EnvironmentVariable<int> g_logVerbosityLevel;
-
-    static AZ::EnvironmentVariable<bool> s_AssertsAutoBreak;
+//    static AZ::EnvironmentVariable<AZStd::unordered_set<size_t>> g_ignoredAsserts;
+//    static AZ::EnvironmentVariable<int> g_assertVerbosityLevel;
+//    static AZ::EnvironmentVariable<int> g_logVerbosityLevel;
+//
+//    static AZ::EnvironmentVariable<bool> s_AssertsAutoBreak;
 //cjh    AZ_CVAR(
 //        bool,
 //        bg_assertsAutoBreak,
