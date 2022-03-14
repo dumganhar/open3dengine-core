@@ -16,9 +16,9 @@
 #include <AzCore/Memory/SystemAllocator.h>
 #include <AzCore/IO/Path/Path.h>
 #include <AzCore/StringFunc/StringFunc.h>
-#include <AzCore/Math/Vector2.h>
-#include <AzCore/Math/Vector3.h>
-#include <AzCore/Math/Vector4.h>
+//cjh #include <AzCore/Math/Vector2.h>
+//#include <AzCore/Math/Vector3.h>
+//#include <AzCore/Math/Vector4.h>
 #include <AzCore/AzCore_Traits_Platform.h>
 
 namespace AZ::StringFunc::Internal
@@ -1122,72 +1122,72 @@ namespace AZ::StringFunc
         return false;
     }
 
-    template <typename VECTOR_TYPE, uint32_t ELEMENT_COUNT>
-    bool LooksLikeVectorHelper(const char* in, VECTOR_TYPE* outVector)
-    {
-        AZStd::vector<AZStd::string> tokens;
-        Tokenize(in, tokens, ',', false, true);
-        if (tokens.size() == ELEMENT_COUNT)
-        {
-            float vectorValues[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
-            for (uint32_t element = 0; element < ELEMENT_COUNT; ++element)
-            {
-                if (!LooksLikeFloat(tokens[element].c_str(), outVector ? &vectorValues[element] : nullptr))
-                {
-                    return false;
-                }
-            }
-
-            if (outVector)
-            {
-                for (uint32_t element = 0; element < ELEMENT_COUNT; ++element)
-                {
-                    outVector->SetElement(element, vectorValues[element]);
-                }
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    bool LooksLikeVector2(const char* in, AZ::Vector2* outVector)
-    {
-        return LooksLikeVectorHelper<AZ::Vector2, 2>(in, outVector);
-    }
-
-    AZ::Vector2 ToVector2(const char* in)
-    {
-        AZ::Vector2 vector;
-        LooksLikeVector2(in, &vector);
-        return vector;
-    }
-
-    bool LooksLikeVector3(const char* in, AZ::Vector3* outVector)
-    {
-        return LooksLikeVectorHelper<AZ::Vector3, 3>(in, outVector);
-    }
-
-    AZ::Vector3 ToVector3(const char* in)
-    {
-        AZ::Vector3 vector;
-        LooksLikeVector3(in, &vector);
-        return vector;
-    }
-
-    bool LooksLikeVector4(const char* in, AZ::Vector4* outVector)
-    {
-        return LooksLikeVectorHelper<AZ::Vector4, 4>(in, outVector);
-    }
-
-    AZ::Vector4 ToVector4(const char* in)
-    {
-        AZ::Vector4 vector;
-        LooksLikeVector4(in, &vector);
-        return vector;
-    }
+//cjh    template <typename VECTOR_TYPE, uint32_t ELEMENT_COUNT>
+//    bool LooksLikeVectorHelper(const char* in, VECTOR_TYPE* outVector)
+//    {
+//        AZStd::vector<AZStd::string> tokens;
+//        Tokenize(in, tokens, ',', false, true);
+//        if (tokens.size() == ELEMENT_COUNT)
+//        {
+//            float vectorValues[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+//
+//            for (uint32_t element = 0; element < ELEMENT_COUNT; ++element)
+//            {
+//                if (!LooksLikeFloat(tokens[element].c_str(), outVector ? &vectorValues[element] : nullptr))
+//                {
+//                    return false;
+//                }
+//            }
+//
+//            if (outVector)
+//            {
+//                for (uint32_t element = 0; element < ELEMENT_COUNT; ++element)
+//                {
+//                    outVector->SetElement(element, vectorValues[element]);
+//                }
+//            }
+//
+//            return true;
+//        }
+//
+//        return false;
+//    }
+//
+//    bool LooksLikeVector2(const char* in, AZ::Vector2* outVector)
+//    {
+//        return LooksLikeVectorHelper<AZ::Vector2, 2>(in, outVector);
+//    }
+//
+//    AZ::Vector2 ToVector2(const char* in)
+//    {
+//        AZ::Vector2 vector;
+//        LooksLikeVector2(in, &vector);
+//        return vector;
+//    }
+//
+//    bool LooksLikeVector3(const char* in, AZ::Vector3* outVector)
+//    {
+//        return LooksLikeVectorHelper<AZ::Vector3, 3>(in, outVector);
+//    }
+//
+//    AZ::Vector3 ToVector3(const char* in)
+//    {
+//        AZ::Vector3 vector;
+//        LooksLikeVector3(in, &vector);
+//        return vector;
+//    }
+//
+//    bool LooksLikeVector4(const char* in, AZ::Vector4* outVector)
+//    {
+//        return LooksLikeVectorHelper<AZ::Vector4, 4>(in, outVector);
+//    }
+//
+//    AZ::Vector4 ToVector4(const char* in)
+//    {
+//        AZ::Vector4 vector;
+//        LooksLikeVector4(in, &vector);
+//        return vector;
+//    }
 
     bool ToHexDump(const char* in, AZStd::string& out)
     {

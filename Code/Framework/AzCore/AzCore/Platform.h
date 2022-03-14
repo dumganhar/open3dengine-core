@@ -23,7 +23,7 @@ namespace AZ
         ProcessId GetCurrentProcessId();
 
         /// Returns a unique machine id that should be unique per platform (PC, Mac, console, etc)
-        MachineId GetLocalMachineId();
+//cjh        MachineId GetLocalMachineId();
 
         /// Sets the machine id. Id should be unique per platform (PC, Mac, console, etc)
         void SetLocalMachineId(MachineId machineId);

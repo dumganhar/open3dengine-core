@@ -7,7 +7,7 @@
  */
 
 #include <AzCore/Math/Uuid.h>
-#include <AzCore/Math/Sfmt.h>
+//cjh #include <AzCore/Math/Sfmt.h>
 #include <AzCore/Math/Sha1.h>
 
 #include <AzCore/std/algorithm.h>
@@ -246,27 +246,27 @@ namespace AZ
     // CreateRandom
     // [4/10/2012]
     //=========================================================================
-    Uuid Uuid::CreateRandom()
-    {
-        Uuid id;
-        Sfmt& smft = Sfmt::GetInstance();
-
-        AZ::u32* id32 = reinterpret_cast<AZ::u32*>(&id);
-        id32[0] = smft.Rand32();
-        id32[1] = smft.Rand32();
-        id32[2] = smft.Rand32();
-        id32[3] = smft.Rand32();
-
-        // variant VAR_RFC_4122
-        id.data[8] &= 0xBF;
-        id.data[8] |= 0x80;
-
-        // version VER_RANDOM
-        id.data[6] &= 0x4F;
-        id.data[6] |= 0x40;
-
-        return id;
-    }
+//cjh    Uuid Uuid::CreateRandom()
+//    {
+//        Uuid id;
+//        Sfmt& smft = Sfmt::GetInstance();
+//
+//        AZ::u32* id32 = reinterpret_cast<AZ::u32*>(&id);
+//        id32[0] = smft.Rand32();
+//        id32[1] = smft.Rand32();
+//        id32[2] = smft.Rand32();
+//        id32[3] = smft.Rand32();
+//
+//        // variant VAR_RFC_4122
+//        id.data[8] &= 0xBF;
+//        id.data[8] |= 0x80;
+//
+//        // version VER_RANDOM
+//        id.data[6] &= 0x4F;
+//        id.data[6] |= 0x40;
+//
+//        return id;
+//    }
 
     //=========================================================================
     // CreateName

@@ -50,7 +50,7 @@ namespace AZ
 
         static Uuid CreateNull();
         /// Create a Uuid (VAR_RFC_4122,VER_RANDOM)
-        static Uuid Create()        { return CreateRandom(); }
+//cjh        static Uuid Create()        { return CreateRandom(); }
         /**
         * This function accepts the following formats, if format is invalid it returns a NULL UUID.
         * 0123456789abcdef0123456789abcdef
@@ -66,7 +66,7 @@ namespace AZ
         // Performs a first pass to handle more uuid string formats - allows and removes spaces, 0x, {, }
         static Uuid CreateStringPermissive(const char* string, size_t stringLength = 0, bool skipWarnings = true);
 
-        static Uuid CreateRandom();
+//cjh        static Uuid CreateRandom();
         /// Create a UUID based on a string name (sha1)
         static Uuid CreateName(const char* name);
         /// Create a UUID based on a byte stream (sha1)

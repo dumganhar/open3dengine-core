@@ -9,19 +9,19 @@
 #include <AzCore/ScriptCanvas/ScriptCanvasOnDemandNames.h>
 
 //cjh #include <AzCore/Component/EntityId.h>
-#include <AzCore/Math/Aabb.h>
-#include <AzCore/Math/Color.h>
-#include <AzCore/Math/Crc.h>
-#include <AzCore/Math/Matrix3x3.h>
-#include <AzCore/Math/Matrix4x4.h>
-#include <AzCore/Math/Obb.h>
-#include <AzCore/Math/Plane.h>
-#include <AzCore/Math/Quaternion.h>
-#include <AzCore/Math/Transform.h>
+//#include <AzCore/Math/Aabb.h>
+//#include <AzCore/Math/Color.h>
+//#include <AzCore/Math/Crc.h>
+//#include <AzCore/Math/Matrix3x3.h>
+//#include <AzCore/Math/Matrix4x4.h>
+//#include <AzCore/Math/Obb.h>
+//#include <AzCore/Math/Plane.h>
+//#include <AzCore/Math/Quaternion.h>
+//#include <AzCore/Math/Transform.h>
 #include <AzCore/Math/Uuid.h>
-#include <AzCore/Math/Vector2.h>
-#include <AzCore/Math/Vector3.h>
-#include <AzCore/Math/Vector4.h>
+//#include <AzCore/Math/Vector2.h>
+//#include <AzCore/Math/Vector3.h>
+//#include <AzCore/Math/Vector4.h>
 #include <AzCore/RTTI/BehaviorContext.h>
 #include <AzCore/RTTI/RTTI.h>
 #include <AzCore/std/string/string.h>
@@ -36,18 +36,19 @@ namespace AZ::ScriptCanvasOnDemandReflection
     {
         // return capitalized versions of what we need, otherwise just the regular name
         // then strip all the stuff
-        if (typeId == azrtti_typeid<Aabb>())
-        {
-            return "AABB";
-        }
-        else if (typeId == azrtti_typeid<bool>())
+//cjh        if (typeId == azrtti_typeid<Aabb>())
+//        {
+//            return "AABB";
+//        }
+//        else
+            if (typeId == azrtti_typeid<bool>())
         {
             return "Boolean";
         }
-        else if (typeId == azrtti_typeid<Color>())
-        {
-            return "Color";
-        }
+//cjh        else if (typeId == azrtti_typeid<Color>())
+//        {
+//            return "Color";
+//        }
         else if (typeId == azrtti_typeid<Crc32>())
         {
             return "CRC";
@@ -56,14 +57,14 @@ namespace AZ::ScriptCanvasOnDemandReflection
 //        {
 //            return "EntityId";
 //        }
-        else if (typeId == azrtti_typeid<Matrix3x3>())
-        {
-            return "Matrix3x3";
-        }
-        else if (typeId == azrtti_typeid<Matrix4x4>())
-        {
-            return "Matrix4x4";
-        }
+//        else if (typeId == azrtti_typeid<Matrix3x3>())
+//        {
+//            return "Matrix3x3";
+//        }
+//        else if (typeId == azrtti_typeid<Matrix4x4>())
+//        {
+//            return "Matrix4x4";
+//        }
         else if (typeId == azrtti_typeid<AZ::s8>())
         {
             return "Number:s8";
@@ -104,38 +105,38 @@ namespace AZ::ScriptCanvasOnDemandReflection
         {
             return "Number";
         }
-        else if (typeId == azrtti_typeid<Obb>())
-        {
-            return "OBB";
-        }
-        else if (typeId == azrtti_typeid<Plane>())
-        {
-            return "Plane";
-        }
-        else if (typeId == azrtti_typeid<Quaternion>())
-        {
-            return "Quaternion";
-        }
+//cjh        else if (typeId == azrtti_typeid<Obb>())
+//        {
+//            return "OBB";
+//        }
+//        else if (typeId == azrtti_typeid<Plane>())
+//        {
+//            return "Plane";
+//        }
+//        else if (typeId == azrtti_typeid<Quaternion>())
+//        {
+//            return "Quaternion";
+//        }
         else if (typeId == azrtti_typeid<AZStd::string>() || typeId == azrtti_typeid<AZStd::string_view>())
         {
             return "String";
         }
-        else if (typeId == azrtti_typeid<Transform>())
-        {
-            return "Transform";
-        }
-        else if (typeId == azrtti_typeid<Vector2>())
-        {
-            return "Vector2";
-        }
-        else if (typeId == azrtti_typeid<Vector3>())
-        {
-            return "Vector3";
-        }
-        else if (typeId == azrtti_typeid<Vector4>())
-        {
-            return "Vector4";
-        }
+//cjh        else if (typeId == azrtti_typeid<Transform>())
+//        {
+//            return "Transform";
+//        }
+//        else if (typeId == azrtti_typeid<Vector2>())
+//        {
+//            return "Vector2";
+//        }
+//        else if (typeId == azrtti_typeid<Vector3>())
+//        {
+//            return "Vector3";
+//        }
+//        else if (typeId == azrtti_typeid<Vector4>())
+//        {
+//            return "Vector4";
+//        }
         else
         {
             auto bcClassIter = context.m_typeToClassMap.find(typeId);
