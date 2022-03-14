@@ -15,8 +15,6 @@
 
 namespace AZStd
 {
-    using std::is_convertible;
-    using std::is_convertible_v;
 
     // models the C++20 convertible_to concept
     namespace Internal

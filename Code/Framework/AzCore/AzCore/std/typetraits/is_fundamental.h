@@ -9,8 +9,3 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::is_fundamental;
-    using std::is_fundamental_v;
-}

@@ -153,6 +153,8 @@
     AZ_FORCE_INLINE _Return _Function(_Param1 a, _Param1 b, _Param1 c, _Param2 d)  { return AZStd::_Function(a, b, c, d); }
 /// @}
 
+#define AZStd std
+
 #endif // AZSTD_CONFIG_H
 
 

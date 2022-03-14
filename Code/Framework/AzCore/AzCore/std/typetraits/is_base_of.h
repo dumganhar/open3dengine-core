@@ -9,9 +9,3 @@
 #pragma once
 #include <AzCore/std/typetraits/intrinsics.h>
 
-namespace AZStd
-{
-    using std::is_base_of;
-    using std::is_base_of_v;
-}
-

@@ -8,9 +8,3 @@
 #pragma once
 
 #include <AzCore/std/typetraits/config.h>
-
-namespace AZStd
-{
-    using std::is_member_object_pointer;
-    using std::is_member_object_pointer_v;
-}

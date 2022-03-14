@@ -9,8 +9,3 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::is_arithmetic;
-    using std::is_arithmetic_v;
-}

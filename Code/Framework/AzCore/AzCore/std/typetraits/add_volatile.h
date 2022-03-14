@@ -8,9 +8,3 @@
 #pragma once
 
 #include <AzCore/std/typetraits/config.h>
-
-namespace AZStd
-{
-    using std::add_volatile;
-    using std::add_volatile_t;
-}

@@ -9,8 +9,4 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::is_member_function_pointer;
-    using std::is_member_function_pointer_v;
-}
+

@@ -9,8 +9,3 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::is_pod;
-    using std::is_pod_v;
-}

@@ -8,8 +8,4 @@
 #pragma once
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::add_const;
-    using std::add_const_t;
-}
+

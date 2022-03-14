@@ -8,9 +8,4 @@
 #pragma once
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::remove_pointer;
-    template<class Type>
-    using remove_pointer_t = std::remove_pointer_t<Type>;
-}
+

@@ -9,8 +9,3 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::alignment_of;
-    using std::alignment_of_v;
-}

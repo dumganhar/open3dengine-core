@@ -9,8 +9,4 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::remove_all_extents;
-    using std::remove_all_extents_t;
-}
+

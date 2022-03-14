@@ -9,8 +9,3 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::rank;
-    using std::rank_v;
-}

@@ -9,8 +9,4 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::is_compound;
-    using std::is_compound_v;
-}
+

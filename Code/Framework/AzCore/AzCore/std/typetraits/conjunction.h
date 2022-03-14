@@ -7,10 +7,5 @@
  */
 #pragma once
 
-#include <type_traits>
+#include <AzCore/std/config.h>
 
-namespace AZStd
-{
-    using std::conjunction;
-    using std::conjunction_v;
-} // namespace AZStd

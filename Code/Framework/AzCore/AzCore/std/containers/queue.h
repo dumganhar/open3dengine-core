@@ -7,15 +7,6 @@
  */
 #pragma once
 
-#include <AzCore/std/containers/deque.h>
-#include <AzCore/std/containers/vector.h>
-#include <AzCore/std/functional_basic.h>
+
 #include <queue>
 
-namespace AZStd
-{
-    template<class T, class Container = AZStd::deque<T>>
-    using queue = std::queue<T, Container>;
-    template<class T, class Container = AZStd::vector<T>, class Compare = AZStd::less<typename Container::value_type>>
-    using priority_queue = std::priority_queue<T, Container, Compare>;
-}

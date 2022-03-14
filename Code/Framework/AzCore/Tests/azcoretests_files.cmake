@@ -179,6 +179,7 @@ set(FILES
     # Memory/HphaSchemaErrorDetection.cpp
     # Memory/LeakDetection.cpp
     # Memory/MallocSchema.cpp
+
     # AZStd/Algorithms.cpp
     # AZStd/Allocators.cpp
     # AZStd/Atomics.cpp
@@ -219,7 +220,7 @@ set(FILES
     # AZStd/TypeTraits.cpp
     # AZStd/Tuple.cpp
     # AZStd/UserTypes.h
-    # AZStd/Variant.cpp
+    AZStd/Variant.cpp
     # AZStd/VectorAndArray.cpp
 
     # AZStd/VariantSerialization.cpp

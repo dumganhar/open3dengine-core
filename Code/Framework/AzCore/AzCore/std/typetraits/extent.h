@@ -9,8 +9,4 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::extent;
-    using std::extent_v;
-}
+

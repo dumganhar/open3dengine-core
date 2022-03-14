@@ -11,9 +11,6 @@
 
 namespace AZStd
 {
-    using std::aligned_storage;
-    using std::aligned_storage_t;
-
     template <typename T, size_t Alignment = alignof(T)>
     using aligned_storage_for_t = std::aligned_storage_t<sizeof(T), Alignment>;
 }

@@ -7,10 +7,3 @@
  */
 #pragma once
 #include <AzCore/std/typetraits/config.h>
-
-namespace AZStd
-{
-    using std::add_pointer;
-    template<class Type>
-    using add_pointer_t = std::add_pointer_t<Type>;
-}

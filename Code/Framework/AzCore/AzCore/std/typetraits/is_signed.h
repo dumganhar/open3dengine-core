@@ -7,13 +7,4 @@
  */
 #pragma once
 
-#include <type_traits>
-
-namespace AZStd
-{
-    using std::is_signed;
-    using std::is_signed_v;
-
-    using std::make_signed;
-    using std::make_signed_t;
-}
+#include <AzCore/std/config.h>

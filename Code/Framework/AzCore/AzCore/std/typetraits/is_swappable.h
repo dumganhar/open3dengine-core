@@ -9,17 +9,3 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::is_swappable_with;
-    using std::is_swappable_with_v;
-
-    using std::is_swappable;
-    using std::is_swappable_v;
-
-    using std::is_nothrow_swappable_with;
-    using std::is_nothrow_swappable_v;
-
-    using std::is_nothrow_swappable;
-    using std::is_nothrow_swappable_v;
-}

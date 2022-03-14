@@ -7,10 +7,4 @@
  */
 #pragma once
 
-#include <type_traits>
-
-namespace AZStd
-{
-    using std::disjunction;
-    using std::disjunction_v;
-}
+#include <AzCore/std/config.h>

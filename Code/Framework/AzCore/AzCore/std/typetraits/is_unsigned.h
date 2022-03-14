@@ -7,13 +7,4 @@
  */
 #pragma once
 
-#include <type_traits>
-
-namespace AZStd
-{
-    using std::is_unsigned;
-    using std::is_unsigned_v;
-
-    using std::make_unsigned;
-    using std::make_unsigned_t;
-}
+#include <AzCore/std/config.h>

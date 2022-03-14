@@ -106,7 +106,7 @@ namespace AZ
     };
 }
 
-namespace AZStd
+namespace std
 {
     template<>
     struct hash<AZ::Crc32>

@@ -9,8 +9,4 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::add_cv;
-    using std::add_cv_t;
-}
+

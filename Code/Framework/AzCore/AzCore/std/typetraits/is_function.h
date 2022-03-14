@@ -13,8 +13,6 @@
 
 namespace AZStd
 {
-    using std::is_function;
-    using std::is_function_v;
 
     template<class T>
     struct is_function_pointer

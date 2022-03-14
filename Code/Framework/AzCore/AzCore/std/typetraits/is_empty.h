@@ -9,8 +9,3 @@
 
 #include <AzCore/std/typetraits/intrinsics.h>
 
-namespace AZStd
-{
-    using std::is_empty;
-    using std::is_empty_v;
-}

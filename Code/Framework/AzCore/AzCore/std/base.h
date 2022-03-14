@@ -25,11 +25,11 @@ namespace AZStd
     using ::size_t;
     using ::ptrdiff_t;
 
-    using std::initializer_list;
-
-    using std::nullptr_t;
+//    using std::initializer_list;
+//
+//    using std::nullptr_t;
 
     using sys_time_t = AZ::s64;
 
-    using std::byte;
+//    using std::byte;
 }

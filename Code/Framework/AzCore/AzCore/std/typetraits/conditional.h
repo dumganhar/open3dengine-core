@@ -9,14 +9,6 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::conditional;
-    using std::conditional_t;
-
-    using std::enable_if;
-    using std::enable_if_t;
-} // namespace AZStd
 
 // Backwards comaptible AZStd extensions for std::conditional and std::enable_if
 namespace AZStd::Utils

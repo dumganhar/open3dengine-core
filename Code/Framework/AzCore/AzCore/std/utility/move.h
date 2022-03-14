@@ -7,13 +7,4 @@
  */
 #pragma once
 
-namespace AZStd
-{
-    // rvalue
-    // rvalue move
-    template<class T>
-    constexpr AZStd::remove_reference_t<T>&& move(T&& t)
-    {
-        return static_cast<AZStd::remove_reference_t<T>&&>(t);
-    }
-}
+#include <AzCore/std/config.h>

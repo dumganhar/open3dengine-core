@@ -179,11 +179,8 @@ namespace AZ
     };
 } // namespace AZ
 
-namespace AZStd
+namespace std
 {
-    template<class T>
-    struct hash;
-
     // hash specialization
     template <>
     struct hash<AZ::Uuid>

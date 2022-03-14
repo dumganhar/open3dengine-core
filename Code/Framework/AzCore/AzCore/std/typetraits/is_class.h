@@ -9,8 +9,4 @@
 
 #include <AzCore/std/typetraits/intrinsics.h>
 
-namespace AZStd
-{
-    using std::is_class;
-    using std::is_class_v;
-}
+

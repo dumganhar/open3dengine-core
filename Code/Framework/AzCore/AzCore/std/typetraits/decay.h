@@ -9,8 +9,3 @@
 
 #include <AzCore/std/typetraits/config.h>
 
-namespace AZStd
-{
-    using std::decay;
-    using std::decay_t;
-} // namespace AZStd

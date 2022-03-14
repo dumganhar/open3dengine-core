@@ -9,9 +9,4 @@
 
 #include <AzCore/std/typetraits/intrinsics.h>
 
-namespace AZStd
-{
-    using std::is_trivial;
-    using std::is_trivial_v;
-}
 

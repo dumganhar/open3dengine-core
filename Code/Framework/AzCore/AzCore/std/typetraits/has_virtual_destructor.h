@@ -9,8 +9,4 @@
 
 #include <AzCore/std/typetraits/intrinsics.h>
 
-namespace AZStd
-{
-    using std::has_virtual_destructor;
-    using std::has_virtual_destructor_v;
-}
+

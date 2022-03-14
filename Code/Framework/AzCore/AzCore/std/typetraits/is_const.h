@@ -11,8 +11,4 @@
 
 namespace AZStd
 {
-    using std::is_const;
-    template<class T>
-    constexpr bool is_const_v = std::is_const<T>::value;
-
 }

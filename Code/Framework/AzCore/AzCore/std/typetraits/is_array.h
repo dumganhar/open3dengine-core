@@ -8,9 +8,3 @@
 #pragma once
 
 #include <AzCore/std/typetraits/config.h>
-
-namespace AZStd
-{
-    using std::is_array;
-    using std::is_array_v;
-}

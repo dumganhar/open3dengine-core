@@ -9,9 +9,4 @@
 
 #include <AzCore/std/typetraits/intrinsics.h>
 
-namespace AZStd
-{
-    using std::is_trivially_copyable;
-    using std::is_trivially_copyable_v;
-}
 
