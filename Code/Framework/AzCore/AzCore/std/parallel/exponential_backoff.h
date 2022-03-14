@@ -22,7 +22,7 @@ namespace AZStd
         {
             if (m_count <= MAX_PAUSE_LOOPS)
             {
-                AZStd::this_thread::pause(m_count);
+//TODO(cjh)                AZStd::this_thread::pause(m_count);
                 m_count <<= 1;
             }
             else

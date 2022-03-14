@@ -9,52 +9,9 @@
 #pragma once
 
 #include <AzCore/std/typetraits/typetraits.h>
-#include <AzCore/std/typetraits/invoke_traits.h>
 
 namespace AZStd
 {
-    template <class Fn, class... ArgTypes>
-    struct is_invocable : Internal::invocable<Fn, ArgTypes...>::type {};
-
-    template <class R, class Fn, class... ArgTypes>
-    struct is_invocable_r : Internal::invocable_r<R, Fn, ArgTypes...>::type {};
-
-    template <class Fn, class... ArgTypes>
-    struct is_nothrow_invocable
-        : bool_constant<noexcept(Internal::invocable<Fn, ArgTypes...>::value)>
-    {};
-
-    template <class R, class Fn, class... ArgTypes>
-    struct is_nothrow_invocable_r
-        : bool_constant<noexcept(Internal::invocable_r<R, Fn, ArgTypes...>::value)>
-    {};
-
-    template <class Fn, class... ArgTypes>
-    constexpr bool is_invocable_v = is_invocable<Fn, ArgTypes...>::value;
-
-    template <class R, class Fn, class ...ArgTypes>
-    constexpr bool is_invocable_r_v = is_invocable_r<R, Fn, ArgTypes...>::value;
-
-    template <class Fn, class... ArgTypes>
-    constexpr bool is_nothrow_invocable_v = is_nothrow_invocable<Fn, ArgTypes...>::value;
-
-    template <class R, class Fn, class ...ArgTypes>
-    constexpr bool is_nothrow_invocable_r_v = is_nothrow_invocable_r<R, Fn, ArgTypes...>::value;
-
-    template<class Fn, class... ArgTypes>
-    struct invoke_result
-        : AZStd::enable_if<Internal::invocable<Fn, ArgTypes...>::value, typename Internal::invocable<Fn, ArgTypes...>::result_type>
-    {};
-
-    template<class Fn, class... ArgTypes>
-    using invoke_result_t = typename invoke_result<Fn, ArgTypes...>::type;
-
-    template <class F, class... Args>
-    inline constexpr invoke_result_t<F, Args...> invoke(F&& f, Args&&... args)
-    {
-        return Internal::INVOKE(Internal::InvokeTraits::forward<F>(f), Internal::InvokeTraits::forward<Args>(args)...);
-    }
-
     // models the invocable concept
     template <class F, class... Args>
     /*concept*/ constexpr bool invocable = is_invocable_v<F, Args...>;

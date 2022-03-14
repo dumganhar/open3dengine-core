@@ -19,12 +19,12 @@ namespace AZ
         : m_desc(desc)
         , m_used(0)
         , m_freeChunksMap(
-              FreeMapType::key_compare(),
-              AZStdIAllocator(desc.m_mapAllocator != nullptr ? desc.m_mapAllocator : &AllocatorInstance<SystemAllocator>::Get()))
+              FreeMapType::key_compare())
+//TODO(cjh)              AZStdIAllocator(desc.m_mapAllocator != nullptr ? desc.m_mapAllocator : &AllocatorInstance<SystemAllocator>::Get()))
         , m_allocChunksMap(
               AllocMapType::hasher(),
-              AllocMapType::key_eq(),
-              AZStdIAllocator(desc.m_mapAllocator != nullptr ? desc.m_mapAllocator : &AllocatorInstance<SystemAllocator>::Get()))
+              AllocMapType::key_eq())
+//TODO(cjh)              AZStdIAllocator(desc.m_mapAllocator != nullptr ? desc.m_mapAllocator : &AllocatorInstance<SystemAllocator>::Get()))
     {
         if (m_desc.m_mapAllocator == nullptr)
         {

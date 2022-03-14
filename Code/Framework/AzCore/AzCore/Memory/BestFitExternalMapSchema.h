@@ -71,8 +71,8 @@ namespace AZ
 
         Descriptor      m_desc;             ///<
         size_type       m_used;             ///< Number of bytes in use.
-        typedef AZStd::multimap<size_t, char*, AZStd::less<size_t>, AZStdIAllocator> FreeMapType;
-        typedef AZStd::unordered_map<char*, size_t, AZStd::hash<char*>, AZStd::equal_to<char*>, AZStdIAllocator> AllocMapType;
+        typedef AZStd::multimap<size_t, char*, AZStd::less<size_t>/*TODO(cjh), AZStdIAllocator*/> FreeMapType;
+        typedef AZStd::unordered_map<char*, size_t, AZStd::hash<char*>, AZStd::equal_to<char*>, /*TODO(cjh), AZStdIAllocator*/> AllocMapType;
         FreeMapType         m_freeChunksMap;
         AllocMapType        m_allocChunksMap;
     };

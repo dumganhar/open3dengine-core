@@ -72,50 +72,7 @@ namespace AZStd::Internal
 
 namespace AZStd
 {
-    //! Implements the C++20 version of destroy_at
-    //! If the element type T is not an array type it invokes the destructor on that object
-    //! Otherwise it recursively destructs the elements of the array as if by calling
-    //! AZStd::destroy(AZStd::begin(*ptr), AZStd::end(*ptr))
-    template <typename T>
-    constexpr void destroy_at(T* ptr)
-    {
-        if constexpr (AZStd::is_array_v<T>)
-        {
-            for (auto& element : *ptr)
-            {
-                AZStd::destroy_at(AZStd::addressof(element));
-            }
-        }
-        else
-        {
-            ptr->~T();
-        }
-    }
-    //! Implements the C++17 destroy function which works on a range of elements
-    //! The functions accepts a first and last iterator
-    //! and invokes the destructor on all element in the iterator range
-    template <typename ForwardIt>
-    constexpr void destroy(ForwardIt first, ForwardIt last)
-    {
-        for (; first != last; ++first)
-        {
-            AZStd::destroy_at(AZStd::addressof(*first));
-        }
-    }
 
-    //! Implements the C++17 destroy_n function
-    //! The function accepts a forward iterator and a number of elements
-    //! and invokes the destructor on all the elements in the range
-    //! Returns an iterator past the last element destructed
-    template <typename ForwardIt, size_t N>
-    constexpr ForwardIt destroy_n(ForwardIt first, size_t numElements)
-    {
-        for (; numElements > 0; ++first, --numElements)
-        {
-            AZStd::destroy_at(AZStd::addressof(*first));
-        }
-        return first;
-    }
 }
 
 namespace AZStd::Internal

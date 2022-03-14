@@ -19,6 +19,14 @@
 #include <AzCore/std/typetraits/void_t.h>
 #include <AzCore/std/function/invoke.h>
 #include <AzCore/std/optional.h>
+#include <AzCore/std/containers/variant.h>
+#include <AzCore/std/containers/list.h>
+#include <AzCore/std/containers/set.h>
+#include <AzCore/std/containers/unordered_set.h>
+#include <AzCore/std/containers/map.h>
+#include <AzCore/std/containers/unordered_map.h>
+#include <AzCore/std/containers/bitset.h>
+#include <AzCore/std/string/string.h>
 
 #include <AzCore/Math/Uuid.h>
 #include <AzCore/Math/Crc.h>
@@ -27,73 +35,73 @@
 
 namespace AZStd
 {
-    template <class T>
-    struct less;
-    template <class T>
-    struct less_equal;
-    template <class T>
-    struct greater;
-    template <class T>
-    struct greater_equal;
-    template <class T>
-    struct equal_to;
-    template <class T>
-    struct hash;
-    template< class T1, class T2>
-    struct pair;
-    template< class T, class Allocator/* = AZStd::allocator*/ >
-    class vector;
-    template< class T, AZStd::size_t N >
-    class array;
-    template< class T, class Allocator/* = AZStd::allocator*/ >
-    class list;
+//    template <class T>
+//    struct less;
+//    template <class T>
+//    struct less_equal;
+//    template <class T>
+//    struct greater;
+//    template <class T>
+//    struct greater_equal;
+//    template <class T>
+//    struct equal_to;
+//    template <class T>
+//    struct hash;
+//    template< class T1, class T2>
+//    struct pair;
+//    template< class T, class Allocator/* = AZStd::allocator*/ >
+//    class vector;
+//    template< class T, AZStd::size_t N >
+//    class array;
+//    template< class T, class Allocator/* = AZStd::allocator*/ >
+//    class list;
     template< class T, class Allocator/* = AZStd::allocator*/ >
     class forward_list;
-    template<class Key, class MappedType, class Compare /*= AZStd::less<Key>*/, class Allocator /*= AZStd::allocator*/>
-    class map;
-    template<class Key, class MappedType, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/ >
-    class unordered_map;
-    template<class Key, class MappedType, class Hasher /* = AZStd::hash<Key>*/, class EqualKey /* = AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/ >
-    class unordered_multimap;
-    template <class Key, class Compare, class Allocator>
-    class set;
-    template<class Key, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/>
-    class unordered_set;
-    template<class Key, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/>
-    class unordered_multiset;
+//    template<class Key, class MappedType, class Compare /*= AZStd::less<Key>*/, class Allocator /*= AZStd::allocator*/>
+//    class map;
+//    template<class Key, class MappedType, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/ >
+//    class unordered_map;
+//    template<class Key, class MappedType, class Hasher /* = AZStd::hash<Key>*/, class EqualKey /* = AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/ >
+//    class unordered_multimap;
+//    template <class Key, class Compare, class Allocator>
+//    class set;
+//    template<class Key, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/>
+//    class unordered_set;
+//    template<class Key, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/>
+//    class unordered_multiset;
     template<class T, size_t Capacity>
     class fixed_vector;
     template< class T, size_t NumberOfNodes>
     class fixed_list;
     template< class T, size_t NumberOfNodes>
     class fixed_forward_list;
-    template<AZStd::size_t NumBits>
-    class bitset;
+//    template<AZStd::size_t NumBits>
+//    class bitset;
 
     template<class T>
     class intrusive_ptr;
-    template<class T>
-    class shared_ptr;
+//    template<class T>
+//    class shared_ptr;
 
-    template<class Element, class Traits, class Allocator>
-    class basic_string;
-
-    template<class Element>
-    struct char_traits;
-
-    template <class Element, class Traits>
-    class basic_string_view;
+//    template<class Element, class Traits, class Allocator>
+//    class basic_string;
+//
+//    template<class Element>
+//    struct char_traits;
+//
+//    template <class Element, class Traits>
+//    class basic_string_view;
 
     template <class Element, size_t MaxElementCount, class Traits>
     class basic_fixed_string;
 
-    template<class Signature>
-    class function;
-
-    struct monostate;
-
-    template<class... Types>
-    class variant;
+//    template<class Signature>
+//    class function;
+//
+//    struct monostate;
+//
+//    template<class... Types>
+//    class variant;
 }
 
 namespace AZ

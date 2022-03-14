@@ -3047,7 +3047,7 @@ namespace AZ
         }
         if (m_class)
         {
-            BehaviorMethod* constructor = aznew AZ::Internal::BehaviorMethodImpl<void(C* address, Params...)>(&Construct<C, Params...>, Base::m_context, AZStd::string::format("%s::Constructor", m_class->m_name.c_str()));
+            BehaviorMethod* constructor = aznew AZ::Internal::BehaviorMethodImpl<void(C* address, Params...)>(&Construct<C, Params...>, Base::m_context, AZStd::format_string("%s::Constructor", m_class->m_name.c_str()));
             m_class->m_constructors.push_back(constructor);
         }
         return this;
@@ -3235,7 +3235,7 @@ namespace AZ
         if (m_class)
         {
             typedef AZ::Internal::BehaviorMethodImpl<typename AZStd::RemoveFunctionConst<typename AZStd::remove_pointer<Function>::type>::type> BehaviorMethodType;
-            BehaviorMethod* method = aznew BehaviorMethodType(f, Base::m_context, AZStd::string::format("%s::%s", m_class->m_name.c_str(), name));
+            BehaviorMethod* method = aznew BehaviorMethodType(f, Base::m_context, AZStd::format_string("%s::%s", m_class->m_name.c_str(), name));
             method->m_debugDescription = dbgDesc;
 
             /*

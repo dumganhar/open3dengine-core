@@ -25,31 +25,31 @@ struct lua_Debug;
 // forward declare specialized types
 namespace AZStd
 {
-    template< class T, class Allocator/* = AZStd::allocator*/ >
-    class vector;
-    template< class T, class Allocator/* = AZStd::allocator*/ >
-    class list;
+//cjh    template< class T, class Allocator/* = AZStd::allocator*/ >
+//    class vector;
+//    template< class T, class Allocator/* = AZStd::allocator*/ >
+//    class list;
     template< class T, class Allocator/* = AZStd::allocator*/ >
     class forward_list;
     template< class T, size_t Capacity >
     class fixed_vector;
-    template< class T, size_t N >
-    class array;
-    template<class Key, class MappedType, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/ >
-    class unordered_map;
-    template<class Key, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/>
-    class unordered_set;
-    template<AZStd::size_t NumBits>
-    class bitset;
-    template<class Element, class Traits, class Allocator>
-    class basic_string;
-    template<class Element>
-    struct char_traits;
+//cjh    template< class T, size_t N >
+//    class array;
+//    template<class Key, class MappedType, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/ >
+//    class unordered_map;
+//    template<class Key, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/>
+//    class unordered_set;
+//    template<AZStd::size_t NumBits>
+//    class bitset;
+//    template<class Element, class Traits, class Allocator>
+//    class basic_string;
+//    template<class Element>
+//    struct char_traits;
 
     template<class T>
     class intrusive_ptr;
-    template<class T>
-    class shared_ptr;
+//cjh    template<class T>
+//    class shared_ptr;
 }
 
 namespace AZ
@@ -493,7 +493,7 @@ namespace AZ
             }
             else
             {
-                return AZ::Failure(AZStd::string::format("Index out of bounds: %zu (size: %zu)", index, thisContainer.size()));
+                return AZ::Failure(AZStd::format_string("Index out of bounds: %zu (size: %zu)", index, thisContainer.size()));
             }
         }
 
@@ -687,14 +687,14 @@ namespace AZ
         template<typename Targ, size_t Index>
         static void ReflectUnpackMethodFold(BehaviorContext::ClassBuilder<ContainerType>& builder, const AZStd::vector<AZStd::string>& typeNames)
         {
-            const AZStd::string methodName = AZStd::string::format("Get%zu", Index);
+            const AZStd::string methodName = AZStd::format_string("Get%zu", Index);
             builder->Method(methodName.data(), [](ContainerType& thisPointer) { return AZStd::get<Index>(thisPointer); })
                 ->Attribute(AZ::Script::Attributes::ExcludeFrom, AZ::Script::Attributes::ExcludeFlags::List)
                 ->Attribute(AZ::ScriptCanvasAttributes::TupleGetFunctionIndex, Index)
                 ;
 
             builder->Property
-                ( AZStd::string::format("element_%zu_%s", Index, typeNames[Index].c_str()).c_str()
+                ( AZStd::format_string("element_%zu_%s", Index, typeNames[Index].c_str()).c_str()
                 , [](ContainerType& thisPointer) { return AZStd::get<Index>(thisPointer); }
                 , [](ContainerType& thisPointer, const Targ& element) { AZStd::get<Index>(thisPointer) = element; });
         }
@@ -1088,7 +1088,7 @@ namespace AZ
                     AZStd::string valueName = AZ::ScriptCanvasOnDemandReflection::GetPrettyNameForAZTypeId(context, AZ::AzTypeInfo<T>::Uuid());
                     if (!valueName.empty())
                     {
-                        return AZStd::string::format("optional<%.*s>",
+                        return AZStd::format_string("optional<%.*s>",
                             aznumeric_cast<int>(valueName.size()), valueName.data());
                     }
                     return "optional<T>";
@@ -1098,7 +1098,7 @@ namespace AZ
                     AZStd::string valueName = AZ::ScriptCanvasOnDemandReflection::GetPrettyNameForAZTypeId(context, AZ::AzTypeInfo<T>::Uuid());
                     if (!valueName.empty())
                     {
-                        return AZStd::string::format("Wraps an optional around type %.*s",
+                        return AZStd::format_string("Wraps an optional around type %.*s",
                             aznumeric_cast<int>(valueName.size()), valueName.data());
                     }
                     return "Wraps an optional around type T";

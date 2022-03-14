@@ -8,9 +8,10 @@
 #pragma once
 
 #include <string>
+#include <AzCore/std/base.h>
 
 namespace AZStd
 {
-using std::string;
-using std::char_traits;
+std::string format_string(const char* formatStr, ...);
+
 } // namespace AZStd

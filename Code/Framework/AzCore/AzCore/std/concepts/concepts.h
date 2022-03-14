@@ -390,9 +390,6 @@ namespace AZStd
 {
     template<class S, class I>
     /*concept*/ constexpr bool sized_sentinel_for = Internal::sized_sentinel_for_impl<S, I>;
-
-    template<class I>
-    struct iterator_traits;
 }
 
 namespace AZStd::Internal

@@ -454,9 +454,6 @@ namespace AZStd
     constexpr auto erase_if(basic_fixed_string<Element, MaxElementCount, Traits>& container, Predicate predicate)
         -> typename basic_fixed_string<Element, MaxElementCount, Traits>::size_type;
 
-    template<class T>
-    struct hash;
-
     template<class Element, size_t MaxElementCount, class Traits>
     struct hash<basic_fixed_string<Element, MaxElementCount, Traits>>;
 

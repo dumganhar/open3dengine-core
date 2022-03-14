@@ -183,7 +183,7 @@ namespace AZ
 
         AZStd::string ScopedAutoTempDirectory::Resolve(const char* path) const
         {
-            AZStd::string resolved = AZStd::string::format("%s" AZ_CORRECT_FILESYSTEM_SEPARATOR_STRING "%s", m_tempDirectory, path);
+            AZStd::string resolved = AZStd::format_string("%s" AZ_CORRECT_FILESYSTEM_SEPARATOR_STRING "%s", m_tempDirectory, path);
             return resolved;
         }
         

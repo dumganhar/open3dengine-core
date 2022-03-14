@@ -140,7 +140,7 @@ namespace AZ::Utils
 //        }
 //        else
 //        {
-//            return AZ::Failure(AZStd::string::format("Could not write to file '%s'", filePathFixed.c_str()));
+//            return AZ::Failure(AZStd::format_string("Could not write to file '%s'", filePathFixed.c_str()));
 //        }
 //    }
 //
@@ -150,7 +150,7 @@ namespace AZ::Utils
 //        IO::FileIOStream file;
 //        if (!file.Open(filePath.data(), IO::OpenMode::ModeRead))
 //        {
-//            return AZ::Failure(AZStd::string::format("Failed to open '%.*s'.", AZ_STRING_ARG(filePath)));
+//            return AZ::Failure(AZStd::format_string("Failed to open '%.*s'.", AZ_STRING_ARG(filePath)));
 //        }
 //
 //        AZ::IO::SizeType length = file.GetLength();
@@ -161,7 +161,7 @@ namespace AZ::Utils
 //        }
 //        else if (length == 0)
 //        {
-//            return AZ::Failure(AZStd::string::format("Failed to load '%.*s'. File is empty.", AZ_STRING_ARG(filePath)));
+//            return AZ::Failure(AZStd::format_string("Failed to load '%.*s'. File is empty.", AZ_STRING_ARG(filePath)));
 //        }
 //
 //        Container fileContent;

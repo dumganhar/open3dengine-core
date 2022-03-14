@@ -19,26 +19,26 @@
 // forward declare specialized types
 namespace AZStd
 {
-    template< class T, class Allocator/* = AZStd::allocator*/ >
-    class vector;
-    template< class T, class Allocator/* = AZStd::allocator*/ >
-    class list;
-    template< class T, class Allocator/* = AZStd::allocator*/ >
+//cjh    template< class T, class Allocator/* = AZStd::allocator*/ >
+//    class vector;
+//    template< class T, class Allocator/* = AZStd::allocator*/ >
+//    class list;
+//    template< class T, class Allocator/* = AZStd::allocator*/ >
     class forward_list;
     template< class T, size_t Capacity >
     class fixed_vector;
-    template< class T, size_t N >
-    class array;
-    template<class Key, class MappedType, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/ >
-    class unordered_map;
-    template<class Key, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/>
-    class unordered_set;
-    template<AZStd::size_t NumBits>
-    class bitset;
-    template<class Element, class Traits, class Allocator>
-    class basic_string;
-    template<class Element>
-    struct char_traits;
+//cjh    template< class T, size_t N >
+//    class array;
+//    template<class Key, class MappedType, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/ >
+//    class unordered_map;
+//    template<class Key, class Hasher /*= AZStd::hash<Key>*/, class EqualKey /*= AZStd::equal_to<Key>*/, class Allocator /*= AZStd::allocator*/>
+//    class unordered_set;
+//    template<AZStd::size_t NumBits>
+//    class bitset;
+//    template<class Element, class Traits, class Allocator>
+//    class basic_string;
+//    template<class Element>
+//    struct char_traits;
 
     template<class T>
     class intrusive_ptr;
@@ -73,7 +73,7 @@ namespace AZ
          {
              static AZStd::string Get(AZ::BehaviorContext& context)
              {
-                 return AZStd::string::format("Intrusive<%s>", OnDemandPrettyName<T>::Get(context).data());
+                 return AZStd::format_string("Intrusive<%s>", OnDemandPrettyName<T>::Get(context).data());
              }
          };
 
@@ -91,7 +91,7 @@ namespace AZ
          {
              static AZStd::string Get(AZ::BehaviorContext& context)
              {
-                 return AZStd::string::format("Shared<%s>", OnDemandPrettyName<T>::Get(context).data());
+                 return AZStd::format_string("Shared<%s>", OnDemandPrettyName<T>::Get(context).data());
              }
          };
 
@@ -109,7 +109,7 @@ namespace AZ
          {
              static AZStd::string Get(AZ::BehaviorContext& context)
              {
-                 return AZStd::string::format("Array<%s>", OnDemandPrettyName<T>::Get(context).data());
+                 return AZStd::format_string("Array<%s>", OnDemandPrettyName<T>::Get(context).data());
              }
          };
 
@@ -127,7 +127,7 @@ namespace AZ
          {
              static AZStd::string Get(AZ::BehaviorContext& context)
              {
-                 return AZStd::string::format("Fixed Size Array<%s, %zu>", OnDemandPrettyName<T>::Get(context).data(), N);
+                 return AZStd::format_string("Fixed Size Array<%s, %zu>", OnDemandPrettyName<T>::Get(context).data(), N);
              }
          };
 
@@ -145,7 +145,7 @@ namespace AZ
          {
              static AZStd::string Get(AZ::BehaviorContext& context)
              {
-                 return AZStd::string::format("Pair<%s, %s>", OnDemandPrettyName<T1>::Get(context).data(), OnDemandPrettyName<T2>::Get(context).data());
+                 return AZStd::format_string("Pair<%s, %s>", OnDemandPrettyName<T1>::Get(context).data(), OnDemandPrettyName<T2>::Get(context).data());
              }
          };
 
@@ -194,7 +194,7 @@ namespace AZ
              {
                  AZStd::string typeNames;
                  GetTypeNames<T...>(typeNames, context);
-                 return AZStd::string::format("Tuple<%s>", typeNames.c_str());
+                 return AZStd::format_string("Tuple<%s>", typeNames.c_str());
              }
          };
 
@@ -212,7 +212,7 @@ namespace AZ
          {
              static AZStd::string Get(AZ::BehaviorContext& context)
              {
-                 return AZStd::string::format("Map<%s, %s>", OnDemandPrettyName<Key>::Get(context).data(), OnDemandPrettyName<MappedType>::Get(context).data());
+                 return AZStd::format_string("Map<%s, %s>", OnDemandPrettyName<Key>::Get(context).data(), OnDemandPrettyName<MappedType>::Get(context).data());
              }
          };
 
@@ -230,7 +230,7 @@ namespace AZ
          {
              static AZStd::string Get(AZ::BehaviorContext& context)
              {
-                 return AZStd::string::format("Set<%s>", OnDemandPrettyName<Key>::Get(context).data());
+                 return AZStd::format_string("Set<%s>", OnDemandPrettyName<Key>::Get(context).data());
              }
          };
 
@@ -248,7 +248,7 @@ namespace AZ
          {
              static AZStd::string Get(AZ::BehaviorContext& context)
              {
-                 return AZStd::string::format("Outcome<%s, %s>", OnDemandPrettyName<t_Success>::Get(context).data(), OnDemandPrettyName<t_Failure>::Get(context).data());
+                 return AZStd::format_string("Outcome<%s, %s>", OnDemandPrettyName<t_Success>::Get(context).data(), OnDemandPrettyName<t_Failure>::Get(context).data());
              }
          };
 

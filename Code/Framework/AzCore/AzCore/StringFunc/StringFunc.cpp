@@ -1451,7 +1451,7 @@ namespace AZ::StringFunc
         } // namespace Internal
         void CalculateBranchToken(AZStd::string_view engineRootPath, AZStd::string& token)
         {
-            token = AZStd::string::format("0x%08X", Internal::CalculateBranchTokenHash(engineRootPath));
+            token = AZStd::format_string("0x%08X", Internal::CalculateBranchTokenHash(engineRootPath));
         }
         void CalculateBranchToken(AZStd::string_view engineRootPath, AZ::IO::FixedMaxPathString& token)
         {
@@ -2384,7 +2384,7 @@ namespace AZ::StringFunc
                         // jumping "\uXXXX" characters
                         jumpChar = 6;
 
-                        AZStd::string hexStr = AZStd::string::format("\\u%04x", static_cast<int>(character));
+                        AZStd::string hexStr = AZStd::format_string("\\u%04x", static_cast<int>(character));
                         inout.replace(i, i + 1, hexStr);
                     }
                     else

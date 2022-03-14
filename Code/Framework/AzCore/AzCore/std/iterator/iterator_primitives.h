@@ -29,17 +29,6 @@
 #include <AzCore/std/typetraits/remove_extent.h>
 #include <AzCore/std/typetraits/void_t.h>
 
-
-namespace AZStd
-{
-    // Bring in std utility functions into AZStd namespace
-    using std::forward;
-
-    // forward declare iterator_traits to avoid iterator.h include
-    template <class I>
-    struct iterator_traits;
-}
-
 // C++20 range traits for iteratable types
 namespace AZStd::Internal
 {

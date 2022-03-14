@@ -71,7 +71,7 @@ namespace AZStd::MemoryToASCII
                                 line2 += "-";
                             }
 
-                            line2 += AZStd::string::format("%02zx", i);
+                            line2 += AZStd::format_string("%02zx", i);
                         }
 
                         if (showASCII)
@@ -95,7 +95,7 @@ namespace AZStd::MemoryToASCII
 
                     if (showInfo)
                     {
-                        output += AZStd::string::format("Address: 0x%p Data Size:%zu Max Size:%zu\n", data, dataSize, maxShowSize);
+                        output += AZStd::format_string("Address: 0x%p Data Size:%zu Max Size:%zu\n", data, dataSize, maxShowSize);
                     }
 
                     output += line1 + "\n";
@@ -109,7 +109,7 @@ namespace AZStd::MemoryToASCII
                 {
                     if (showOffset)
                     {
-                        output += AZStd::string::format("%06zx", offset);
+                        output += AZStd::format_string("%06zx", offset);
 
                         if (showBinary || showASCII)
                         {
@@ -131,7 +131,7 @@ namespace AZStd::MemoryToASCII
 
                             if ((offset + index) < maxSize)
                             {
-                                binLine += AZStd::string::format("%02x", data[offset + index]);
+                                binLine += AZStd::format_string("%02x", data[offset + index]);
                             }
                             else
                             {

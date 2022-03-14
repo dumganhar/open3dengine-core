@@ -26,6 +26,7 @@
 //cjh #include <AzCore/Module/Environment.h>
 //cjh #include <AzCore/Console/IConsole.h>
 #include <AzCore/std/chrono/chrono.h>
+#include <AzCore/Casting/numeric_cast.h>
 
 namespace AZ::Debug
 {
