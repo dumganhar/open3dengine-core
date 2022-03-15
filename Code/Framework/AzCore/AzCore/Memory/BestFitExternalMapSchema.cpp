@@ -21,9 +21,9 @@ namespace AZ
         , m_freeChunksMap(
               FreeMapType::key_compare())
 //TODO(cjh)              AZStdIAllocator(desc.m_mapAllocator != nullptr ? desc.m_mapAllocator : &AllocatorInstance<SystemAllocator>::Get()))
-        , m_allocChunksMap(
-              AllocMapType::hasher(),
-              AllocMapType::key_eq())
+//        , m_allocChunksMap(
+//              AllocMapType::hasher()
+//              AllocMapType::key_eq())
 //TODO(cjh)              AZStdIAllocator(desc.m_mapAllocator != nullptr ? desc.m_mapAllocator : &AllocatorInstance<SystemAllocator>::Get()))
     {
         if (m_desc.m_mapAllocator == nullptr)
@@ -186,7 +186,7 @@ namespace AZ
                     FreeMapType::iterator toErase = curBlock;
                     ++curBlock;
                     m_freeChunksMap.erase(toErase);
-                    FreeMapType::iterator newBlock = m_freeChunksMap.insert(AZStd::make_pair(newBlockSize, newBlockAddress)).first;
+                    FreeMapType::iterator newBlock = m_freeChunksMap.insert(AZStd::make_pair(newBlockSize, newBlockAddress));//TODO(cjh) .first;
                     // if the newBlock in before the next in the list, update next in the list to current
                     if (curBlock != m_freeChunksMap.end() && newBlockSize < curBlock->first)
                     {
@@ -204,7 +204,7 @@ namespace AZ
                     FreeMapType::iterator toErase = curBlock;
                     ++curBlock;
                     m_freeChunksMap.erase(toErase);
-                    FreeMapType::iterator newBlock = m_freeChunksMap.insert(AZStd::make_pair(newBlockSize, newBlockAddress)).first;
+                    FreeMapType::iterator newBlock = m_freeChunksMap.insert(AZStd::make_pair(newBlockSize, newBlockAddress));//TODO(cjh) .first;
                     // if the newBlock in before the next in the list, update next in the list to current
                     if (curBlock != m_freeChunksMap.end() && newBlockSize < curBlock->first)
                     {

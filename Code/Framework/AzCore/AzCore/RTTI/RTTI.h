@@ -14,8 +14,8 @@
 
 namespace AZStd
 {
-    template<class T>
-    class shared_ptr;
+//TODO(cjh)    template<class T>
+//    class shared_ptr;
     template<class T>
     class intrusive_ptr;
 }

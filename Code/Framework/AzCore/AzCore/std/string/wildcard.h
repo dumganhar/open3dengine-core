@@ -68,7 +68,7 @@ namespace AZStd
                 if (findFilterPos.front() == '?' || binaryOp(findFilterPos.front(), *findEndCharPos))
                 {
                     // Make sub string view from the found position to the end of the string
-                    AZStd::string_view startFindSubView{ findCharPos.data() + AZStd::distance(findCharPos.begin(), findEndCharPos.base()) - 1, findCharPos.data() + findCharPos.size() };
+                    AZStd::string_view startFindSubView{ findCharPos.data() + AZStd::distance(findCharPos.begin(), findEndCharPos.base()) - 1 }; //TODO(cjh), findCharPos.data() + findCharPos.size() };
                     // the character matched so move both the find view and filter view to the next character
                     if (wildcard_match(findFilterPos.substr(1), startFindSubView.substr(1), binaryOp))
                     {

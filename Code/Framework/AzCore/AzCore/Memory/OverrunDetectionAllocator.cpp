@@ -203,7 +203,7 @@ namespace AZ
             void UpdateAvailability(SmallAllocationGroup* allocationGroup);
 
             OverrunDetectionSchema::PlatformAllocator* m_platformAllocator = nullptr;
-            AZStd::vector<SmallAllocationGroup, AZ::OSStdAllocator> m_smallAllocationGroups;
+            AZStd::vector<SmallAllocationGroup/*TODO(cjh), AZ::OSStdAllocator*/> m_smallAllocationGroups;
             bool m_underrunMode = false;
         };
     }

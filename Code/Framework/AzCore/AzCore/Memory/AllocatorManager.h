@@ -16,6 +16,7 @@
 #include <AzCore/std/functional.h> // for callbacks
 
 #include <AzCore/std/smart_ptr/shared_ptr.h>
+#include <AzCore/std/containers/vector.h>
 
 
 namespace AZ
@@ -36,7 +37,7 @@ namespace AZ
         friend class Debug::AllocationRecords;
         template<typename T, typename... Args> friend constexpr auto AZStd::construct_at(T*, Args&&... args)
             ->AZStd::enable_if_t<AZStd::is_void_v<AZStd::void_t<decltype(new (AZStd::declval<void*>()) T(AZStd::forward<Args>(args)...))>>, T*>;
-        template<typename T> constexpr friend void AZStd::destroy_at(T*);
+        template<typename T> /*TODO(cjh) constexpr */ friend void AZStd::destroy_at(T*);
 
     public:
 

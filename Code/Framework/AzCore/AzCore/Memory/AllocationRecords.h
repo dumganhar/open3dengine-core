@@ -40,7 +40,7 @@ namespace AZ
         };
 
         // We use OSAllocator which uses system calls to allocate memory, they are not recorded or tracked!
-        using AllocationRecordsType = AZStd::unordered_map<void*, AllocationInfo, AZStd::hash<void*>, AZStd::equal_to<void*>, OSStdAllocator>;
+        using AllocationRecordsType = AZStd::unordered_map<void*, AllocationInfo, AZStd::hash<void*>, AZStd::equal_to<void*>/* TODO(cjh) , OSStdAllocator*/>;
 
         /**
          * Records enumeration callback

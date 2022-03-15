@@ -21,69 +21,69 @@
 #include <AzCore/std/utility/declval.h>
 
 
-namespace AZStd
-{
-    // Bring in std utility functions into AZStd namespace
-    using std::forward;
-}
-
-// C++20 range traits for iteratable types
-namespace AZStd::ranges::Internal
-{
-    void iter_move();
-
-    template <typename It, typename = void>
-    constexpr bool iter_move_adl = false;
-
-    template <typename It>
-    constexpr bool iter_move_adl<It, void_t<decltype(iter_move(declval<It>()))>> = true;
-
-    template <typename It, typename = void>
-    constexpr bool is_class_or_enum_with_iter_move_adl = false;
-
-    template <typename It>
-    constexpr bool is_class_or_enum_with_iter_move_adl<It, enable_if_t<iter_move_adl<It>
-        && (is_class_v<remove_cvref_t<It>> || is_enum_v<remove_cvref_t<It>>)>>
-        = true;
-
-    struct iter_move_fn
-    {
-        template <typename It>
-        constexpr auto operator()(It&& it) const
-            ->enable_if_t<is_class_or_enum_with_iter_move_adl<It>,
-            decltype(iter_move(AZStd::forward<It>(it)))>
-        {
-            return iter_move(AZStd::forward<It>(it));
-        }
-        template <typename It>
-        constexpr auto operator()(It&& it) const
-            ->enable_if_t<!is_class_or_enum_with_iter_move_adl<It>&& is_lvalue_reference_v<decltype(*AZStd::forward<It>(it))>,
-            decltype(AZStd::move(*AZStd::forward<It>(it)))>
-        {
-            return AZStd::move(*AZStd::forward<It>(it));
-        }
-        template <typename It>
-        constexpr auto operator()(It&& it) const
-            ->enable_if_t<!is_class_or_enum_with_iter_move_adl<It> && !is_lvalue_reference_v<decltype(*AZStd::forward<It>(it))>,
-            decltype(*AZStd::forward<It>(it))>
-        {
-            return *AZStd::forward<It>(it);
-        }
-    };
-}
-
-namespace AZStd::ranges
-{
-    // Workaround for clang bug https://bugs.llvm.org/show_bug.cgi?id=37556
-    // Adding placing the inline customization_point_object namespace
-    // under a regular namespace and then aliasing that into the AZStd::ranges namespace
-    namespace workaround
-    {
-        inline namespace customization_point_object
-        {
-            inline constexpr auto iter_move = Internal::iter_move_fn{};
-        }
-    }
-
-    using namespace workaround;
-}
+//namespace AZStd
+//{
+//    // Bring in std utility functions into AZStd namespace
+//    using std::forward;
+//}
+//
+//// C++20 range traits for iteratable types
+//namespace AZStd::ranges::Internal
+//{
+//    void iter_move();
+//
+//    template <typename It, typename = void>
+//    constexpr bool iter_move_adl = false;
+//
+//    template <typename It>
+//    constexpr bool iter_move_adl<It, void_t<decltype(iter_move(declval<It>()))>> = true;
+//
+//    template <typename It, typename = void>
+//    constexpr bool is_class_or_enum_with_iter_move_adl = false;
+//
+//    template <typename It>
+//    constexpr bool is_class_or_enum_with_iter_move_adl<It, enable_if_t<iter_move_adl<It>
+//        && (is_class_v<remove_cvref_t<It>> || is_enum_v<remove_cvref_t<It>>)>>
+//        = true;
+//
+//    struct iter_move_fn
+//    {
+//        template <typename It>
+//        constexpr auto operator()(It&& it) const
+//            ->enable_if_t<is_class_or_enum_with_iter_move_adl<It>,
+//            decltype(iter_move(AZStd::forward<It>(it)))>
+//        {
+//            return iter_move(AZStd::forward<It>(it));
+//        }
+//        template <typename It>
+//        constexpr auto operator()(It&& it) const
+//            ->enable_if_t<!is_class_or_enum_with_iter_move_adl<It>&& is_lvalue_reference_v<decltype(*AZStd::forward<It>(it))>,
+//            decltype(AZStd::move(*AZStd::forward<It>(it)))>
+//        {
+//            return AZStd::move(*AZStd::forward<It>(it));
+//        }
+//        template <typename It>
+//        constexpr auto operator()(It&& it) const
+//            ->enable_if_t<!is_class_or_enum_with_iter_move_adl<It> && !is_lvalue_reference_v<decltype(*AZStd::forward<It>(it))>,
+//            decltype(*AZStd::forward<It>(it))>
+//        {
+//            return *AZStd::forward<It>(it);
+//        }
+//    };
+//}
+//
+//namespace AZStd::ranges
+//{
+//    // Workaround for clang bug https://bugs.llvm.org/show_bug.cgi?id=37556
+//    // Adding placing the inline customization_point_object namespace
+//    // under a regular namespace and then aliasing that into the AZStd::ranges namespace
+//    namespace workaround
+//    {
+//        inline namespace customization_point_object
+//        {
+//            inline constexpr auto iter_move = Internal::iter_move_fn{};
+//        }
+//    }
+//
+//    using namespace workaround;
+//}

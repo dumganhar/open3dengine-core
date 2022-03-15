@@ -21,10 +21,12 @@ namespace AZ
         * AZStd allocator wrapper for the global variables. Don't expose to external code, this allocation are NOT
         * tracked, etc. These are only for global environment variables.
         */
+        template <typename T>
         class OSStdAllocator
         {
         public:
-            using pointer_type = void *;
+            using value_type = T;
+            using pointer_type = T *;
             using size_type = AZStd::size_t;
             using difference_type = AZStd::ptrdiff_t;
             using allow_memory_leaks = AZStd::false_type;         ///< Regular allocators should not leak.
@@ -33,6 +35,7 @@ namespace AZ
                 : m_name("GlobalEnvironmentAllocator")
                 , m_allocator(allocator)
             {
+
             }
 
             OSStdAllocator(const OSStdAllocator& rhs)
@@ -73,8 +76,11 @@ namespace AZ
             Environment::AllocatorInterface* m_allocator;
         };
 
-        bool operator==(const OSStdAllocator& a, const OSStdAllocator& b) { (void)a; (void)b; return true; }
-        bool operator!=(const OSStdAllocator& a, const OSStdAllocator& b) { (void)a; (void)b; return false; }
+        template <typename T>
+        bool operator==(const OSStdAllocator<T>& a, const OSStdAllocator<T>& b) { (void)a; (void)b; return true; }
+
+        template <typename T>
+        bool operator!=(const OSStdAllocator<T>& a, const OSStdAllocator<T>& b) { (void)a; (void)b; return false; }
 
         void EnvironmentVariableHolderBase::UnregisterAndDestroy(DestructFunc destruct, bool moduleRelease)
         {
@@ -122,15 +128,15 @@ namespace AZ
             : public EnvironmentInterface
         {
         public:
-            using MapType = AZStd::unordered_map<u32, void *, AZStd::hash<u32>, AZStd::equal_to<u32>, OSStdAllocator>;
+            using MapType = AZStd::unordered_map<u32, void *>; //TODO(cjh), AZStd::hash<u32>, AZStd::equal_to<u32>, OSStdAllocator<AZStd::pair<u32, void*>>>;
 
             static EnvironmentInterface* Get();
             static void Attach(EnvironmentInstance sourceEnvironment, bool useAsGetFallback);
             static void Detach();
 
             EnvironmentImpl(Environment::AllocatorInterface* allocator)
-                : m_variableMap(MapType::hasher(), MapType::key_eq(), OSStdAllocator(allocator))
-                , m_numAttached(0)
+//TODO(cjh)                : m_variableMap(MapType::hasher(), MapType::key_equal(), OSStdAllocator<AZStd::pair<u32, void*>>(allocator))
+                : m_numAttached(0)
                 , m_fallback(nullptr)
                 , m_allocator(allocator)
             {}
@@ -231,28 +237,28 @@ namespace AZ
                     }
                 }
 
-                auto variableItBool = m_variableMap.insert_key(guid);
-                variableItBool.first->second = m_allocator->Allocate(byteSize, alignment);
-                if (variableItBool.first->second)
-                {
-                    result.m_state = EnvironmentVariableResult::Added;
-                    result.m_variable = variableItBool.first->second;
-                    if (addedVariableLock)
-                    {
-                        *addedVariableLock = &m_globalLock; // let the user release it
-                    }
-                    else
-                    {
-                        m_globalLock.unlock();
-                    }
-                }
-                else
-                {
-                    result.m_state = EnvironmentVariableResult::OutOfMemory;
-                    result.m_variable = nullptr;
-                    m_variableMap.erase(variableItBool.first);
-                    m_globalLock.unlock();
-                }
+//TODO(cjh)                auto variableItBool = m_variableMap.insert_key(guid);
+//                variableItBool.first->second = m_allocator->Allocate(byteSize, alignment);
+//                if (variableItBool.first->second)
+//                {
+//                    result.m_state = EnvironmentVariableResult::Added;
+//                    result.m_variable = variableItBool.first->second;
+//                    if (addedVariableLock)
+//                    {
+//                        *addedVariableLock = &m_globalLock; // let the user release it
+//                    }
+//                    else
+//                    {
+//                        m_globalLock.unlock();
+//                    }
+//                }
+//                else
+//                {
+//                    result.m_state = EnvironmentVariableResult::OutOfMemory;
+//                    result.m_variable = nullptr;
+//                    m_variableMap.erase(variableItBool.first);
+//                    m_globalLock.unlock();
+//                }
 
                 return result;
             }
@@ -501,7 +507,7 @@ namespace AZ
                 allocator = &s_moduleAllocator;
             }
 
-            Internal::EnvironmentImpl::s_environment = new(allocator->Allocate(sizeof(Internal::EnvironmentImpl), AZStd::alignment_of<Internal::EnvironmentImpl>::value)) Internal::EnvironmentImpl(allocator);
+//            Internal::EnvironmentImpl::s_environment = new(allocator->Allocate(sizeof(Internal::EnvironmentImpl), AZStd::alignment_of<Internal::EnvironmentImpl>::value)) Internal::EnvironmentImpl(allocator);
             AZ_Assert(Internal::EnvironmentImpl::s_environment, "We failed to allocate memory from the OS for environment storage %d bytes!", sizeof(Internal::EnvironmentImpl));
             Internal::g_environmentCleanUp.m_isOwner = true;
 

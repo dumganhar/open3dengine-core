@@ -282,9 +282,6 @@ namespace AZStd
         return azdynamic_cast<T*>(p.get());
     }
 
-    template <typename T>
-    struct hash;
-
     // hashing support for STL containers
     template <typename T>
     struct hash<intrusive_ptr<T>>

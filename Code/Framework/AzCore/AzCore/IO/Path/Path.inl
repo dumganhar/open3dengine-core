@@ -105,7 +105,7 @@ namespace AZ::IO
             if (NextCh && *NextCh == m_preferred_separator)
             {
                 ++pathParser;
-                return AZStd::string_view{ m_path.begin(), pathParser.m_path_raw_entry.end() };
+                return AZStd::make_string_view( m_path.begin(), pathParser.m_path_raw_entry.end() );
             }
             return pathParser.m_path_raw_entry;
         }
@@ -123,7 +123,7 @@ namespace AZ::IO
         AZStd::string_view relativePathStart = pathParser.m_path_raw_entry;
         // Retrieve the last filename entry and use it's end as the end of the relative path
         AZStd::string_view lastFilenameEntry = *(--parser::PathParser::CreateEnd(m_path, m_preferred_separator));
-        return AZStd::string_view(relativePathStart.begin(), lastFilenameEntry.end());
+        return AZStd::make_string_view(relativePathStart.begin(), lastFilenameEntry.end());
     }
 
     constexpr auto PathView::parent_path_view() const -> AZStd::string_view
@@ -151,7 +151,7 @@ namespace AZ::IO
                 return {};
             }
             --pathParser;
-            return AZStd::string_view(m_path.data(), pathParser.m_path_raw_entry.data() + pathParser.m_path_raw_entry.size());
+            return AZStd::make_string_view(m_path.data(), pathParser.m_path_raw_entry.data() + pathParser.m_path_raw_entry.size());
         }
     }
 
@@ -583,7 +583,7 @@ namespace AZ::IO
                 if (auto filenameParser = parser::PathParser::CreateBegin(filenameView, pathParser.m_preferred_separator);
                     filenameParser && parser::ClassifyPathPart(filenameParser) == parser::PathPartKind::PK_RootName)
                 {
-                    AZ::IO::PathView fileNamePath{ AZStd::string_view{ filenameView.begin(), path.m_path.end() },
+                    AZ::IO::PathView fileNamePath{ AZStd::make_string_view( filenameView.begin(), path.m_path.end() ),
                         pathParser.m_preferred_separator };
                     AppendNormalPathParts(pathIterable, fileNamePath);
                     return;
@@ -866,7 +866,7 @@ namespace AZ::IO
         // As the root names are different the other path replaces current path in it's entirety
         auto postRootNameIter = Internal::ConsumeRootName(m_path.begin(), m_path.end(), m_preferred_separator);
         auto otherPostRootNameIter = Internal::ConsumeRootName(first, last, m_preferred_separator);
-        AZStd::string_view rootNameView{ m_path.begin(), postRootNameIter };
+        AZStd::string_view rootNameView = AZStd::make_string_view( m_path.begin(), postRootNameIter );
 
         // The RootName can only ever be two characters long which is "<drive letter>:"
         auto ToLower = [](const char element) constexpr -> char

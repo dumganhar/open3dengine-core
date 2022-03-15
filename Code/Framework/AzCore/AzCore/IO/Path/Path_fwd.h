@@ -10,22 +10,25 @@
 
 #include <cstddef>
 
-namespace AZStd
-{
-    class allocator;
+#include <AzCore/std/string/string.h>
+#include <AzCore/std/string/fixed_string.h>
 
-    template <class Element>
-    struct char_traits;
-
-    template <class Element, class Traits, class Allocator>
-    class basic_string;
-    
-    template <class Element, size_t MaxElementCount, class Traits>
-    class basic_fixed_string;
-
-    template <typename T>
-    struct hash;
-}
+//cjh namespace AZStd
+//{
+//    class allocator;
+//
+//    template <class Element>
+//    struct char_traits;
+//
+//    template <class Element, class Traits, class Allocator>
+//    class basic_string;
+//
+//    template <class Element, size_t MaxElementCount, class Traits>
+//    class basic_fixed_string;
+//
+//    template <typename T>
+//    struct hash;
+//}
 
 namespace AZ
 {
@@ -50,7 +53,7 @@ namespace AZ::IO
 
     //! Only the following path types are supported
     //! The BasicPath template above is shared only amoung the following instantiations
-    using Path = BasicPath<AZStd::basic_string<char, AZStd::char_traits<char>, AZStd::allocator>>;
+    using Path = BasicPath<AZStd::string>; // <AZStd::basic_string<char, AZStd::char_traits<char>/*TODO(cjh), AZStd::allocator*/>>;
     using FixedMaxPath = BasicPath<FixedMaxPathString>;
 
     // Forward declare the PathIterator type.
@@ -61,9 +64,9 @@ namespace AZ::IO
 
 namespace AZStd
 {
-    template <>
-    struct hash<AZ::IO::PathView>;
-
-    template <typename StringType>
-    struct hash<AZ::IO::BasicPath<StringType>>;
+//cjh    template <>
+//    struct hash<AZ::IO::PathView>;
+//
+//    template <typename StringType>
+//    struct hash<AZ::IO::BasicPath<StringType>>;
 }

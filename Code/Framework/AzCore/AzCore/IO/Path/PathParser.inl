@@ -81,7 +81,7 @@ namespace AZ::IO::Internal
             // \\.\device - returns "\\."
 
 
-            AZStd::string_view path{ entryBeginIter, entryEndIter };
+            AZStd::string_view path = AZStd::make_string_view(entryBeginIter, entryEndIter);
 
             if (path.size() < 2)
             {
@@ -498,7 +498,7 @@ namespace AZ::IO::parser
         constexpr void MakeState(ParserState newState, typename AZStd::string_view::iterator start, typename AZStd::string_view::iterator end) noexcept
         {
             m_parser_state = newState;
-            m_path_raw_entry = AZStd::string_view(start, end);
+            m_path_raw_entry = AZStd::make_string_view(start, end);
         }
         constexpr void MakeState(ParserState newState) noexcept
         {

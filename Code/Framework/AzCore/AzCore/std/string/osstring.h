@@ -16,7 +16,7 @@ namespace AZ
     // ASCII string type that allocates from the OS allocator rather than the system allocator.
     // This should be used very sparingly, and only in application bootstrap situations where
     // the system allocator is not yet available.
-    typedef AZStd::basic_string<char, AZStd::char_traits<char>, OSStdAllocator> OSString;
+    typedef AZStd::basic_string<char, AZStd::char_traits<char>/*TODO(cjh), OSStdAllocator*/> OSString;
 } // namespace AZ
 
 #endif // AZCORE_OS_STRING_H

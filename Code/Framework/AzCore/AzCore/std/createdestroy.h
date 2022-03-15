@@ -499,30 +499,6 @@ namespace AZStd::Internal
     //////////////////////////////////////////////////////////////////////////
 }
 
-namespace AZStd
-{
-    //! Implements the C++17 uninitialized_move function
-    //! The functions accepts two input iterators and an output iterator
-    //! It performs an AZStd::move on each in in the range of the input iterator
-    //! and stores the result in location pointed by the output iterator
-    template <typename InputIt, typename ForwardIt>
-    ForwardIt uninitialized_move(InputIt first, InputIt last, ForwardIt result)
-    {
-        return AZStd::Internal::uninitialized_move(first, last, result, {});
-    }
-    // 25.3.2 Move
-    template<class InputIterator, class OutputIterator>
-    OutputIterator move(InputIterator first, InputIterator last, OutputIterator result)
-    {
-        return AZStd::Internal::move(first, last, result, {});
-    }
-
-    template<class BidirectionalIterator1, class BidirectionalIterator2>
-    BidirectionalIterator2 move_backward(BidirectionalIterator1 first, BidirectionalIterator1 last, BidirectionalIterator2 result)
-    {
-        return AZStd::Internal::move_backward(first, last, result, {});
-    }
-}
 
 namespace AZStd::Internal
 {

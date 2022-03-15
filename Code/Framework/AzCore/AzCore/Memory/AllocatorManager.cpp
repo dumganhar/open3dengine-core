@@ -246,7 +246,7 @@ AllocatorManager::LockAllocators()
         AZStd::unique_lock<AZStd::mutex> m_lock;
     };
 
-    AZStd::shared_ptr<AllocatorLock> result = AZStd::allocate_shared<AllocatorLockImpl>(OSStdAllocator(), m_allocatorListMutex);
+    AZStd::shared_ptr<AllocatorLock> result;//TODO(cjh) = AZStd::allocate_shared<AllocatorLockImpl>(OSStdAllocator(), m_allocatorListMutex);
 
     return result;
 }

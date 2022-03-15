@@ -13,14 +13,3 @@
 #include <AzCore/std/typetraits/is_convertible.h>
 #include <AzCore/std/typetraits/is_destructible.h>
 
-namespace AZStd
-{
-
-    template<class T, class... Args>
-    /*concept*/ constexpr bool constructible_from = conjunction_v<bool_constant<destructible<T>>,
-        is_constructible<T, Args...> >;
-
-    template<class T>
-    /*concept*/ constexpr bool move_constructible = conjunction_v<bool_constant<constructible_from<T, T>>,
-        bool_constant<convertible_to<T, T>>>;
-}

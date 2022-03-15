@@ -589,7 +589,7 @@ namespace AZStd
         {
             pointer data = m_buffer;
             // make room and insert new stuff
-            Traits::copy_backward(data + offset + count, data + offset, m_size - offset);   // empty out hole
+//TODO(cjh)            Traits::copy_backward(data + offset + count, data + offset, m_size - offset);   // empty out hole
             Traits::assign(data + offset, count, ch);
             m_size = static_cast<internal_size_type>(num);
             Traits::assign(data[num], Element());  // terminate

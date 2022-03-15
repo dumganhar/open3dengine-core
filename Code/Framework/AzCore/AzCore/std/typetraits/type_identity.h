@@ -9,14 +9,14 @@
 
 namespace AZStd
 {
-    /// Implements the C++20 std::type_identity type trait
-    /// Note type_identity can be used to block template argument deduction
-    template <typename T>
-    struct type_identity
-    {
-        using type = T;
-    };
-
-    template <typename T>
-    using type_identity_t = typename type_identity<T>::type;
+//    /// Implements the C++20 std::type_identity type trait
+//    /// Note type_identity can be used to block template argument deduction
+//    template <typename T>
+//    struct type_identity
+//    {
+//        using type = T;
+//    };
+//
+//    template <typename T>
+//    using type_identity_t = typename type_identity<T>::type;
 }

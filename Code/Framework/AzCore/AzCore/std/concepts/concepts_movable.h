@@ -14,22 +14,3 @@
 #include <AzCore/std/typetraits/conjunction.h>
 #include <AzCore/std/typetraits/is_object.h>
 
-namespace AZStd::Internal
-{
-    template <class T, class = void>
-    constexpr bool movable_impl = false;
-    template <class T>
-    constexpr bool movable_impl<T, enable_if_t<conjunction_v<
-        is_object<T>,
-        bool_constant<move_constructible<T>>,
-        bool_constant<assignable_from<T&, T>>,
-        bool_constant<swappable<T>>
-        >>> = true;
-}
-
-namespace AZStd
-{
-    // movable
-    template <class T>
-    /*concept*/ constexpr bool movable = Internal::movable_impl<T>;
-}

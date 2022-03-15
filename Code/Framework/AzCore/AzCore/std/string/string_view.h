@@ -298,6 +298,12 @@ namespace StringInternal
         return hash;
     }
 
+template <typename It, typename End>
+constexpr string_view make_string_view(It first, End last) {
+    return string_view{} ;//TODO(cjh) AZStd::to_address(first), AZStd::to_address(last) - AZStd::to_address(first)};
+}
+
+
 } // namespace AZStd
 
 //cjh namespace AZStd::ranges
